@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('closed_cash', function (Blueprint $table) {
             $table->id();
+            $table->string('active_cash')->unique();
+            $table->string('closed_cash')->nullable();
+            $table->dateTime('started');
+            $table->dateTime('closed')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

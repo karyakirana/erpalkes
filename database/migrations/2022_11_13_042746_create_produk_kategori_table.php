@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('produk_kategori', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('kategori_id')->nullable();
+            $table->string('kode');
+            $table->string('kategori');
+            $table->boolean('is_sub_kategori')->nullable()->default(false);
             $table->timestamps();
         });
     }

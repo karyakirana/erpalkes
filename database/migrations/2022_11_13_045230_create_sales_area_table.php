@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pegawai', function (Blueprint $table) {
+        Schema::create('sales_area', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('nama_pegawai');
-            $table->string('gender');
-            $table->string('telepon');
-            $table->string('email')->nullable();
-            $table->string('npwp')->nullable();
-            $table->string('jabatan_id');
-            $table->string('area_id')->nullable();
+            $table->string('kode_area');
+            $table->string('nama_area');
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });
@@ -35,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pegawai');
+        Schema::dropIfExists('sales_area');
     }
 };

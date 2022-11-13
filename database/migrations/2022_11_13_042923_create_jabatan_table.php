@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('jabatan', function (Blueprint $table) {
             $table->id();
+            $table->string('kode');
+            $table->string('nama_jabatan');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }
