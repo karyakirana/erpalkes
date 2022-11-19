@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+    use AreaModelTrait;
+
+    protected $table = 'customer';
+    protected $fillable = [
+        'kode',
+        'jenis_instansi',
+        'area_id',
+        'nama_customer',
+        'telepon',
+        'email',
+        'npwp',
+        'alamat',
+        'diskon',
+        'keterangan',
+    ];
 }

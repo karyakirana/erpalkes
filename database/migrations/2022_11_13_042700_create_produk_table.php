@@ -18,11 +18,13 @@ return new class extends Migration
             $table->unsignedBigInteger('produk_kategori_id');
             $table->string('nama_produk');
             $table->text('tipe');
-            $table->string('isi_kemasan');
             $table->string('satuan_beli');
+            $table->bigInteger('isi_kemasan');
             $table->string('satuan_jual');
             $table->bigInteger('harga');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
+            $table->unsignedBigInteger('produk_image_id')->nullable();
+            $table->unsignedBigInteger('produk_brosur_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
