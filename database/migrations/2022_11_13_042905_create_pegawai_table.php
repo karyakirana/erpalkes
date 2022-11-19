@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('telepon');
             $table->string('email')->nullable();
             $table->string('npwp')->nullable();
-            $table->string('jabatan_id');
-            $table->string('area_id')->nullable();
+            $table->unsignedBigInteger('jabatan_id')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

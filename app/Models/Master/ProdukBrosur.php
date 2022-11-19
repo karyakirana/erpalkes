@@ -9,15 +9,11 @@ class ProdukBrosur extends Model
 {
     use HasFactory;
     use ProdukModelTrait;
+    use ImageModelTrait;
 
     protected $table = 'produk_brosur';
     protected $fillable = [
         'produk_id',
         'image_id'
     ];
-
-    public function image()
-    {
-        return $this->hasMany(Image::class, 'image_id');
-    }
 }
