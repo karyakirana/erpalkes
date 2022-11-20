@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('produk_kategori_id');
             $table->string('nama_produk');
+            $table->boolean('is_expired');
             $table->text('tipe');
             $table->string('satuan_beli');
             $table->bigInteger('isi_kemasan');
