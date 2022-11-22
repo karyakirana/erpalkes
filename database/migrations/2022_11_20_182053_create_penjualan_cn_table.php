@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('active_cash');
             $table->string('kode');
             $table->unsignedBigInteger('penjualan_id');
+            $table->unsignedBigInteger('penerima_cn_id');
             $table->bigInteger('total_cn');
             $table->text('keterangan')->nullable();
             $table->timestamps();
