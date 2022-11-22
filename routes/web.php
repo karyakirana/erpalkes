@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
 
+Route::get('master/customer', [\App\Http\Controllers\Master\CustomerController::class, 'index']);
+
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
