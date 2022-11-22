@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kode');
             $table->unsignedBigInteger('pembelian_po_id')->nullable();
             $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('jenis_pembelian'); // tunai|tempo|dimuka
             $table->string('status_pembelian'); // belum|sebagian|lunas
             $table->date('tgl_nota');
