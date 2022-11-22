@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('stock', function (Blueprint $table) {
             $table->id();
+            $table->string('active_cash');
             $table->unsignedBigInteger('produk_id');
             $table->date('tgl_produksi')->nullable();
             $table->date('tgl_expired')->nullable();
