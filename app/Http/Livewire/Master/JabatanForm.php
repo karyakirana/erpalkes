@@ -14,7 +14,10 @@ class JabatanForm extends Component
 
     public $update = false;
 
-    protected $listeners = [];
+    protected $listeners = [
+        'resetForm',
+        'edit'
+    ];
 
     public function resetForm()
     {
@@ -26,7 +29,14 @@ class JabatanForm extends Component
 
     protected function kode()
     {
-        return null;
+        $jabatan = Jabatan::latest('kode')->first();
+        if (!$jabatan){
+            $num = 1;
+        } else {
+            $lastNum = (int) $jabatan->last_num_master;
+            $num = $lastNum + 1;
+        }
+        return "J".sprintf("%05s", $num);
     }
 
     public function store()
@@ -36,14 +46,18 @@ class JabatanForm extends Component
             'nama_jabatan' => $this->nama_jabatan,
             'keterangan' => $this->keterangan
         ]);
+        $this->emit('modalJabatanHide');
     }
 
     public function edit($jabatanId)
     {
         $jabatan = Jabatan::find($jabatanId);
+        $this->update = true;
+        $this->jabatan_id = $jabatan->id;
         $this->kode = $jabatan->kode;
         $this->nama_jabatan = $jabatan->nama_jabatan;
         $this->keterangan = $jabatan->keterangan;
+        $this->emit('modalJabatanShow');
     }
 
     public function update()
@@ -53,6 +67,7 @@ class JabatanForm extends Component
             'nama_jabatan' => $this->nama_jabatan,
             'keterangan' => $this->keterangan
         ]);
+        $this->emit('modalJabatanHide');
     }
 
     public function render()
