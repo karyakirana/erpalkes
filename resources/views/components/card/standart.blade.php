@@ -4,7 +4,7 @@
     'toolbar'=>null,
     'footer'=>null
 ])
-<div class="card shadow-lg">
+<div {{$attributes->class('card shadow-lg')->merge() }}>
     @if($toolbar || $title)
         <div class="card-header">
             <div class="card-title">{{$title}}</div>
