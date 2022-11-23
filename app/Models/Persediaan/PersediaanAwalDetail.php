@@ -16,7 +16,7 @@ class PersediaanAwalDetail extends Model
         'persediaan_awal_id',
         'produk_id',
         'is_expired',
-        'tgl_produksi',
+        'batch',
         'tgl_expired',
         'jumlah',
         'harga_dasar',

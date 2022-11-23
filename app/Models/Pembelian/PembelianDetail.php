@@ -16,7 +16,7 @@ class PembelianDetail extends Model
     protected $fillable = [
         'pembelian_id',
         'produk_id',
-        'tgl_produksi',
+        'batch',
         'tgl_expired',
         'harga',
         'jumlah',

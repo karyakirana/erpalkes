@@ -15,7 +15,7 @@ class StockAwalDetail extends Model
     protected $fillable = [
         'stock_awal_id',
         'produk_id',
-        'tgl_produksi',
+        'batch',
         'tgl_expired',
         'jumlah'
     ];

@@ -15,7 +15,7 @@ class PersediaanMasukDetail extends Model
     protected $fillable = [
         'persediaan_masuk_id',
         'produk_id',
-        'tgl_produksi',
+        'batch',
         'tgl_expired',
         'jumlah',
         'harga_dasar',
