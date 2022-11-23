@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('persediaan_awal_detail', function (Blueprint $table) {
+        Schema::create('pembelian_retur_detail', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('persediaan_awal_id');
-            $table->unsignedBigInteger('produk_id');
-            $table->boolean('is_expired');
-            $table->string('batch')->nullable();
-            $table->date('tgl_expired')->nullable();
-            $table->bigInteger('jumlah');
+            $table->unsignedBigInteger('pembelian_retur_id');
+            $table->unsignedBigInteger('stock_id');
             $table->bigInteger('harga_dasar');
+            $table->bigInteger('jumlah');
+            $table->float('diskon', 2);
             $table->bigInteger('sub_total');
             $table->timestamps();
         });
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persediaan_awal_detail');
+        Schema::dropIfExists('pembelian_retur_detail');
     }
 };

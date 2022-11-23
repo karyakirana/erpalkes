@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('active_cash');
             $table->unsignedBigInteger('produk_id');
             $table->date('tgl_produksi')->nullable();
-            $table->date('tgl_expired')->nullable();
+            $table->string('batch')->nullable();
             $table->bigInteger('stock_awal')->nullable()->default(0);
             $table->bigInteger('stock_masuk')->nullable()->default(0);
             $table->bigInteger('stock_keluar')->nullable()->default(0);

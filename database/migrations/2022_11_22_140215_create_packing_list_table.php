@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stock_awal_detail', function (Blueprint $table) {
+        Schema::create('packing_list', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('stock_awal_id');
-            $table->unsignedBigInteger('produk_id');
-            $table->string('batch')->nullable();
-            $table->date('tgl_expired')->nullable();
-            $table->bigInteger('jumlah');
+            $table->string('kode');
+            $table->string('no_colley');
+            $table->string('kota');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stock_awal_detail');
+        Schema::dropIfExists('packing_list');
     }
 };

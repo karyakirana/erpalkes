@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('persediaan_masuk_id');
             $table->unsignedBigInteger('produk_id');
-            $table->date('tgl_produksi')->nullable();
+            $table->string('batch')->nullable();
             $table->date('tgl_expired')->nullable();
             $table->bigInteger('jumlah');
             $table->bigInteger('harga_dasar');
