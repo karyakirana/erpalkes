@@ -106,7 +106,7 @@
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="customerDestroy(`+data.id+`)" class="menu-link px-3" data-kt-jabatan-table-filter="delete_row">
+                                    <a href="#" onclick="destroy(`+data.id+`)" class="menu-link px-3" data-kt-jabatan-table-filter="delete_row">
                                         Delete
                                     </a>
                                 </div>
@@ -167,7 +167,7 @@
                 }).then((result)=>{
                     if(result.isConfirmed){
                         $.ajax({
-                            url : '{{route("jabatan")}}',
+                            url : '{{route("jabatan.destroy")}}',
                             method : 'delete',
                             data : {
                                 id : id

@@ -19,12 +19,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('master/customer/datatables', [\App\Http\Controllers\Master\CustomerController::class, 'datatables'])->name('customer.datatables');
-Route::delete('master/customer', [\App\Http\Controllers\Master\CustomerController::class, 'destroy'])->name('customer');
+Route::delete('master/customer', [\App\Http\Controllers\Master\CustomerController::class, 'destroy'])->name('customer.destroy');
 
 Route::post('master/supplier/datatables', [\App\Http\Controllers\Master\SupplierController::class, 'datatables'])->name('supplier.datatables');
-Route::delete('master/supplier', [\App\Http\Controllers\Master\SupplierController::class, 'destroy'])->name('supplier');
+Route::delete('master/supplier', [\App\Http\Controllers\Master\SupplierController::class, 'destroy'])->name('supplier.destroy');
 
 Route::post('master/area/datatables', [\App\Http\Controllers\Master\AreaController::class, 'datatables'])->name('area.datatables');
-Route::post('master/area', [\App\Http\Controllers\Master\AreaController::class, 'destroy'])->name('area');
+Route::delete('master/area', [\App\Http\Controllers\Master\AreaController::class, 'destroy'])->name('area.destroy');
 
-Route::post('master/jabatan/datatables', [\App\Http\Controllers\Master\JabatanController::class, 'datatables'])->name('area.datatables');
+Route::post('master/jabatan/datatables', [\App\Http\Controllers\Master\JabatanController::class, 'datatables'])->name('jabatan.datatables');
+Route::delete('master/jabatan', [\App\Http\Controllers\Master\JabatanController::class, 'destroy'])->name('jabatan.destroy');
