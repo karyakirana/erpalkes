@@ -4,17 +4,12 @@
             <h4>{{$kode}}</h4>
         </x-slot:toolbar>
         <div class="row">
-            <div class="col-2">
-                <x-input.group-vertical label="Kode" name="kode">
-                    <x-input.text wire:model.defer="kode"/>
-                </x-input.group-vertical>
-            </div>
             <div class="col-4">
                 <x-input.group-vertical label="Nama" name="nama_supplier">
                     <x-input.text wire:model.defer="nama_supplier" />
                 </x-input.group-vertical>
             </div>
-            <div class="col-3">
+            <div class="col-2">
                 <x-input.group-vertical label="Telepon" name="telepom">
                     <x-input.text wire:model.defer="telepon" />
                 </x-input.group-vertical>
@@ -24,19 +19,19 @@
                     <x-input.text wire:model.defer="email"/>
                 </x-input.group-vertical>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-2">
+            <div class="col-3">
                 <x-input.group-vertical label="NPWP" name="npwp">
                     <x-input.text wire:model.defer="npwp"/>
                 </x-input.group-vertical>
             </div>
+        </div>
+        <div class="row">
             <div class="col-4">
                 <x-input.group-vertical label="Alamat" name="alamat">
                     <x-input.text wire:model.defer="alamat"/>
                 </x-input.group-vertical>
             </div>
-            <div class="col-6">
+            <div class="col-8">
                 <x-input.group-vertical label="Keterangan" name="keterangan">
                     <x-input.text wire:model.defer="keterangan"/>
                 </x-input.group-vertical>
