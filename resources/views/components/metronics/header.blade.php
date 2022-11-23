@@ -694,7 +694,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-4">
-                                                <img src="assets/media/stock/600x600/img-82.jpg" class="rounded mw-100" alt="" />
+                                                <img src="/assets/media/stock/600x600/img-82.jpg" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -804,7 +804,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-7">
-                                                <img src="assets/media/stock/900x600/46.jpg" class="rounded mw-100" alt="" />
+                                                <img src="/assets/media/stock/900x600/46.jpg" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -1525,7 +1525,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-5 pe-lg-5">
-                                                <img src="assets/media/stock/600x600/img-84.jpg" class="rounded mw-100" alt="" />
+                                                <img src="/assets/media/stock/600x600/img-84.jpg" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -1596,7 +1596,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-8">
-                                                <img src="assets/media/stock/900x600/44.jpg" class="rounded mw-100" alt="" />
+                                                <img src="/assets/media/stock/900x600/44.jpg" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -2995,7 +2995,7 @@
                                     <!--end:Col-->
                                     <!--begin:Col-->
                                     <div class="col-lg-6 mb-3 py-lg-3 pe-lg-8 d-flex align-items-center">
-                                        <img src="assets/media/stock/900x600/45.jpg" class="rounded mw-100" alt="" />
+                                        <img src="/assets/media/stock/900x600/45.jpg" class="rounded mw-100" alt="" />
                                     </div>
                                     <!--end:Col-->
                                 </div>
@@ -3282,7 +3282,7 @@
                             <a href="#" class="menu-link px-5">
 												<span class="menu-title position-relative">Language
 												<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-												<img class="w-15px h-15px rounded-1 ms-2" src="assets/media/flags/united-states.svg" alt="" /></span></span>
+												<img class="w-15px h-15px rounded-1 ms-2" src="/assets/media/flags/united-states.svg" alt="" /></span></span>
                             </a>
                             <!--begin::Menu sub-->
                             <div class="menu-sub menu-sub-dropdown w-175px py-4">
@@ -3290,7 +3290,7 @@
                                 <div class="menu-item px-3">
                                     <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5 active">
 													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1" src="assets/media/flags/united-states.svg" alt="" />
+														<img class="rounded-1" src="/assets/media/flags/united-states.svg" alt="" />
 													</span>English</a>
                                 </div>
                                 <!--end::Menu item-->
@@ -3298,7 +3298,7 @@
                                 <div class="menu-item px-3">
                                     <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5">
 													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1" src="assets/media/flags/spain.svg" alt="" />
+														<img class="rounded-1" src="/assets/media/flags/spain.svg" alt="" />
 													</span>Spanish</a>
                                 </div>
                                 <!--end::Menu item-->
@@ -3306,7 +3306,7 @@
                                 <div class="menu-item px-3">
                                     <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5">
 													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1" src="assets/media/flags/germany.svg" alt="" />
+														<img class="rounded-1" src="/assets/media/flags/germany.svg" alt="" />
 													</span>German</a>
                                 </div>
                                 <!--end::Menu item-->
@@ -3314,7 +3314,7 @@
                                 <div class="menu-item px-3">
                                     <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5">
 													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1" src="assets/media/flags/japan.svg" alt="" />
+														<img class="rounded-1" src="/assets/media/flags/japan.svg" alt="" />
 													</span>Japanese</a>
                                 </div>
                                 <!--end::Menu item-->
@@ -3322,7 +3322,7 @@
                                 <div class="menu-item px-3">
                                     <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5">
 													<span class="symbol symbol-20px me-4">
-														<img class="rounded-1" src="assets/media/flags/france.svg" alt="" />
+														<img class="rounded-1" src="/assets/media/flags/france.svg" alt="" />
 													</span>French</a>
                                 </div>
                                 <!--end::Menu item-->

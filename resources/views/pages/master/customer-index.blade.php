@@ -1,5 +1,5 @@
 <x-metronics-layout>
-    <x-slot name="toolbar">
-        <x-metronics.toolbar></x-metronics.toolbar>
-    </x-slot>
+    <x-card.standart class="mt-5">
+        <x-datatables.customer-list />
+    </x-card.standart>
 </x-metronics-layout>
