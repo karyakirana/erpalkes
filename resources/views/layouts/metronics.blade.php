@@ -1,3 +1,6 @@
+@props([
+    'toolbar'=>null,
+    ])
 <!DOCTYPE html>
 <html lang="en">
 <!--begin::Head-->
@@ -50,12 +53,14 @@
                 <!--begin::Content wrapper-->
                 <div class="d-flex flex-column flex-column-fluid">
                     <!--begin::Toolbar-->
-                    <x-metronics.toolbar />
+                    @if($toolbar)
+                        {{$toolbar}}
+                    @endif
                     <!--end::Toolbar-->
                     <!--begin::Content-->
                     <div id="kt_app_content" class="app-content flex-column-fluid">
                         <!--begin::Content container-->
-                        <div id="kt_app_content_container" class="app-container container-fluid">
+                        <div id="kt_app_content_container" class="app-container container-xxl">
                             {{$slot}}
                         </div>
                         <!--end::Content container-->
