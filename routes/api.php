@@ -29,3 +29,9 @@ Route::delete('master/area', [\App\Http\Controllers\Master\AreaController::class
 
 Route::post('master/jabatan/datatables', [\App\Http\Controllers\Master\JabatanController::class, 'datatables'])->name('jabatan.datatables');
 Route::delete('master/jabatan', [\App\Http\Controllers\Master\JabatanController::class, 'destroy'])->name('jabatan.destroy');
+
+Route::post('master/supplier/datatables', [\App\Http\Controllers\Master\SupplierController::class, 'datatables'])->name('supplier.datatables');
+Route::delete('master/supplier', [\App\Http\Controllers\Master\SupplierController::class, 'destroy'])->name('supplier.destroy');
+
+Route::post('master/pegawai/datatables', [\App\Http\Controllers\Master\PegawaiController::class, 'datatables'])->name('pegawai.datatables');
+Route::delete('master/pegawai', [\App\Http\Controllers\Master\PegawaiController::class, 'destroy'])->name('pegawai.destroy');
