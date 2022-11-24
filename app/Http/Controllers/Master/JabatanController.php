@@ -16,7 +16,6 @@ class JabatanController extends Controller
         return view('pages.master.jabatan-index');
     }
 
-
     /**
      * @param Request $request
      * @return JsonResponse|null

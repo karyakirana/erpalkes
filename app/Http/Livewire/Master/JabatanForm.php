@@ -19,12 +19,18 @@ class JabatanForm extends Component
         'edit'
     ];
 
+    protected $rules = [
+        'nama_jabatan'=> 'required|min:3'
+    ];
+
     public function resetForm()
     {
         $this->update = false;
         $this->reset([
             'jabatan_id', 'kode', 'nama_jabatan', 'keterangan'
         ]);
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 
     protected function kode()
@@ -41,6 +47,7 @@ class JabatanForm extends Component
 
     public function store()
     {
+        $this->validate();
         Jabatan::create([
             'kode' => $this->kode(),
             'nama_jabatan' => $this->nama_jabatan,
@@ -62,6 +69,7 @@ class JabatanForm extends Component
 
     public function update()
     {
+        $this->validate();
         $jabatan = Jabatan::find($this->jabatan_id);
         $jabatan->update([
             'nama_jabatan' => $this->nama_jabatan,
