@@ -21,6 +21,12 @@ class PegawaiForm extends Component
 
     protected $listeners = [];
 
+    protected $rules = [
+        'nama_pegawai'=>'required|min:3',
+        'gender'=>'required',
+        'telepon'=>'required'
+    ];
+
     public function mount($pegawai_id = null)
     {
         if ($pegawai_id){
@@ -44,6 +50,7 @@ class PegawaiForm extends Component
 
     public function store()
     {
+        $this->validate();
         Pegawai::create([
             'kode' => $this->kode(),
             'nama_pegawai' => $this->nama_pegawai,
@@ -59,6 +66,7 @@ class PegawaiForm extends Component
 
     public function update()
     {
+        $this->validate();
         $pegawai = Pegawai::find($this->pegawai_id);
         $pegawai->update([
             'nama_pegawai' => $this->nama_pegawai,

@@ -2,6 +2,7 @@
 
 namespace App\Models\Master;
 
+use App\Models\KodeTrait;
 use App\Models\User;
 use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +13,7 @@ class Pegawai extends Model
     use HasFactory;
     use AreaModelTrait;
     use UsersModelTrait;
+    use KodeTrait;
 
     protected $table = 'pegawai';
     protected $fillable = [
