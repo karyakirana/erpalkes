@@ -1,4 +1,5 @@
 @props([
-    'color'=>'primary'
+    'color'=>'primary',
+    'type'=>'button'
 ])
-<button {{$attributes->class('btn btn-'.$color)->merge()}}>{{$slot}}</button>
+<button type="{{$type}}" {{$attributes->class('btn btn-'.$color)->merge()}}>{{$slot}}</button>
