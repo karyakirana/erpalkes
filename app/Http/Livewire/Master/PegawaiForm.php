@@ -14,7 +14,8 @@ class PegawaiForm extends Component
     public $telepon;
     public $email;
     public $npwp;
-    public $jabatan_id;
+    public $jabatan_id, $jabatan_nama;
+    public $alamat;
     public $keterangan;
 
     public $update = false;
@@ -24,7 +25,8 @@ class PegawaiForm extends Component
     protected $rules = [
         'nama_pegawai'=>'required|min:3',
         'gender'=>'required',
-        'telepon'=>'required'
+        'telepon'=>'required',
+        'alamat'=>'required'
     ];
 
     public function mount($pegawai_id = null)
@@ -39,13 +41,21 @@ class PegawaiForm extends Component
             $this->email = $pegawai->email;
             $this->npwp = $pegawai->npwp;
             $this->jabatan_id = $pegawai->jabatan_id;
+            $this->alamat = $pegawai->alamat;
             $this->keterangan = $pegawai->keterangan;
         }
     }
 
     protected function kode()
     {
-        return null;
+        $pegawai = Pegawai::latest('kode')->first();
+        if (!$pegawai){
+            $num = 1;
+        } else {
+            $lastNum = (int) $pegawai->last_num_master;
+            $num = $lastNum + 1;
+        }
+        return "S".sprintf("%05s", $num);
     }
 
     public function store()
@@ -59,9 +69,12 @@ class PegawaiForm extends Component
             'email' => $this->email,
             'npwp'=>$this->npwp,
             'jabatan_id' => $this->jabatan_id,
-            'keterangan' => $this->keterangan
+            'alamat' => $this->alamat,
+            'keterangan' => $this->keterangan,
         ]);
         // redirect
+        session()->flash('message', 'Data '.$this->nama_pegawai.' sudah disimpan.');
+        return redirect()->to(route('pegawai'));
     }
 
     public function update()
@@ -75,9 +88,12 @@ class PegawaiForm extends Component
             'email' => $this->email,
             'npwp'=>$this->npwp,
             'jabatan_id' => $this->jabatan_id,
-            'keterangan' => $this->keterangan
+            'alamat' => $this->alamat,
+            'keterangan' => $this->keterangan,
         ]);
         // redirect
+        session()->flash('message', 'Data '.$this->nama_pegawai.' sudah diupdate.');
+        return redirect()->to(route('pegawai'));
     }
 
     public function render()

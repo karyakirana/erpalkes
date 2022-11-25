@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('produk', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('produk_kategori_id');
+            $table->unsignedBigInteger('produk_sub_kategori_id');
             $table->string('kode');
             $table->string('nama_produk');
             $table->boolean('is_expired');
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang');
+        Schema::dropIfExists('produk');
     }
 };

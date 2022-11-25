@@ -25,6 +25,7 @@ class Pegawai extends Model
         'npwp',
         'jabatan_id',
         'area_id',
+        'alamat',
         'keterangan',
     ];
 

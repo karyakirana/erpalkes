@@ -22,7 +22,8 @@ class PegawaiController extends Controller
     public function datatables(Request $request)
     {
         if ($request->ajax()){
-            $data = Pegawai::latest()->get();
+            $data = Pegawai::with('jabatan')
+                ->latest()->get();
             return DataTables::of($data)
                 ->make(true);
         }
