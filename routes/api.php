@@ -35,3 +35,6 @@ Route::delete('master/supplier', [\App\Http\Controllers\Master\SupplierControlle
 
 Route::post('master/pegawai/datatables', [\App\Http\Controllers\Master\PegawaiController::class, 'datatables'])->name('pegawai.datatables');
 Route::delete('master/pegawai', [\App\Http\Controllers\Master\PegawaiController::class, 'destroy'])->name('pegawai.destroy');
+
+Route::post('master/produk/datatables', [\App\Http\Controllers\Master\ProdukController::class, 'datatables'])->name('produk.datatables');
+Route::delete('master/produk', [\App\Http\Controllers\Master\ProdukController::class, 'destroy'])->name('produk.destroy');

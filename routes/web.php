@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function (){
     Route::get('master/penerimacn', [\App\Http\Controllers\Master\PenerimaCNController::class, 'index'])->name('penerima-cn');
 
     Route::get('master/produk', [\App\Http\Controllers\Master\ProdukController::class, 'index'])->name('produk');
+    Route::get('master/produk/form', \App\Http\Livewire\Master\ProdukForm::class)->name('produk.form');
 });
 
 
