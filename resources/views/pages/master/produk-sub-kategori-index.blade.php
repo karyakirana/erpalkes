@@ -1,5 +1,5 @@
 <x-metronics-layout>
-    <x-card.standart class="mt-5" title="Data Produk Kategori">
+    <x-card.standart class="mt-5" title="Data Produk Sub Kategori">
         <!--begin::Wrapper-->
         <div class="d-flex flex-stack mb-5">
             <!--begin::Search-->
@@ -17,21 +17,21 @@
             <!--begin::Toolbar-->
             <div class="d-flex justify-content-end" data-kt-jabatan-table-toolbar="base">
                 <!--begin::Add customer-->
-                <x-button.btn-base data-bs-toggle="modal" data-bs-target="#modalProdukKategori">
+                <x-button.btn-base data-bs-toggle="modal" data-bs-target="#modalProdukSubKategori">
                     <span class="svg-icon svg-icon-2">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor"></rect>
                             <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor"></rect>
                         </svg>
                     </span>
-                    Add Area
+                    Add Sub Kategori
                 </x-button.btn-base>
                 <!--end::Add customer-->
             </div>
             <!--end::Toolbar-->
         </div>
         <!--end::Wrapper-->
-        <table id="produkKategoriDatatable" class="table align-middle table-striped table-row-bordered fs-6 gy-5 gs-7">
+        <table id="produkSubKategoriDatatable" class="table align-middle table-striped table-row-bordered fs-6 gy-5 gs-7">
             <thead>
             <tr class="fw-semibold fs-6 text-gray-800">
                 <th>Kode</th>
@@ -44,7 +44,7 @@
         </table>
     </x-card.standart>
 
-    <livewire:produk-kategori-form />
+    <livewire:master.produk-sub-kategori-form />
 
     @push('scripts')
         <script>
@@ -67,11 +67,12 @@
                         stateSave: false,
                         ajax: {
                             type: 'post',
-                            url: "{{route('produk-kategori.datatables')}}",
+                            url: "{{route('produk-sub-kategori.datatables')}}",
                         },
                         columns: [
                             { data: 'kode' },
                             { data: 'kategori' },
+                            { data: 'nama_sub_kategori' },
                             { data: 'keterangan' },
                             { data: null },
                         ],
@@ -167,7 +168,7 @@
                 }).then((result)=>{
                     if(result.isConfirmed){
                         $.ajax({
-                            url : '{{route("produk-kategori.destroy")}}',
+                            url : '{{route("produk-sub-kategori.destroy")}}',
                             method : 'delete',
                             data : {
                                 id : id

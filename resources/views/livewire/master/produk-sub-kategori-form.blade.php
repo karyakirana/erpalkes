@@ -1,12 +1,23 @@
 <div>
     <!--begin::modal-->
-    <x-modal.standart id="modalProdukKategori" size="lg" title="Form Kategori" wire:ignore.self>
+    <x-modal.standart id="modalProdukKategori" size="lg" title="Form Sub Kategori" wire:ignore.self>
         <!--begin::form -->
         <x-input.group-horizontal label="Kode" name="kode">
             <x-input.text wire:model.defer="kode" disabled />
         </x-input.group-horizontal>
         <x-input.group-horizontal label="Kategori" name="kategori">
-            <x-input.text wire:model.defer="kategori" />
+            @php
+                $kategoriData = \App\Models\Master\ProdukKategori::latest()->get();
+            @endphp
+            <x-input.select wire:model.defer="kategori_id">
+                <option>Dipilih</option>
+                @foreach($kategoriData as $row)
+                    <option value="{{$row->id}}">{{$row->kategori}}</option>
+                @endforeach
+            </x-input.select>
+        </x-input.group-horizontal>
+        <x-input.group-horizontal label="Sub Kategori" name="nama_sub_kategori">
+            <x-input.text wire:model.defer="nama_sub_kategori" />
         </x-input.group-horizontal>
         <x-input.group-horizontal label="Keterangan" name="keterangan">
             <x-input.text wire:model.defer="keterangan" />
@@ -25,11 +36,11 @@
         <script>
             const modalsArea = new bootstrap.Modal(document.getElementById('modalProdukKategori'));
 
-            window.livewire.on('modalProdukKategoriHide', function () {
+            window.livewire.on('modalSubKategoriHide', function () {
                 modalsArea.hide()
             })
 
-            window.livewire.on('modalProdukKategoriShow', function (){
+            window.livewire.on('modalSubKategoriShow', function (){
                 modalsArea.show()
             })
 
