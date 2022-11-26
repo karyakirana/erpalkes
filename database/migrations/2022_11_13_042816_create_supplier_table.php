@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('npwp')->nullable();
             $table->text('alamat');
+            $table->char('regencies_id', 4);
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

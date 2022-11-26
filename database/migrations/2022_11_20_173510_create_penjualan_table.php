@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kode');
             $table->unsignedBigInteger('penjualan_quotation_id')->nullable();
             $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('sales_id')->nullable();
             $table->unsignedBigInteger('user_id'); // pembuat atau pengedit
             $table->string('jenis_penjualan'); // tunai|tempo|dimuka
             $table->string('status_invoice'); // belum|sebagian|lunas

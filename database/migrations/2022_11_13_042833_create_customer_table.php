@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('npwp')->nullable();
             $table->text('alamat')->nullable();
+            $table->char('regencies_id', 4);
             $table->double('diskon', 2)->nullable()->default(0);
             $table->text('keterangan')->nullable();
             $table->timestamps();

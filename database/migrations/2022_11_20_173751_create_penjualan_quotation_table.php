@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('active_cash');
             $table->string('kode');
             $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('sales_id');
             $table->unsignedBigInteger('user_id'); // pembuat atau pengedit
             $table->string('status_quotation'); // belum|sebagian|lunas
             $table->date('tgl_quotation');

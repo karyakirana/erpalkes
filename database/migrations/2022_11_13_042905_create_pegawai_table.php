@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('npwp')->nullable();
             $table->unsignedBigInteger('jabatan_id')->nullable();
             $table->text('alamat')->nullable();
+            $table->char('regencies_id', 4);
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });
