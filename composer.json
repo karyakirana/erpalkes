@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "anlutro/l4-settings": "^1.0",
+        "azishapidin/indoregion": "^3.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "jackiedo/log-reader": "^2.2",
