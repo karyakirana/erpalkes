@@ -21,4 +21,14 @@ class SalesArea extends Model
     {
         return substr($this->kode_area, 1, 5);
     }
+
+    public function salesAreaDetail()
+    {
+        return $this->hasMany(SalesAreaDetail::class, 'sales_area_id');
+    }
+
+    public function salesAreaSet()
+    {
+        return $this->hasMany(SalesAreaSet::class, 'sales_area_id');
+    }
 }

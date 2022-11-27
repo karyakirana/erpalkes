@@ -26,6 +26,7 @@ class Pegawai extends Model
         'jabatan_id',
         'area_id',
         'alamat',
+        'regencies_id',
         'keterangan',
     ];
 

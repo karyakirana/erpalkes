@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('sales_area_detail', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sales-area_id');
+            $table->unsignedBigInteger('sales_area_id');
             $table->char('regencies_id', 4)->nullable();
             $table->timestamps();
         });

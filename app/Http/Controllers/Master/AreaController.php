@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
-use App\Models\Master\SalesArea;
+use App\Mine\SubMaster\SalesAreaRepository;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class AreaController extends Controller
     public function datatables(Request $request)
     {
         if ($request->ajax()){
-            $data = SalesArea::latest()->get();
+            $data = SalesAreaRepository::getAll();
             return DataTables::of($data)
                 ->make(true);
         }
@@ -33,6 +33,6 @@ class AreaController extends Controller
 
     public function destroy(Request $request)
     {
-        return SalesArea::destroy($request->id);
+        return SalesAreaRepository::destroy($request->id);
     }
 }

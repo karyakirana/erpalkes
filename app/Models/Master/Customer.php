@@ -20,6 +20,7 @@ class Customer extends Model
         'email',
         'npwp',
         'alamat',
+        'regencies_id',
         'diskon',
         'keterangan',
     ];

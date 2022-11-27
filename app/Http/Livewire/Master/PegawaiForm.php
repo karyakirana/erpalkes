@@ -55,7 +55,7 @@ class PegawaiForm extends Component
             $lastNum = (int) $pegawai->last_num_master;
             $num = $lastNum + 1;
         }
-        return "S".sprintf("%05s", $num);
+        return "E".sprintf("%05s", $num);
     }
 
     public function store()

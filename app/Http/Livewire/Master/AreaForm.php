@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Master;
 
-use App\Models\Master\SalesArea;
+use App\Mine\SubMaster\SalesAreaRepository;
+use App\Models\Regency;
+use DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Component;
 
 class AreaForm extends Component
@@ -12,6 +15,12 @@ class AreaForm extends Component
     public $nama_area;
     public $keterangan;
 
+    public $dataDetail = [];
+    public $index;
+    public $regencies_id, $regencies_name;
+    public $provinces_id, $provinces_name;
+
+    public $mode = 'create';
     public $update = false;
 
     protected $listeners = [
@@ -25,57 +34,75 @@ class AreaForm extends Component
         'nama_area' => 'required|min:3',
     ];
 
-    public function resetForm()
+    public function mount($area_id = null)
     {
-        $this->update = false;
-        $this->reset(['area_id', 'kode_area', 'nama_area', 'keterangan']);
-        $this->resetErrorBag();
-        $this->resetValidation();
-    }
+        if ($area_id) {
+            $mode = 'update';
+            $area = SalesAreaRepository::getById($area_id);
+            $this->kode_area = $area->kode_area;
+            $this->nama_area = $area->nama_area;
+            $this->keterangan = $area->keterangan;
 
-    public function edit($area_id)
-    {
-        $this->update = true;
-        $area = SalesArea::find($area_id);
-        $this->area_id = $area->id;
-        $this->kode_area = $area->kode_area;
-        $this->nama_area = $area->nama_area;
-        $this->keterangan = $area->keterangan;
-        $this->emit('modalAreaShow');
-    }
-
-    protected function kode()
-    {
-        $area = SalesArea::latest('kode_area')->first();
-        if ($area == null){
-            $num = 1;
-        } else {
-            $lastNum = (int) $area->last_num_master;
-            $num = $lastNum + 1;
+            foreach ($area->salesAreaDetail as $item) {
+                $this->dataDetail[] = [
+                    'regencies_id'=>$item->regencies_id,
+                    'regencies_name'=>$item->regencies->name,
+                    'provinces_name'=>$item->regencies->province->name
+                ];
+            }
         }
-        return "A".sprintf("%05s", $num);
+    }
+
+    public function addLine()
+    {
+        $regencies = Regency::find($this->regencies_id);
+        $this->dataDetail[] = [
+            'regencies_id'=>$regencies->id,
+            'regencies_name'=>$regencies->name,
+            'provinces_name'=>$regencies->province->name
+        ];
+    }
+
+    public function removeLine($index)
+    {
+        unset($this->dataDetail);
+        $this->dataDetail = array_values($this->dataDetail);
+    }
+
+    protected function setData()
+    {
+        return $this->validate([
+            'area_id'=>($this->area_id) ? 'required' : 'nullable',
+            'nama_area'=> 'required|min:3',
+            'keterangan'=>'nullable',
+            'dataDetail'=>'required|array'
+        ]);
     }
 
     public function store()
     {
-        $this->validate();
-        SalesArea::create([
-            'kode_area' => $this->kode(),
-            'nama_area' => $this->nama_area,
-            'keterangan' => $this->keterangan
-        ]);
-        $this->emit('modalAreaHide');
+        $data = $this->setData();
+        DB::beginTransaction();
+        try {
+            DB::commit();
+            SalesAreaRepository::store($data);
+        } catch (ModelNotFoundException $e){
+            DB::rollBack();
+        }
+        // redirect
     }
 
     public function update()
     {
-        $this->validate();
-        $area = SalesArea::find($this->area_id);
-        $area->update([
-            'nama_area' => $this->nama_area,
-            'keterangan' => $this->keterangan
-        ]);
-        $this->emit('modalAreaHide');
+        $data = $this->setData();
+        DB::beginTransaction();
+        try {
+            DB::commit();
+            SalesAreaRepository::update($data);
+        } catch (ModelNotFoundException $e){
+            DB::rollBack();
+        }
+        // redirect
     }
 
     public function render()

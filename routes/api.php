@@ -18,6 +18,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('helper/provinsi', [\App\Http\Controllers\Helper\AreaHelperController::class, 'province'])->name('helper-area.province');
+Route::post('helper/city', [\App\Http\Controllers\Helper\AreaHelperController::class, 'city'])->name('helper-area.city');
+
 Route::post('master/customer/datatables', [\App\Http\Controllers\Master\CustomerController::class, 'datatables'])->name('customer.datatables');
 Route::delete('master/customer', [\App\Http\Controllers\Master\CustomerController::class, 'destroy'])->name('customer.destroy');
 
@@ -36,5 +39,8 @@ Route::delete('master/supplier', [\App\Http\Controllers\Master\SupplierControlle
 Route::post('master/pegawai/datatables', [\App\Http\Controllers\Master\PegawaiController::class, 'datatables'])->name('pegawai.datatables');
 Route::delete('master/pegawai', [\App\Http\Controllers\Master\PegawaiController::class, 'destroy'])->name('pegawai.destroy');
 
-Route::post('master/produkkategori', [\App\Http\Controllers\Master\ProdukKategoriController::class, 'datatables'])->name('produk-kategori.datatables');
+Route::post('master/produkkategori/datatables', [\App\Http\Controllers\Master\ProdukKategoriController::class, 'datatables'])->name('produk-kategori.datatables');
 Route::delete('master/produkkategori', [\App\Http\Controllers\Master\ProdukKategoriController::class, 'destroy'])->name('produk-kategori.destroy');
+
+Route::post('master/penerimacn/datatables', [\App\Http\Controllers\Master\PenerimaCNController::class, 'datatables'])->name('penerima-cn.datatables');
+Route::delete('master/penerimacn', [\App\Http\Controllers\Master\PenerimaCNController::class, 'destroy'])->name('penerima-cn.destroy');
