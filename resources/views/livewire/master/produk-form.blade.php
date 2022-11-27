@@ -41,26 +41,30 @@
         </div>
         <div class="row">
 {{--            <div class="col-6">--}}
-{{--                <x-input.group-vertical label="Deskripsi" name="keterangan">--}}
-{{--                    <x-input.text wire:model.defer="keterangan" />--}}
-{{--                </x-input.group-vertical>--}}
+{{--                <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>--}}
+{{--                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>--}}
 {{--            </div>--}}
-            <div class="col-6">
-                <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
-            </div>
-            <div class="col-3">
-                <x-input.group-vertical label="File Gambar" name="keterangan"><br>
-{{--                    <a class="dropzone-select btn btn-sm btn-primary me-2" type="file">Upload Gambar</a>--}}
-                    <x-button.btn-upload></x-button.btn-upload><br>
-{{--                    <input type="file"></input>--}}
-{{--                    <br>--}}
+            <div class="col-12">
+                <x-input.group-vertical label="Produk Brosur" ><br>
+                    <form id="addForm" method="post" action="" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input type="file" name="image" id='image' class='p-5'>
+                        </div>
+                    </form>
                     <span class="form-text fs-6 text-muted">Max file size is 1MB per file.</span>
                 </x-input.group-vertical>
             </div>
-            <div class="col-3">
-                <x-input.group-vertical label="File Brosur" name="keterangan"><br>
-                    <x-button.btn-base >Upload Gambar</x-button.btn-base>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <x-input.group-vertical label="Harga" name="harga">
+                    <x-input.text wire:model.defer="harga" />
+                </x-input.group-vertical>
+            </div>
+            <div class="col-6">
+                <x-input.group-vertical label="Deskripsi" name="keterangan">
+                    <x-input.text wire:model.defer="keterangan" />
                 </x-input.group-vertical>
             </div>
         </div>
@@ -84,4 +88,63 @@
             @endif
         </x-slot:footer>
     </x-card.standart>
+
+    @section('scripts')
+{{--        <script>--}}
+{{--            // get a collection of elements with class filepond--}}
+{{--            const inputElements = document.querySelectorAll('input.filepond');--}}
+
+{{--            // loop over input elements--}}
+{{--            Array.from(inputElements).forEach(inputElement => {--}}
+
+{{--                // create a FilePond instance at the input element location--}}
+{{--                FilePond.create(inputElement);--}}
+
+{{--            })--}}
+{{--        </script>--}}
+
+        <script>
+            //configuration filepond
+            const inputElement = document.querySelector('input[id="image"]');
+            // Create a FilePond instance
+            const pond = FilePond.create(inputElement);
+            //tujuan filepond
+            FilePond.setOptions({
+                server: {
+                    process: '{{ route('upload') }}', //upload
+                    revert: '{{ route('hapus') }}', //cancel
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }
+            });
+            //end config filepond
+            $(document).ready(function() {
+                $("#addForm").on('submit', function(e) {
+                    e.preventDefault();
+                    $("#saveBtn").html('Processing...').attr('disabled', 'disabled');
+                    var link = $("#addForm").attr('action');
+                    $.ajax({
+                        url: link,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "POST",
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            $("#saveBtn").html('Save').removeAttr('disabled');
+                            pond.removeFiles(); //clear
+                            alert('Berhasil')
+                        },
+                        error: function(response) {
+                            $("#saveBtn").html('Save').removeAttr('disabled');
+                            alert(response.error);
+                        }
+                    });
+                });
+            });
+        </script>
+    @endsection
 </div>

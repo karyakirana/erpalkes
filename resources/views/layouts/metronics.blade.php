@@ -20,6 +20,18 @@
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
+
+    <!--begin::Toby-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <!--end::Toby-->
+
+    <!--begin::Filepond-Toby-->
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <!--end::Filepond-Toby-->
+
     <!--begin::Vendor Stylesheets(used for this page only)-->
     <link href="{{asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -132,6 +144,12 @@
 @stack('scripts')
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
+
+<!--begin::Filepond-Toby-->
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+@yield('scripts')
+<!--end::Filepond-Toby-->
+
 </body>
 <!--end::Body-->
 </html>

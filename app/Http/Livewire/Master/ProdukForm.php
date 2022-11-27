@@ -100,7 +100,6 @@ class ProdukForm extends Component
         return redirect()->to(route('produk'));
     }
 
-
     public function render()
     {
         return view('livewire.master.produk-form');
