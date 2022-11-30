@@ -44,3 +44,6 @@ Route::delete('master/produkkategori', [\App\Http\Controllers\Master\ProdukKateg
 
 Route::post('master/penerimacn/datatables', [\App\Http\Controllers\Master\PenerimaCNController::class, 'datatables'])->name('penerima-cn.datatables');
 Route::delete('master/penerimacn', [\App\Http\Controllers\Master\PenerimaCNController::class, 'destroy'])->name('penerima-cn.destroy');
+
+Route::post('master/produk/datatables', [\App\Http\Controllers\Master\ProdukController::class, 'datatables'])->name('produk.datatables');
+Route::delete('master/produk', [\App\Http\Controllers\Master\ProdukController::class, 'destroy'])->name('produk.destroy');
