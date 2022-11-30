@@ -21,9 +21,9 @@ Route::middleware('auth')->group(function (){
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
 
     //Upload Brosur Produk
-    Route::get('/image', [\App\Http\Controllers\Upload\ProdukGambarController::class, 'index']);
+    Route::get('/image', [\App\Http\Controllers\Upload\GambarBrosurController::class, 'index']);
 
-    Route::controller(\App\Http\Controllers\Upload\UploadProdukGambarController::class)->group(function () {
+    Route::controller(\App\Http\Controllers\Upload\UploadGambarBrosurController::class)->group(function () {
         Route::post('/upload', 'store')->name('upload');
         Route::delete('/hapus', 'destroy')->name('hapus');
     });

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
-class UploadProdukGambarController extends Controller
+class UploadGambarBrosurController extends Controller
 {
     public function store(Request $request)
     {
@@ -18,7 +18,7 @@ class UploadProdukGambarController extends Controller
         $folder = uniqid() . '-' . now()->timestamp;
         Session::put('folder', $folder); //save session  folder
         Session::put('filename', $filename); //save session filename
-        $file->storeAs('files/produk_gambar/' . $folder, $filename);
+        $file->storeAs('files/gambar_brosur/' . $folder, $filename);
 
         ProdukBrosur::create([
             'folder' => $folder,
@@ -29,19 +29,19 @@ class UploadProdukGambarController extends Controller
     }
 
 
-    public function destroy(ProdukBrosur $produkGambar)
+    public function destroy(ProdukBrosur $produkBrosur)
     {
-        $produkGambar = Session::get('folder');
+        $produkBrosur = Session::get('folder');
         $namefile = Session::get('filename');
 
-        $path = storage_path() . '/app/files/produk_gambar/' . $produkGambar . '/' . $namefile;
+        $path = storage_path() . '/app/files/gambar_brosur/' . $produkBrosur . '/' . $namefile;
         if (File::exists($path)) {
             File::delete($path);
-            rmdir(storage_path('app/files/produk_gambar/' . $produkGambar));
+            rmdir(storage_path('app/files/gambar_brosur/' . $produkBrosur));
 
             //delete record in table temporaryImage
             ProdukBrosur::where([
-                'folder' =>  $produkGambar,
+                'folder' =>  $produkBrosur,
                 'image' => $namefile
             ])->delete();
 

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
-class ProdukGambarController extends Controller
+class GambarBrosurController extends Controller
 {
     public function index()
     {
@@ -19,26 +19,26 @@ class ProdukGambarController extends Controller
 
     public function store(Request $request)
     {
-        $produkGambar = Session::get('folder');
+        $produkBrosur = Session::get('folder');
         $namefile = Session::get('filename');
 
-        $temporary = ProdukBrosur::where('folder', $produkGambar)->where('image', $namefile)->first();
+        $temporary = ProdukBrosur::where('folder', $produkBrosur)->where('image', $namefile)->first();
 
         if ($temporary) { //if exist
 
 //            Image::create([
-//                'folder' => $produkGambar,
+//                'folder' => $produkBrosur,
 //                'image' => $namefile,
 //            ]);
 
             //hapus file and folder temporary
-            $path = storage_path() . '/app/files/produk_gambar/' . $temporary->folder . '/' . $temporary->image;
+            $path = storage_path() . '/app/files/gambar_brosur/' . $temporary->folder . '/' . $temporary->image;
             if (File::exists($path)) {
 
-                Storage::move('files/produk_gambar/'.$temporary->folder.'/'.$temporary->image, 'files/'.$temporary->folder.'/'.$temporary->image);
+                Storage::move('files/gambar_brosur/'.$temporary->folder.'/'.$temporary->image, 'files/'.$temporary->folder.'/'.$temporary->image);
 
                 File::delete($path);
-                rmdir(storage_path('app/files/produk_gambar/' . $temporary->folder));
+                rmdir(storage_path('app/files/gambar_brosur/' . $temporary->folder));
 
                 //delete record in temporary table
                 $temporary->delete();
