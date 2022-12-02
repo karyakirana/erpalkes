@@ -7,7 +7,8 @@ use Livewire\Component;
 
 class ProdukForm extends Component
 {
-    public $produk_kategori_id;
+    public $produk_id;
+    public $produk_sub_kategori_id;
     public $kode;
     public $nama_produk;
     public $tipe;
@@ -33,7 +34,7 @@ class ProdukForm extends Component
         if ($produk_id){
             $this->update = true;
             $produk = Produk::find($produk_id);
-            $this->produk_kategori_id = $produk->id;
+            $this->produk_sub_kategori_id = $produk_sub_kategori_id;
             $this->kode = $produk->kode;
             $this->nama_produk = $produk->nama_produk;
             $this->tipe = $produk->tipe;
@@ -64,8 +65,8 @@ class ProdukForm extends Component
     {
         $this->validate();
         $produk = Produk::create([
+            'produk_sub_kategori_id' => $this->produk_sub_kategori_id,
             'kode' => $this->kode(),
-            'produk_kategori_id' => $this->produk_kategori_id,
             'nama_produk' => $this->nama_produk,
             'tipe' => $this->tipe,
             'satuan_beli' => $this->satuan_beli,
@@ -85,7 +86,7 @@ class ProdukForm extends Component
         $this->validate();
         $produk = Produk::find($this->produk_id);
         $produk->update([
-            'produk_kategori_id' => $this->produk_kategori_id,
+            'produk_sub_kategori_id' => $this->produk_sub_kategori_id,
             'nama_produk' => $this->nama_produk,
             'tipe' => $this->tipe,
             'satuan_beli' => $this->satuan_beli,

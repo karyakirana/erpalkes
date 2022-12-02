@@ -24,8 +24,8 @@
 
         <div class="row">
             <div class="col-6">
-                <x-input.group-vertical label="Kategori" name="produk_kategori_id">
-                    <x-input.text wire:model.defer="produk_kategori_id" />
+                <x-input.group-vertical label="Kategori" name="produk_sub_kategori_id">
+                    <x-input.text wire:model.defer="produk_sub_kategori_id" />
                 </x-input.group-vertical>
             </div>
             <div class="col-3">

@@ -55,6 +55,9 @@ Route::middleware('auth')->group(function (){
 
     Route::get('master/produk', [\App\Http\Controllers\Master\ProdukController::class, 'index'])->name('produk');
     Route::get('master/produk/form', \App\Http\Livewire\Master\ProdukForm::class)->name('produk.form');
+
+//    Route::get('penjualan/quotation', [\App\Http\Controllers\Penjualan\PenjualanQuotationController::class, 'index'])->name('penjualan.quotation');
+//    Route::get('penjualan/quotation/form', \App\Http\Livewire\Penjualan\PenjualanQuotationForm::class)->name('penjualan.quotation.form');
 });
 
 

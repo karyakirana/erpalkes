@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Penjualan;
 
 use App\Http\Controllers\Controller;
-use App\Mine\SubPenjualan\PenjualanRepository;
-use Datata;
+use App\Mine\SubPenjualan\PenjualanQuotationRepository;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class PenjualanController extends Controller
+class PenjualanQuotationController extends Controller
 {
     public function index()
     {
-        return view('pages.penjualan.penjualan-index');
+        return view('pages.penjualan.penjualan-quotation-index');
     }
 
     /**
@@ -22,7 +22,7 @@ class PenjualanController extends Controller
     public function datatables(Request $request)
     {
         if($request->ajax()){
-            $data = PenjualanRepository::getAllCurrentActiveCash();
+            $data = PenjualanQuotationRepository::getAllCurrentActiveCash();
             return DataTables::of($data)
                 ->make(true);
         }

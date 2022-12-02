@@ -47,3 +47,6 @@ Route::delete('master/penerimacn', [\App\Http\Controllers\Master\PenerimaCNContr
 
 Route::post('master/produk/datatables', [\App\Http\Controllers\Master\ProdukController::class, 'datatables'])->name('produk.datatables');
 Route::delete('master/produk', [\App\Http\Controllers\Master\ProdukController::class, 'destroy'])->name('produk.destroy');
+
+Route::post('penjualan/quotation/datatables', [\App\Http\Controllers\Penjualan\PenjualanQuotationController::class, 'datatables'])->name('penjualan.quotation.datatables');
+Route::delete('penjualan/quotation', [\App\Http\Controllers\Penjualan\PenjualanQuotationController::class, 'destroy'])->name('penjualan.quotation.destroy');
