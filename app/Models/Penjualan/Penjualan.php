@@ -39,4 +39,9 @@ class Penjualan extends Model
     {
         return $this->hasMany(PenjualanDetail::class, 'penjualan_id');
     }
+
+    public function penjualanQuotation()
+    {
+        return $this->belongsTo(PenjualanQuotation::class, 'penjualan_quotation_id');
+    }
 }
