@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\ClosedCash;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -44,6 +45,10 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        // check and add session closed cash
+        $idUser = Auth::id();
+        $request->session()->put('ClosedCash', $this->ClosedCash($idUser));
+
         return redirect(RouteServiceProvider::HOME);
     }
 
@@ -52,6 +57,9 @@ class AuthController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $idUser = Auth::id();
+        $request->session()->put('ClosedCash', $this->ClosedCash($idUser));
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -66,4 +74,27 @@ class AuthController extends Controller
 
         return redirect('/');
     }
+
+    /**
+     * Handle Closed Cashed after login to session
+     * @param number $idUser ID USER
+     * @return string Active Closed id
+     */
+    public function ClosedCash($idUser)
+    {
+        $data = ClosedCash::whereNull('closed')->latest()->first();
+        if ($data) {
+            // jika null maka buat data
+            return $data->active_cash;
+        }
+        $generateClosedCash = md5(now());
+        $isi = [
+            'active_cash' => $generateClosedCash,
+            'user_id' => $idUser,
+        ];
+        $createData = ClosedCash::create($isi);
+        return $generateClosedCash;
+
+    }
+
 }

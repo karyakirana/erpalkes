@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
+    use ClosedCashTrait;
     /**
      * Display the login view.
      *
@@ -31,6 +32,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $idUser = Auth::id();
+        $request->session()->put('ClosedCash', $this->ClosedCash($idUser));
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

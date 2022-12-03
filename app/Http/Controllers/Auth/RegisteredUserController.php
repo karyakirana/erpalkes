@@ -13,6 +13,8 @@ use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
+    use ClosedCashTrait;
+
     /**
      * Display the registration view.
      *
@@ -51,6 +53,9 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $idUser = Auth::id();
+        $request->session()->put('ClosedCash', $this->ClosedCash($idUser));
 
         return redirect(RouteServiceProvider::HOME);
     }
