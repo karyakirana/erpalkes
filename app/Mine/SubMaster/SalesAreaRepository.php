@@ -28,7 +28,7 @@ class SalesAreaRepository
 
     public static function store(array $data)
     {
-        $data['kode'] = self::kode();
+        $data['kode_area'] = self::kode();
         $salesArea = SalesArea::create($data);
         $salesArea->salesAreaDetail()->createMany($data['dataDetail']);
         return $salesArea;

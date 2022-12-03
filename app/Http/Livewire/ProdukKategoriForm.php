@@ -31,7 +31,7 @@ class ProdukKategoriForm extends Component
 
     protected function kode()
     {
-        $area = ProdukKategori::latest('kode_area')->first();
+        $area = ProdukKategori::latest('kode')->first();
         if ($area == null){
             $num = 1;
         } else {
@@ -55,6 +55,7 @@ class ProdukKategoriForm extends Component
     {
         $this->update = true;
         $kategori = ProdukKategori::find($id);
+        $this->kategori_id = $kategori->id;
         $this->kode = $kategori->kode;
         $this->kategori = $kategori->kategori;
         $this->keterangan = $kategori->keterangan;

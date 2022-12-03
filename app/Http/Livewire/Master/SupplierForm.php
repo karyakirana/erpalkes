@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Master;
 
 use App\Models\Master\Supplier;
+use App\Models\Regency;
 use Livewire\Component;
 
 class SupplierForm extends Component
@@ -14,15 +15,23 @@ class SupplierForm extends Component
     public $email;
     public $npwp;
     public $alamat;
+    public $regencies_id, $regencies_name;
+    public $provinces_id, $provinces_name;
     public $keterangan;
 
     public $update = false;
 
-    protected $listeners = [];
+    protected $listeners = [
+        'setCity'
+    ];
 
     protected $rules = [
         'nama_supplier'=>'required|min:3',
         'alamat'=>'required|min:3',
+    ];
+
+    protected $messages = [
+        'regencies_id.required' => 'Data Kota harus diinput'
     ];
 
     public function mount($supplier_id = null)
@@ -41,6 +50,13 @@ class SupplierForm extends Component
         }
     }
 
+    public function setCity(Regency $regency)
+    {
+        $this->regencies_id = $regency->id;
+        $this->regencies_name = $regency->name;
+        $this->emit('modalCitySetHide');
+    }
+
     protected function kode()
     {
         $supplier = Supplier::latest('kode')->first();
@@ -53,18 +69,26 @@ class SupplierForm extends Component
         return "S".sprintf("%05s", $num);
     }
 
+    protected function setData()
+    {
+        $this->kode = $this->kode();
+        return $this->validate([
+            'kode' => 'required',
+            'nama_supplier' => 'required|min:3',
+            'telepon' => 'nullable',
+            'email' => 'nullable|email',
+            'npwp' => 'nullable|min:10',
+            'alamat' => 'required|min:10',
+            'regencies_id' => 'required',
+            'keterangan' => 'nullable'
+        ]);
+    }
+
     public function store()
     {
-        $this->validate();
-        $supplier = Supplier::create([
-            'kode' => $this->kode(),
-            'nama_supplier' => $this->nama_supplier,
-            'telepon' => $this->telepon,
-            'email' => $this->email,
-            'npwp' => $this->npwp,
-            'alamat' => $this->alamat,
-            'keterangan' => $this->keterangan
-        ]);
+        $data = $this->setData();
+        //dd($data);
+        $supplier = Supplier::create($data);
         // redirect
         session()->flash('message', 'Data '.$this->nama_supplier.' sudah disimpan.');
         return redirect()->to(route('supplier'));
@@ -72,16 +96,10 @@ class SupplierForm extends Component
 
     public function update()
     {
-        $this->validate();
+        $data = $this->setData();
+        unset($data['kode']);
         $supplier = Supplier::find($this->supplier_id);
-        $supplier->update([
-            'nama_supplier' => $this->nama_supplier,
-            'telepon' => $this->telepon,
-            'email' => $this->email,
-            'npwp' => $this->npwp,
-            'alamat' => $this->alamat,
-            'keterangan' => $this->keterangan
-        ]);
+        $supplier->update($data);
         // redirect
         session()->flash('message', 'Data '.$this->nama_supplier.' sudah diperbarui.');
         return redirect()->to(route('supplier'));

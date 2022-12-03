@@ -2,15 +2,17 @@
 
 namespace App\Models\Master;
 
+use App\Models\KodeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Produk extends Model
 {
-    use HasFactory;
+    use HasFactory, KodeTrait;
     protected $table = 'produk';
     protected $fillable = [
-        'produk_sub_kategori_id',
+        'produk_kategori_id',
+        'kode',
         'nama_produk',
         'tipe',
         'isi_kemasan',

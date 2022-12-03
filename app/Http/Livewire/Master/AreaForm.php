@@ -24,20 +24,23 @@ class AreaForm extends Component
     public $update = false;
 
     protected $listeners = [
-        'store',
-        'edit',
-        'update',
-        'resetForm'
+        'setRegencies',
+        'updateLine',
     ];
 
     protected $rules = [
         'nama_area' => 'required|min:3',
     ];
 
+    protected $messages = [
+        'regencies_id.required' => 'The City cannot be empty.',
+        'dataDetail.required' => 'Nama Kota Belum diinputkan'
+    ];
+
     public function mount($area_id = null)
     {
         if ($area_id) {
-            $mode = 'update';
+            $this->update = true;
             $area = SalesAreaRepository::getById($area_id);
             $this->kode_area = $area->kode_area;
             $this->nama_area = $area->nama_area;
@@ -53,8 +56,17 @@ class AreaForm extends Component
         }
     }
 
+    public function setRegencies($id)
+    {
+        $this->regencies_id = $id;
+        $this->dispatchBrowserEvent('pharaonic.select2.init');
+    }
+
     public function addLine()
     {
+        $this->validate([
+            'regencies_id'=>'required'
+        ]);
         $regencies = Regency::find($this->regencies_id);
         $this->dataDetail[] = [
             'regencies_id'=>$regencies->id,
@@ -65,7 +77,7 @@ class AreaForm extends Component
 
     public function removeLine($index)
     {
-        unset($this->dataDetail);
+        unset($this->dataDetail[$index]);
         $this->dataDetail = array_values($this->dataDetail);
     }
 
@@ -90,6 +102,8 @@ class AreaForm extends Component
             DB::rollBack();
         }
         // redirect
+        session()->flash('message', 'Data Area sudah tersimpan.');
+        return redirect()->route('area');
     }
 
     public function update()
@@ -103,6 +117,8 @@ class AreaForm extends Component
             DB::rollBack();
         }
         // redirect
+        session()->flash('message', 'Data Area sudah terupdate.');
+        return redirect()->route('area');
     }
 
     public function render()

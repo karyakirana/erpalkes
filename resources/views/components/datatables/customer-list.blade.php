@@ -82,7 +82,7 @@
                         columns: [
                             { data: 'kode' },
                             { data: 'jenis_instansi' },
-                            { data: 'area_id' },
+                            { data: 'area.nama_area' },
                             { data: 'nama_customer' },
                             { data: 'alamat' },
                             { data: null },
@@ -118,9 +118,9 @@
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <button type="button" onclick="customerDestroy(`+id+`)" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
+                                    <a href="#" type="button" onclick="customerDestroy(`+data.id+`)" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
                                         Delete
-                                    </button>
+                                    </a>
                                 </div>
                                 <!--end::Menu item-->
                             </div>
@@ -179,7 +179,7 @@
                 }).then((result)=>{
                     if(result.isConfirmed){
                         $.ajax({
-                            url : '{{route("customer")}}',
+                            url : '{{route("customer.destroy")}}',
                             method : 'delete',
                             data : {
                                 id : id
@@ -188,7 +188,7 @@
                                 Swal.fire(
                                     'Deleted'
                                 )
-                                refreshDatatables()
+                                reloadCustomerDatatables()
                             }
                         })
                     }

@@ -21,7 +21,8 @@ class CustomerController extends Controller
     public function datatables(Request $request)
     {
         if($request->ajax()){
-            $data = Customer::latest();
+            $data = Customer::with(['area'])
+                ->latest();
             return DataTables::of($data)
                 ->make(true);
         }

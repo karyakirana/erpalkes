@@ -20,6 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('helper/provinsi', [\App\Http\Controllers\Helper\AreaHelperController::class, 'province'])->name('helper-area.province');
 Route::post('helper/city', [\App\Http\Controllers\Helper\AreaHelperController::class, 'city'])->name('helper-area.city');
+Route::post('helper/salesarea', [\App\Http\Controllers\Helper\AreaHelperController::class, 'areaSelect2'])->name('helper-area.salesarea');
+
+Route::post('helper/city/databales', [\App\Http\Controllers\Helper\AreaHelperController::class, 'cityDatatables'])->name('helper-area.city-datatables');
 
 Route::post('master/customer/datatables', [\App\Http\Controllers\Master\CustomerController::class, 'datatables'])->name('customer.datatables');
 Route::delete('master/customer', [\App\Http\Controllers\Master\CustomerController::class, 'destroy'])->name('customer.destroy');

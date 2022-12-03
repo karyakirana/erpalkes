@@ -38,7 +38,7 @@
     @endif
 </div>
 <!--end::Wrapper-->
-<table id="{{$idDatatable}}" class="table align-middle table-striped table-row-bordered fs-6 gy-5 gs-7">
+<table id="{{$idDatatable}}" {{$attributes->class('table align-middle table-striped table-row-bordered fs-6 gy-5 gs-7')->merge()}} >
     <thead>
     <tr class="fw-semibold fs-6 text-gray-800">
         {{$slot}}
