@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Datatables;
 
+use App\Models\Province;
 use App\Models\Regency;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
@@ -9,16 +10,22 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class KotaTable extends DataTableComponent
 {
+    protected string $pageName = 'citySet';
+
+    public function setTableClass()
+    {
+        return 'table table-striped border align-middle gy-7 gs-7';
+    }
 
     public function columns(): array
     {
         return [
             Column::make('Provinsi','province.name')
-            ->searchable()
-            ->sortable(),
+            ->searchable(),
             Column::make('Kota', 'name')
             ->searchable()
             ->sortable(),
+            Column::make('Actions')
         ];
     }
 

@@ -59,7 +59,7 @@
 
                 // Private functions
                 let initDatatable = function () {
-                    dt = $("#areaDatatable").DataTable({
+                    dt = $("#produkKategoriDatatable").DataTable({
                         searchDelay: 500,
                         processing: true,
                         serverSide: true,
@@ -151,7 +151,7 @@
 
             function refreshDatatables()
             {
-                $('#areaDatatable').DataTable().ajax.reload()
+                $('#produkKategoriDatatable').DataTable().ajax.reload()
             }
 
             function destroy(id)

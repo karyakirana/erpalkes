@@ -33,7 +33,7 @@
                 modalsArea.show()
             })
 
-            document.getElementById('modalArea').addEventListener('hidden.bs.modal', event => {
+            document.getElementById('modalProdukKategori').addEventListener('hidden.bs.modal', event => {
                 Livewire.emit('resetForm')
                 refreshDatatables()
             })

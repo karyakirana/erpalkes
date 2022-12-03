@@ -23,7 +23,7 @@
                     @php
                         $jabatan = \App\Models\Master\Jabatan::query()->latest()->get();
                     @endphp
-                    <x-input.select wire:model.defer="jabatan_nama">
+                    <x-input.select wire:model.defer="jabatan_id">
                         <option>Dipilih</option>
                         @foreach($jabatan as $row)
                             <option value="{{$row->id}}">{{$row->nama_jabatan}}</option>

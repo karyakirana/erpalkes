@@ -8,8 +8,9 @@ use Livewire\Component;
 class ProdukForm extends Component
 {
     public $produk_id;
-    public $produk_sub_kategori_id;
+    public $produk_kategori_id;
     public $kode;
+    public $is_expired;
     public $nama_produk;
     public $tipe;
     public $isi_kemasan;
@@ -34,7 +35,7 @@ class ProdukForm extends Component
         if ($produk_id){
             $this->update = true;
             $produk = Produk::find($produk_id);
-            $this->produk_sub_kategori_id = $produk_sub_kategori_id;
+            $this->produk_kategori_id = $produk->produk_kategori_id;
             $this->kode = $produk->kode;
             $this->nama_produk = $produk->nama_produk;
             $this->tipe = $produk->tipe;
@@ -58,24 +59,32 @@ class ProdukForm extends Component
             $lastNum = (int) $produk->last_num_master;
             $num = $lastNum + 1;
         }
-        return "S".sprintf("%05s", $num);
+        return "P".sprintf("%05s", $num);
+    }
+
+    public function setData()
+    {
+        $this->kode = $this->kode();
+        return $this->validate([
+            'produk_id' => ($this->update) ? 'required' : 'nullable',
+            'produk_kategori_id' => 'required',
+            'kode' => 'required',
+            'nama_produk' => 'required',
+            'is_expired' => 'nullable',
+            'tipe' => 'required',
+            'satuan_beli' => 'required',
+            'isi_kemasan' => 'required',
+            'satuan_jual' => 'required',
+            'harga' => 'required',
+            'keterangan' => 'nullable'
+        ]);
     }
 
     public function store()
     {
-        $this->validate();
-        $produk = Produk::create([
-            'produk_sub_kategori_id' => $this->produk_sub_kategori_id,
-            'kode' => $this->kode(),
-            'nama_produk' => $this->nama_produk,
-            'tipe' => $this->tipe,
-            'satuan_beli' => $this->satuan_beli,
-            'satuan_jual' => $this->satuan_jual,
-            'produk_image_id' => $this->produk_image_id,
-            'produk_brosur_id' => $this->produk_brosur_id,
-            'harga' => $this->harga,
-            'keterangan' => $this->keterangan
-        ]);
+        $data = $this->setData();
+        //dd($data);
+        $produk = Produk::create($data);
         // redirect
         session()->flash('message', 'Data '.$this->nama_produk.' sudah disimpan.');
         return redirect()->to(route('produk'));
@@ -83,19 +92,10 @@ class ProdukForm extends Component
 
     public function update()
     {
-        $this->validate();
+        $data = $this->setData();
+        unset($data['kode']);
         $produk = Produk::find($this->produk_id);
-        $produk->update([
-            'produk_sub_kategori_id' => $this->produk_sub_kategori_id,
-            'nama_produk' => $this->nama_produk,
-            'tipe' => $this->tipe,
-            'satuan_beli' => $this->satuan_beli,
-            'satuan_jual' => $this->satuan_jual,
-            'produk_image_id' => $this->produk_image_id,
-            'produk_brosur_id' => $this->produk_brosur_id,
-            'harga' => $this->harga,
-            'keterangan' => $this->keterangan
-        ]);
+        $produk->update($data);
         // redirect
         session()->flash('message', 'Data '.$this->nama_produk.' sudah diperbarui.');
         return redirect()->to(route('produk'));

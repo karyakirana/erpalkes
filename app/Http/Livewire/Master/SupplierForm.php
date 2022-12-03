@@ -54,7 +54,7 @@ class SupplierForm extends Component
     {
         $this->regencies_id = $regency->id;
         $this->regencies_name = $regency->name;
-        $this->emit('modalCityHide');
+        $this->emit('modalCitySetHide');
     }
 
     protected function kode()
@@ -71,6 +71,7 @@ class SupplierForm extends Component
 
     protected function setData()
     {
+        $this->kode = $this->kode();
         return $this->validate([
             'kode' => 'required',
             'nama_supplier' => 'required|min:3',
@@ -86,6 +87,7 @@ class SupplierForm extends Component
     public function store()
     {
         $data = $this->setData();
+        //dd($data);
         $supplier = Supplier::create($data);
         // redirect
         session()->flash('message', 'Data '.$this->nama_supplier.' sudah disimpan.');
