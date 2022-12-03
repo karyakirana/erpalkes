@@ -27,24 +27,38 @@ class CustomerForm extends Component
         'resetForm'
     ];
 
+    protected $messages = [];
+
     public function mount($customer_id = null)
     {
         if ($customer_id){
             $this->update = true;
             $customer = Customer::find($customer_id);
+            $this->kode = $customer->kode;
+            $this->jenis_instansi = $customer->jenis_instansi;
+            $this->area_id = $customer->area_id;
+            $this->nama_area = $customer->area->nama_area;
+            $this->nama_customer = $customer->nama_customer;
+            $this->telepon = $customer->telepon;
+            $this->email = $customer->email;
+            $this->npwp = $customer->npwp;
+            $this->alamat = $customer->alamat;
+            $this->diskon = $customer->diskon;
+            $this->keterangan = $customer->keterangan;
         }
-    }
-
-    public function setArea(SalesArea $salesArea)
-    {
-        $this->area_id = $salesArea->id;
-        $this->nama_area = $salesArea->nama_area;
     }
 
     protected function kode()
     {
         // generate kode
-        return null;
+        $customer = Customer::latest('kode')->first();
+        if (!$customer){
+            $num = 1;
+        } else {
+            $lastNum = (int) $customer->last_num_master;
+            $num = $lastNum + 1;
+        }
+        return "C".sprintf("%05s", $num);
     }
 
     public function resetForm()
@@ -56,38 +70,39 @@ class CustomerForm extends Component
         ]);
     }
 
+    protected function setData()
+    {
+        $this->kode = $this->kode();
+        return $this->validate([
+            'kode'=>'required',
+            'jenis_instansi'=>'required',
+            'area_id'=>'required',
+            'nama_customer'=>'required',
+            'telepon'=>'nullable',
+            'email'=>'nullable',
+            'npwp'=>'nullable',
+            'alamat'=>'nullable',
+            'diskon'=>'nullable',
+            'keterangan'=>'nullable'
+        ]);
+    }
+
     public function store()
     {
-        $customer = Customer::create([
-            'kode'=>$this->kode,
-            'jenis_instansi' => $this->jenis_instansi,
-            'area_id' => $this->area_id,
-            'nama_customer' => $this->nama_customer,
-            'telepon' => $this->telepon,
-            'email' => $this->email,
-            'npwp' => $this->npwp,
-            'alamat' => $this->alamat,
-            'diskon' => $this->diskon,
-            'keterangan' => $this->keterangan
-        ]);
+        $data = $this->setData();
+        $customer = Customer::create($data);
         // redirect
+        return redirect()->route('customer');
     }
 
     public function update()
     {
         $customer = Customer::find($this->customer_id);
-        $customer->update([
-            'jenis_instansi' => $this->jenis_instansi,
-            'area_id' => $this->area_id,
-            'nama_customer' => $this->nama_customer,
-            'telepon' => $this->telepon,
-            'email' => $this->email,
-            'npwp' => $this->npwp,
-            'alamat' => $this->alamat,
-            'diskon' => $this->diskon,
-            'keterangan' => $this->keterangan
-        ]);
+        $data = $this->setData();
+        unset($data['kode']);
+        $customer->update($data);
         // redirect
+        return redirect()->route('customer');
     }
 
     public function render()

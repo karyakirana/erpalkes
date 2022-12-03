@@ -17,7 +17,7 @@
             <!--begin::Toolbar-->
             <div class="d-flex justify-content-end" data-kt-jabatan-table-toolbar="base">
                 <!--begin::Add customer-->
-                <x-button.btn-base data-bs-toggle="modal" data-bs-target="#modalArea">
+                <x-button.btn-link-base href="{{route('area.form')}}">
                     <span class="svg-icon svg-icon-2">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor"></rect>
@@ -25,7 +25,7 @@
                         </svg>
                     </span>
                     Add Area
-                </x-button.btn-base>
+                </x-button.btn-link-base>
                 <!--end::Add customer-->
             </div>
             <!--end::Toolbar-->
@@ -44,7 +44,7 @@
         </table>
     </x-card.standart>
 
-    <livewire:master.area-form />
+    <livewire:master.area-detail />
 
     @push('scripts')
         <script>
@@ -98,8 +98,16 @@
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="edit(`+data.id+`)" class="menu-link px-3" data-kt-jabatan-table-filter="edit_row">
+                                    <a href="/master/area/form/`+data.id+`" class="menu-link px-3" data-kt-jabatan-table-filter="edit_row">
                                         Edit
+                                    </a>
+                                </div>
+                                <!--end::Menu item-->
+
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" onclick="detail(`+data.id+`)" class="menu-link px-3" data-kt-jabatan-table-filter="delete_row">
+                                        Detail
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
@@ -183,9 +191,9 @@
                 })
             }
 
-            function edit(id)
+            function detail(id)
             {
-                window.livewire.emit('edit', id);
+                window.livewire.emit('detailArea', id);
             }
 
         </script>
