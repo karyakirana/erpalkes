@@ -29,7 +29,7 @@ class PenjualanQuotationForm extends Component
     protected $rules = [
         'customer_id'=>'required',
         'sales_id'=>'required',
-        'user_id'=>'required',
+        'tgl_quotation'=>'required',
     ];
 
     public function mount($penjualan_quotation_id = null)
@@ -87,7 +87,7 @@ class PenjualanQuotationForm extends Component
     public function update()
     {
         $this->validate();
-        PenjualanQuotation::find($this->penjualan_quotation_id);
+        $penjualan_quotation = PenjualanQuotation::find($this->penjualan_quotation_id);
         $penjualan_quotation->update([
             'tgl_quotation' => $this->tgl_quotation,
             'customer_id' => $this->customer_id,

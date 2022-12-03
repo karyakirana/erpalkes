@@ -10,12 +10,12 @@
                     <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
                 </svg>
             </span>
-                <input type="text" data-kt-jabatan-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Customers"/>
+                <input type="text" data-kt-quotation-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Customers"/>
             </div>
             <!--end::Search-->
 
             <!--begin::Toolbar-->
-            <div class="d-flex justify-content-end" data-kt-jabatan-table-toolbar="base">
+            <div class="d-flex justify-content-end" data-kt-quotation-table-toolbar="base">
                 <!--begin::Add customer-->
                 <x-button.btn-link-base href="{{route('penjualan.quotation.form')}}">
                     <span class="svg-icon svg-icon-2">
@@ -31,7 +31,7 @@
             <!--end::Toolbar-->
         </div>
         <!--end::Wrapper-->
-        <table id="jabatanDatatable" class="table align-middle table-striped table-row-bordered fs-6 gy-5 gs-7">
+        <table id="quotationDatatable" class="table align-middle table-striped table-row-bordered fs-6 gy-5 gs-7">
             <thead>
             <tr class="fw-semibold fs-6 text-gray-800">
                 <th>Kode</th>
@@ -48,8 +48,6 @@
         </table>
     </x-card.standart>
 
-    <livewire:master.jabatan-form />
-
     @push('scripts')
         <script>
             "use strict";
@@ -63,7 +61,7 @@
 
                 // Private functions
                 let initDatatable = function () {
-                    dt = $("#jabatanDatatable").DataTable({
+                    dt = $("#quotationDatatable").DataTable({
                         searchDelay: 500,
                         processing: true,
                         serverSide: true,
@@ -106,7 +104,7 @@
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="edit(`+data.id+`)" class="menu-link px-3" data-kt-jabatan-table-filter="edit_row">
+                                    <a href="#" onclick="edit(`+data.id+`)" class="menu-link px-3" data-kt-quotation-table-filter="edit_row">
                                         Edit
                                     </a>
                                 </div>
@@ -114,7 +112,7 @@
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="destroy(`+data.id+`)" class="menu-link px-3" data-kt-jabatan-table-filter="delete_row">
+                                    <a href="#" onclick="destroy(`+data.id+`)" class="menu-link px-3" data-kt-quotation-table-filter="delete_row">
                                         Delete
                                     </a>
                                 </div>
@@ -159,7 +157,7 @@
 
             function refreshDatatables()
             {
-                $('#jabatanDatatable').DataTable().ajax.reload()
+                $('#quotationDatatable').DataTable().ajax.reload()
             }
 
             function destroy(id)

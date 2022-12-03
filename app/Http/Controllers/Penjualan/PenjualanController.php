@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Penjualan;
 
 use App\Http\Controllers\Controller;
 use App\Mine\SubPenjualan\PenjualanRepository;
-use Datata;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class PenjualanController extends Controller
 {
@@ -23,8 +23,7 @@ class PenjualanController extends Controller
     {
         if($request->ajax()){
             $data = PenjualanRepository::getAllCurrentActiveCash();
-            return DataTables::of($data)
-                ->make(true);
+            return DataTables::of($data)->make(true);
         }
         return null;
     }
