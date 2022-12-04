@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('supplier', function (Blueprint $table) {
-            $table->char('regencies_id', 2)->after('alamat');
+        Schema::create('kemasan', function (Blueprint $table) {
+            $table->id();
+            $table->string('kemasan');
+            $table->bigInteger('isi_kemasan');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('supplier', function (Blueprint $table) {
-            $table->dropColumn(['regencies_id']);
-        });
+        Schema::dropIfExists('kemasan');
     }
 };

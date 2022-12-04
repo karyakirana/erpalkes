@@ -18,7 +18,7 @@
                     <x-input.text wire:model.defer="nama_supplier" />
                 </x-input.group-vertical>
             </div>
-            <div class="col-2" wire:ignore>
+            <div class="col-2">
                 <x-input.group-vertical label="Telepon" name="telepon">
                     <x-input.text wire:model.defer="telepon" />
                 </x-input.group-vertical>

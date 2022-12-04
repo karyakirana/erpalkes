@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gambar_brosur', function (Blueprint $table) {
+        Schema::create('sales_and_supervisor', function (Blueprint $table) {
             $table->id();
-            $table->string('folder');
-            $table->string('image');
+            $table->unsignedBigInteger('pegawai_id');
+            $table->unsignedBigInteger('area_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('sales_and_supervisor');
     }
 };
