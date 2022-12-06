@@ -8,6 +8,9 @@
         <x-input.group-horizontal label="Kategori" name="kategori">
             <x-input.text wire:model.defer="kategori" />
         </x-input.group-horizontal>
+        <x-input.group-horizontal label="Sub Kategori" name="sub_kategori">
+            <x-input.text wire:model.defer="sub_kategori" />
+        </x-input.group-horizontal>
         <x-input.group-horizontal label="Keterangan" name="keterangan">
             <x-input.text wire:model.defer="keterangan" />
         </x-input.group-horizontal>

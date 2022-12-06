@@ -10,6 +10,7 @@ class ProdukKategoriForm extends Component
     public $kategori_id;
     public $kode;
     public $kategori;
+    public $sub_kategori;
     public $keterangan;
 
     public $update = false;
@@ -24,7 +25,7 @@ class ProdukKategoriForm extends Component
     public function resetForm()
     {
         $this->update = false;
-        $this->reset(['kategori_id', 'kategori', 'keterangan']);
+        $this->reset(['kategori_id', 'kategori', 'sub_kategori', 'keterangan']);
         $this->resetErrorBag();
         $this->resetValidation();
     }
@@ -46,6 +47,7 @@ class ProdukKategoriForm extends Component
         ProdukKategori::create([
             'kode' => $this->kode(),
             'kategori' => $this->kategori,
+            'sub_kategori' => $this->sub_kategori,
             'keterangan' => $this->keterangan
         ]);
         $this->emit('modalProdukKategoriHide');
@@ -58,6 +60,7 @@ class ProdukKategoriForm extends Component
         $this->kategori_id = $kategori->id;
         $this->kode = $kategori->kode;
         $this->kategori = $kategori->kategori;
+        $this->sub_kategori = $kategori->sub_kategori;
         $this->keterangan = $kategori->keterangan;
         $this->emit('modalProdukKategoriShow');
     }
@@ -67,6 +70,7 @@ class ProdukKategoriForm extends Component
         $kategori = ProdukKategori::find($this->kategori_id);
         $kategori->update([
             'kategori' => $this->kategori,
+            'sub_kategori' => $this->sub_kategori,
             'keterangan' => $this->keterangan
         ]);
         $this->emit('modalProdukKategoriHide');

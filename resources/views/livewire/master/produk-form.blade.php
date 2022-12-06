@@ -24,16 +24,21 @@
                 </x-input.group-vertical>
             </div>
             <div class="col-3">
-                <x-input.group-vertical label="Isi Kemasan" name="isi_kemasan">
-                    <x-input.text wire:model.defer="isi_kemasan" />
+                <x-input.group-vertical label="Sub Kategori" name="sub_kategori">
+                    <x-input.text wire:model.defer="sub_kategori" />
                 </x-input.group-vertical>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-6">
+            <div class="col-3">
                 <x-input.group-vertical label="Tipe" name="tipe">
                     <x-input.text wire:model.defer="tipe" />
+                </x-input.group-vertical>
+            </div>
+            <div class="col-3">
+                <x-input.group-vertical label="Isi Kemasan" name="isi_kemasan">
+                    <x-input.text wire:model.defer="isi_kemasan" />
                 </x-input.group-vertical>
             </div>
             <div class="col-3">
@@ -65,12 +70,12 @@
         </div>
 
         <div class="row">
-            <div class="col-6">
-                <x-input.group-vertical label="Harga" name="harga">
-                    <x-input.text wire:model.defer="harga" />
-                </x-input.group-vertical>
-            </div>
-            <div class="col-6">
+{{--            <div class="col-6">--}}
+{{--                <x-input.group-vertical label="Harga" name="harga">--}}
+{{--                    <x-input.text wire:model.defer="harga" />--}}
+{{--                </x-input.group-vertical>--}}
+{{--            </div>--}}
+            <div class="col-12">
                 <x-input.group-vertical label="Deskripsi" name="keterangan">
                     <x-input.text wire:model.defer="keterangan" />
                 </x-input.group-vertical>

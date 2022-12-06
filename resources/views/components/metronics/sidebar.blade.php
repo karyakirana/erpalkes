@@ -112,7 +112,7 @@
                                 <!--begin:Menu item-->
                                 <div class="menu-item">
                                     <!--begin:Menu link-->
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link" href="{{url('master/produk')}}">
 															<span class="menu-bullet">
 																<span class="bullet bullet-dot"></span>
 															</span>
@@ -124,7 +124,7 @@
                                 <!--begin:Menu item-->
                                 <div class="menu-item">
                                     <!--begin:Menu link-->
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link" href="{{url('master/produkkategori')}}">
 															<span class="menu-bullet">
 																<span class="bullet bullet-dot"></span>
 															</span>
@@ -138,6 +138,35 @@
                         <!--end:Menu item-->
                     </div>
                     <!--end:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <!--begin:Menu link-->
+                            <span class="menu-link">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+													<span class="menu-title">Area</span>
+													<span class="menu-arrow"></span>
+												</span>
+                            <!--end:Menu link-->
+                            <!--begin:Menu sub-->
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <!--begin:Menu item-->
+                                <div class="menu-item">
+                                    <!--begin:Menu link-->
+                                    <a class="menu-link" href="{{url('master/area')}}">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+                                        <span class="menu-title">Area</span>
+                                    </a>
+                                    <!--end:Menu link-->
+                                </div>
+                            </div>
+                            <!--end:Menu item-->
+                        </div>
+                    </div>
                 </div>
                 <!--end:Menu item-->
 
@@ -164,7 +193,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('master/pegawai')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -222,7 +251,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('master/customer')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -234,7 +263,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('penjualan/quotation')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -259,7 +288,7 @@
                                 <!--begin:Menu item-->
                                 <div class="menu-item">
                                     <!--begin:Menu link-->
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link" href="{{url('penjualan')}}">
 															<span class="menu-bullet">
 																<span class="bullet bullet-dot"></span>
 															</span>

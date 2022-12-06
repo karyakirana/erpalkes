@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode');
             $table->string('kategori');
+            $table->string('sub_kategori');
             $table->text('keterangan');
             $table->timestamps();
         });

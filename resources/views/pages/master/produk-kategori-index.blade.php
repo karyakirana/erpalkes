@@ -24,7 +24,7 @@
                             <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor"></rect>
                         </svg>
                     </span>
-                    Add Area
+                    Add Kategori
                 </x-button.btn-base>
                 <!--end::Add customer-->
             </div>
@@ -36,6 +36,7 @@
             <tr class="fw-semibold fs-6 text-gray-800">
                 <th>Kode</th>
                 <th>Kategori</th>
+                <th>Sub Kategori</th>
                 <th>Keterangan</th>
                 <th></th>
             </tr>
@@ -72,6 +73,7 @@
                         columns: [
                             { data: 'kode' },
                             { data: 'kategori' },
+                            { data: 'sub_kategori' },
                             { data: 'keterangan' },
                             { data: null },
                         ],
