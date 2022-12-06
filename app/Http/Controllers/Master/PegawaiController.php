@@ -15,6 +15,11 @@ class PegawaiController extends Controller
         return view('pages.master.pegawai-index');
     }
 
+    public function show($pegawai_id)
+    {
+        //
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse|null

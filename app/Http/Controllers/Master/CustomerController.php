@@ -15,6 +15,11 @@ class CustomerController extends Controller
         return view('pages.master.customer-index');
     }
 
+    public function show($customer_id)
+    {
+        return view('pages.master.customer-show');
+    }
+
     /**
      * @throws Exception
      */

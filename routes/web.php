@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function (){
     });
 
     Route::get('master/customer', [\App\Http\Controllers\Master\CustomerController::class, 'index'])->name('customer');
+    Route::get('master/customer/{customer_id}', [\App\Http\Controllers\Master\CustomerController::class, 'show'])->name('customer.show');
     Route::get('master/customer/form', \App\Http\Livewire\Master\CustomerForm::class)->name('customer.form');
     Route::get('master/customer/form/{customer_id}', \App\Http\Livewire\Master\CustomerForm::class);
 

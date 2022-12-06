@@ -16,9 +16,12 @@ return new class extends Migration
         Schema::create('produk_harga', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('produk_id');
-            $table->bigInteger('harga_beli');
-            $table->bigInteger('margin');
+            $table->unsignedBigInteger('satuan_jual');
+            $table->bigInteger('harga_beli'); // harga maksimal dari pembelian
+            $table->integer('persen_margin');
+            $table->bigInteger('harga_margin');
             $table->bigInteger('harga_jual');
+            $table->bigInteger('discount_maksimum');
             $table->timestamps();
         });
     }
