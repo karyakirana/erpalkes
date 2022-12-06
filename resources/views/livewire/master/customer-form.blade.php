@@ -56,12 +56,7 @@
                     <x-input.text wire:model.defer="npwp"/>
                 </x-input.group-vertical>
             </div>
-            <div class="col-3">
-                <x-input.group-vertical label="Diskon" name="diskon">
-                    <x-input.text wire:model.defer="diskon" />
-                </x-input.group-vertical>
-            </div>
-            <div class="col-6">
+            <div class="col-9">
                 <x-input.group-vertical label="Keterangan" name="keterangan">
                     <x-input.text wire:model.defer="keterangan" />
                 </x-input.group-vertical>
