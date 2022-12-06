@@ -17,7 +17,7 @@ class CustomerController extends Controller
 
     public function show($customer_id)
     {
-        return view('pages.master.customer-show');
+        return view('pages.master.customer-show', ['customer_id' => $customer_id]);
     }
 
     /**
