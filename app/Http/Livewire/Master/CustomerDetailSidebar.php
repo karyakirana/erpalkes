@@ -2,33 +2,29 @@
 
 namespace App\Http\Livewire\Master;
 
-use App\Http\Requests\Master\CustomerRequest;
 use App\Mine\SubMaster\CustomerRepository;
 use Livewire\Component;
 
 class CustomerDetailSidebar extends Component
 {
-    public $customer_id;
+    use CustomerFormTrait;
 
     public function mount($customer_id)
     {
         $customer = CustomerRepository::getById($customer_id);
-        $this->customer_id = $customer->id;
-    }
-
-    public function rules()
-    {
-        return (new CustomerRequest())->rules();
+        $this->loadCustomer($customer_id);
     }
 
     public function edit()
     {
-        $this->emit('editCustomerDetail');
+        $this->emit('customerModalFormShow');
     }
 
     public function update()
     {
         $data = $this->validate();
+        $repo = CustomerRepository::update($data, $this->customer_id);
+        $this->emit('customerModalFormHide');
     }
 
     public function render()

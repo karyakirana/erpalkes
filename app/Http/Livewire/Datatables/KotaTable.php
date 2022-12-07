@@ -10,12 +10,9 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class KotaTable extends DataTableComponent
 {
-    protected string $pageName = 'citySet';
+    use LivewireDatatableTrait;
 
-    public function setTableClass()
-    {
-        return 'table table-striped border align-middle gy-7 gs-7';
-    }
+    protected string $pageName = 'citySet';
 
     public function columns(): array
     {
@@ -25,7 +22,7 @@ class KotaTable extends DataTableComponent
             Column::make('Kota', 'name')
             ->searchable()
             ->sortable(),
-            Column::make('Actions')
+            Column::make('')
         ];
     }
 

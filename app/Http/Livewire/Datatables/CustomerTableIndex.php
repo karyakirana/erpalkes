@@ -9,15 +9,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class CustomerTableIndex extends DataTableComponent
 {
-    public function setTableClass()
-    {
-        return 'table table-hover border border-gray-400 align-middle fs-6 gs-7';
-    }
-
-    public function setTableRowClass($row): ?string
-    {
-        return 'border border-gray-400';
-    }
+    use LivewireDatatableTrait;
 
     public function columns(): array
     {

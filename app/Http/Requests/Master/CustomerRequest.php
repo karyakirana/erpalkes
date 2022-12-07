@@ -27,13 +27,14 @@ class CustomerRequest extends FormRequest
             'customer_id' => 'nullable',
             'kode' => 'nullable',
             'jenis_instansi' => 'required',
-            'nama_customer' => 'required',
+            'nama_customer' => 'required|min:3',
             'telepon' => 'nullable',
             'email' => 'nullable|email',
             'npwp' => 'nullable',
             'alamat' => 'nullable',
             'regencies_id' => 'required',
-            'diskon' => 'nullable',
+            'regencies_name' => 'required',
+            'diskon' => 'nullable|numeric',
             'keterangan' => 'nullable'
         ];
     }
@@ -41,7 +42,7 @@ class CustomerRequest extends FormRequest
     public function messages()
     {
         return [
-            ''
+            'regencies_id.required' => 'Kota harus diisi.'
         ];
     }
 }

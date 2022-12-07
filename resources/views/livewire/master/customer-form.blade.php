@@ -13,12 +13,12 @@
             </x-alert.danger>
         @endif
         <div class="row">
-            <div class="col-6">
+            <div class="col-8">
                 <x-input.group-vertical label="Nama" name="nama_customer">
                     <x-input.text wire:model.defer="nama_customer"/>
                 </x-input.group-vertical>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <x-input.group-vertical label="Jenis Instansi" name="jenis_instansi">
                     <x-input.select wire:model.defer="jenis_instansi">
                         <option>Dipilih</option>
@@ -27,38 +27,38 @@
                     </x-input.select>
                 </x-input.group-vertical>
             </div>
-            <div class="col-3">
-                <x-input.group-vertical label="Area" name="area_id" wire:ignore>
-                    <x-input.select id="areaSelect2" data-placeholder="Pilih Area" wire:model.defer="area_id" />
-                </x-input.group-vertical>
-            </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-8">
                 <x-input.group-vertical label="Alamat" name="alamat">
                     <x-input.text wire:model.defer="alamat"/>
                 </x-input.group-vertical>
             </div>
-            <div class="col-3">
-                <x-input.group-vertical label="Telepon" name="alamat">
-                    <x-input.text wire:model.defer="telepon" />
+            <div class="col-4">
+                <x-input.group-vertical label="Kota" name="regencies_name">
+                    <x-input.text wire:model.defer="regencies_name" wire:click="$emit('modalCitySetShow')" readonly />
                 </x-input.group-vertical>
             </div>
+        </div>
+        <div class="row">
             <div class="col-3">
                 <x-input.group-vertical label="Email" name="email">
                     <x-input.text wire:model.defer="email"/>
                 </x-input.group-vertical>
             </div>
-        </div>
-        <div class="row">
+            <div class="col-3">
+                <x-input.group-vertical label="Telepon" name="telepon">
+                    <x-input.text wire:model.defer="telepon"/>
+                </x-input.group-vertical>
+            </div>
             <div class="col-3">
                 <x-input.group-vertical label="NPWP" name="npwp">
                     <x-input.text wire:model.defer="npwp"/>
                 </x-input.group-vertical>
             </div>
-            <div class="col-9">
-                <x-input.group-vertical label="Keterangan" name="keterangan">
-                    <x-input.text wire:model.defer="keterangan" />
+            <div class="col-3">
+                <x-input.group-vertical label="Diskon" name="diskon">
+                    <x-input.text wire:model.defer="diskon"/>
                 </x-input.group-vertical>
             </div>
         </div>
@@ -70,6 +70,7 @@
             @endif
         </x-slot:footer>
     </x-card.standart>
+    <x-datatables.city-set />
     @push('scripts')
         <script>
             let areaSelect2 = function () {

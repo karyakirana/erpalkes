@@ -3,7 +3,7 @@
 <div class="{{ $this->responsive ? 'table-responsive' : '' }}">
     <table {{ $attributes->except(['wire:sortable', 'class']) }} class="{{ trim($attributes->get('class')) ?: 'table table-striped'}}">
         <thead>
-            <tr class="fs-4 fw-bold border border-gray-400">
+            <tr class="fw-semibold fs-5 text-gray-800 border-bottom border-gray-200">
                 {{ $head }}
             </tr>
         </thead>

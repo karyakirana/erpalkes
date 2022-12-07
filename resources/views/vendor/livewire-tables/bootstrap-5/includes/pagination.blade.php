@@ -1,11 +1,11 @@
 @if ($showPagination)
     @if ($paginationEnabled && $rows->lastPage() > 1)
-        <div class="row">
-            <div class="col-12 col-md-6">
+        <div class="row align-middle">
+            <div class="col-12 col-md-8">
                 {{ $rows->links() }}
             </div>
 
-            <div class="col-12 col-md-6 text-center text-md-end text-muted">
+            <div class="col-12 col-md-4 text-center text-md-end text-muted">
                 <span>@lang('Showing')</span>
                 <strong>{{ $rows->count() ? $rows->firstItem() : 0 }}</strong>
                 <span>@lang('to')</span>

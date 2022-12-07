@@ -7,5 +7,6 @@
         let modalCitySet = new bootstrap.Modal(document.getElementById('modalCitySet'));
 
         window.livewire.on('modalCitySetHide', function (){modalCitySet.hide()})
+        window.livewire.on('modalCitySetShow', function (){modalCitySet.show()})
     </script>
 @endpush

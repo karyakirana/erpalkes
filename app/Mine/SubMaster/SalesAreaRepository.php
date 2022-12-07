@@ -2,14 +2,14 @@
 
 use App\Models\Master\SalesArea;
 
-class SalesAreaRepository
+class SalesAreaRepository implements MasterRepositoryInterface
 {
-    public static function getById($salesAreaId)
+    public static function getById($id)
     {
-        return SalesArea::find($salesAreaId);
+        return SalesArea::find($id);
     }
 
-    public static function getAll()
+    public static function datatables($deleted = false)
     {
         return SalesArea::all();
     }
@@ -34,22 +34,22 @@ class SalesAreaRepository
         return $salesArea;
     }
 
-    public static function update(array $data)
+    public static function update(array $data, $id)
     {
-        $salesArea = SalesArea::find($data['area_id']);
+        $salesArea = SalesArea::find($id);
         $salesArea->update($data);
         $salesArea->salesAreaDetail()->createMany($data['dataDetail']);
     }
 
-    public static function deleteDetaail($salesAreaId)
+    public static function deleteDetail($id)
     {
-        $salesArea = SalesArea::find($salesAreaId);
+        $salesArea = SalesArea::find($id);
         return $salesArea->salesAreaDetail()->delete();
     }
 
-    public static function destroy($salesAreaId)
+    public static function destroy($id)
     {
-        $salesArea = SalesArea::find($salesAreaId);
+        $salesArea = SalesArea::find($id);
         $salesArea->salesAreaDetail()->delete();
         return $salesArea->delete();
     }
