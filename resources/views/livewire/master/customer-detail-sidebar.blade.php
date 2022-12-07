@@ -21,7 +21,7 @@
                 </span>
             </div>
             <span data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-original-title="Edit customer details" data-kt-initialized="1">
-                <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_customer">Edit</a>
+                <a href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#modalEditCustomer">Edit</a>
             </span>
         </div>
         <div id="kt_customer_view_details" class="collapse show">
@@ -33,7 +33,7 @@
                 <!--begin::Details item-->
                 <div class="fw-bold mt-5">Billing</div>
                 <div class="text-gray-600">
-                    <a href="#" class="text-gray-600 text-hover-primary">{{$email}}</a>
+                    <a href="mailto:{{$email}}" class="text-gray-600 text-hover-primary">{{$email}}</a><br>
                     {{$telepon}}
                 </div>
                 <!--begin::Details item-->
@@ -55,4 +55,52 @@
             </div>
         </div>
     </x-card.standart>
+    <x-modal.standart size="xl" id="modalEditCustomer" title="Edit {{$kode}}" wire:ignore.self>
+
+        <form>
+            <x-input.group-horizontal label="Instansi" name="jenis_instansi">
+                <x-input.select wire:model.defer="jenis_instansi">
+                    <option>Dipilih</option>
+                    <option value="Non Pemerintah">Non Pemerintah</option>
+                    <option value="Pemerintah">Pemerintah</option>
+                </x-input.select>
+            </x-input.group-horizontal>
+            <x-input.group-horizontal label="Nama" name="nama_customer">
+                <x-input.text wire:model.defer="nama_customer"/>
+            </x-input.group-horizontal>
+            <x-input.group-horizontal label="Telepon" name="telepon">
+                <x-input.text wire:model.defer="telepon"/>
+            </x-input.group-horizontal>
+            <x-input.group-horizontal label="Email" name="email">
+                <x-input.text wire:model.defer="email"/>
+            </x-input.group-horizontal>
+            <x-input.group-horizontal label="NPWP" name="npwp">
+                <x-input.text wire:model.defer="npwp"/>
+            </x-input.group-horizontal>
+            <x-input.group-horizontal label="Alamat" name="alamat">
+                <x-input.text wire:model.defer="alamat"/>
+            </x-input.group-horizontal>
+            <x-input.group-horizontal label="Kota" name="kota">
+                <x-input.text wire:model.defer="regencies_name" wire:click="$emit('modalCitySetShow')" readonly />
+            </x-input.group-horizontal>
+            <x-input.group-horizontal label="Diskon" name="diskon">
+                <x-input.text wire:model.defer="diskon"/>
+            </x-input.group-horizontal>
+            <x-input.group-horizontal label="Keterangan" name="keterangan">
+                <x-input.text wire:model.defer="keterangan"/>
+            </x-input.group-horizontal>
+        </form>
+
+        <x-slot:footer>
+            <x-button.btn-base wire:click="update">Update</x-button.btn-base>
+        </x-slot:footer>
+    </x-modal.standart>
+
+    @push('scripts')
+        <script>
+            let customerDetailModal = new bootstrap.Modal(document.getElementById('modalEditCustomer'))
+
+            window.livewire.on('customerModalFormHide', function (){customerDetailModal.hide()})
+        </script>
+    @endpush
 </div>
