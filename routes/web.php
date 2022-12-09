@@ -56,11 +56,11 @@ Route::middleware('auth')->group(function (){
     Route::get('master/produksubkategori', [\App\Http\Controllers\Master\ProdukSubKategoriController::class, 'index'])->name('produk-sub-kategori');
 
     Route::get('master/produk', [\App\Http\Controllers\Master\ProdukController::class, 'index'])->name('produk');
+    Route::get('master/produk/{produk_id}/show', [\App\Http\Controllers\Master\ProdukController::class, 'show'])->name('produk.show');
     Route::get('master/produk/form', \App\Http\Livewire\Master\ProdukForm::class)->name('produk.form');
     Route::get('master/produk/form/{produk_id}', \App\Http\Livewire\Master\ProdukForm::class);
 
-//    Route::get('penjualan/quotation', [\App\Http\Controllers\Penjualan\PenjualanQuotationController::class, 'index'])->name('penjualan.quotation');
-//    Route::get('penjualan/quotation/form', \App\Http\Livewire\Penjualan\PenjualanQuotationForm::class)->name('penjualan.quotation.form');
+
 });
 
 
