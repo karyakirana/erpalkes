@@ -9,26 +9,32 @@ class PenjualanQuotationRepository
         return PenjualanQuotation::find($id);
     }
 
-    public static function getAllCurrentActiveCash($deleted = false)
+    public static function datatables($deleted = false)
     {
+        $query = PenjualanQuotation::query();
         if ($deleted){
-            return PenjualanQuotation::withTrashed()
-                ->where('active_cash', session('ClosedCash'))
-                ->latest()
-                ->get();
+            // with deleted account
+            $query = $query->withTrashed();
         }
-        return PenjualanQuotation::where('active_cash', session('ClosedCash'))
-            ->latest()->get();
-    }
-
-    public static function getAllByActiveCash($activeCash)
-    {
-        return PenjualanQuotation::latest()->get();
+        // without deleted account
+        return $query->latest('kode');
     }
 
     public static function kode()
     {
-        return null;
+        // generate kode
+        $query = PenjualanQuotation::query()
+            ->where('active_cash', session('ClosedCash'))
+            ->withTrashed()
+            ->latest('kode')->first();
+
+        // check last num
+        if (!$query){
+            return '0001/PQ/'.date('Y');
+        }
+
+        $num = (int)$query->last_num_trans + 1 ;
+        return sprintf("%04s", $num)."/PQ/".date('Y');
     }
 
     public static function store(array $data)

@@ -24,7 +24,7 @@ class Supplier extends Model
         'keterangan',
     ];
 
-    public function regencies()
+    public function regency()
     {
         return $this->belongsTo(Regency::class, 'regencies_id');
     }

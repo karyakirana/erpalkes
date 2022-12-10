@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('kode');
             $table->string('jenis_instansi');
-            $table->string('area_id');
             $table->string('nama_customer');
             $table->string('telepon')->nullable();
             $table->string('email')->nullable();

@@ -13,6 +13,11 @@ class PenerimaCNController extends Controller
         return view('pages.master.penerima-cn-index');
     }
 
+    public function show($penerima_cn_id)
+    {
+        return view('');
+    }
+
     public function datatables(Request $request)
     {
         if ($request->ajax()){

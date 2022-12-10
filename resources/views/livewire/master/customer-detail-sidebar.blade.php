@@ -96,6 +96,8 @@
         </x-slot:footer>
     </x-modal.standart>
 
+    <x-datatables.city-set />
+
     @push('scripts')
         <script>
             let customerDetailModal = new bootstrap.Modal(document.getElementById('modalEditCustomer'))

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('alamat')->nullable();
             $table->char('regencies_id', 4);
             $table->text('keterangan')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

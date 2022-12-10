@@ -2,6 +2,7 @@
 
 namespace App\Models\Penjualan;
 
+use App\Models\KodeTrait;
 use App\Models\Master\CustomerModelTrait;
 use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +13,7 @@ class PenjualanQuotation extends Model
     use HasFactory;
     use CustomerModelTrait;
     use UsersModelTrait;
+    use KodeTrait;
 
     protected $table = 'penjualan_quotation';
     protected $fillable = [

@@ -3,10 +3,12 @@
 namespace App\Models\Master;
 
 use App\Models\KodeTrait;
+use App\Models\Regency;
 use App\Models\User;
 use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pegawai extends Model
 {
@@ -14,6 +16,7 @@ class Pegawai extends Model
     use AreaModelTrait;
     use UsersModelTrait;
     use KodeTrait;
+    use SoftDeletes;
 
     protected $table = 'pegawai';
     protected $fillable = [
@@ -33,5 +36,10 @@ class Pegawai extends Model
     public function jabatan()
     {
         return $this->belongsTo(Jabatan::class, 'jabatan_id');
+    }
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class, 'regencies_id');
     }
 }

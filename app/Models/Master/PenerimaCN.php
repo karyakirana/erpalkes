@@ -16,6 +16,7 @@ class PenerimaCN extends Model
     protected $fillable = [
         'kode',
         'customer_id',
+        'penerima_cn',
         'jabatan_cn',
         'unit_cn',
         'keterangan'

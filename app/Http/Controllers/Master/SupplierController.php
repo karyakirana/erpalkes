@@ -15,6 +15,11 @@ class SupplierController extends Controller
         return view('pages.master.supplier-index');
     }
 
+    public function show($supplier_id)
+    {
+        return view('pages.master.supplier-show', ['supplier_id' => $supplier_id]);
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse|null

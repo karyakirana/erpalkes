@@ -17,7 +17,7 @@ class SupplierRepository implements MasterRepositoryInterface
             $query = $query->withTrashed();
         }
         // without deletec account
-        return $query->latest('kode')->get();
+        return $query->latest('kode');
     }
 
     public static function kode()

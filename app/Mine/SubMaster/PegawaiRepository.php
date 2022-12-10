@@ -17,7 +17,7 @@ class PegawaiRepository implements MasterRepositoryInterface
             $query = $query->withTrashed();
         }
         // without deletec account
-        return $query->latest('kode')->get();
+        return $query;
     }
 
     public static function kode()

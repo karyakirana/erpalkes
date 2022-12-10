@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('active_cash');
             $table->string('kode');
+            $table->string('kondisi');
             $table->unsignedBigInteger('user_id');
             $table->bigInteger('total_barang');
             $table->bigInteger('total_nominal');

@@ -8,6 +8,11 @@ use Livewire\Component;
 class CustomerDetailSidebar extends Component
 {
     use CustomerFormTrait;
+    use CitySetTrait;
+
+    protected $listeners = [
+        'setCity'
+    ];
 
     public function mount($customer_id)
     {

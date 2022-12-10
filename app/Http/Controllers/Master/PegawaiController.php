@@ -17,7 +17,7 @@ class PegawaiController extends Controller
 
     public function show($pegawai_id)
     {
-        //
+        return view('pages.master.pegawai-show', ['pegawai_id', $pegawai_id]);
     }
 
     /**

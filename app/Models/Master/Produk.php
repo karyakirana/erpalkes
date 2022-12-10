@@ -5,10 +5,12 @@ namespace App\Models\Master;
 use App\Models\KodeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Produk extends Model
 {
-    use HasFactory, KodeTrait;
+    use HasFactory, KodeTrait, SoftDeletes;
+
     protected $table = 'produk';
     protected $fillable = [
         'produk_kategori_id',
@@ -21,6 +23,11 @@ class Produk extends Model
         'harga',
         'keterangan',
     ];
+
+    public function produkKategori()
+    {
+        return $this->belongsTo(ProdukKategori::class, 'produk_sub_kategori_id');
+    }
 
     public function produkBrosur()
     {

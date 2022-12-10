@@ -4,7 +4,7 @@ namespace App\Http\Requests\Master;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CustomerRequest extends FormRequest
+class SupplierRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,15 @@ class CustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_id' => 'nullable',
+            'supplier_id' => 'nullable',
             'kode' => 'nullable',
-            'jenis_instansi' => 'required',
-            'nama_customer' => 'required|min:3',
+            'nama_supplier' => 'required|min:3',
             'telepon' => 'nullable',
             'email' => 'nullable|email',
             'npwp' => 'nullable',
-            'alamat' => 'nullable',
-            'regencies_id' => 'nullable',
-            'regencies_name' => 'required',
-            'diskon' => 'nullable|numeric',
+            'alamat' => 'required',
+            'regencies_id' => 'required',
+            'regencies_name' => 'nullable',
             'keterangan' => 'nullable'
         ];
     }
@@ -42,7 +40,7 @@ class CustomerRequest extends FormRequest
     public function messages()
     {
         return [
-            'regencies_name.required' => 'Kota harus diisi.'
+            'regencies_id.required' => 'Kota / Kabupaten harus diisi.'
         ];
     }
 }

@@ -34,12 +34,14 @@ Route::middleware('auth')->group(function (){
     Route::get('master/customer/form/{customer_id}', \App\Http\Livewire\Master\CustomerForm::class);
 
     Route::get('master/supplier', [\App\Http\Controllers\Master\SupplierController::class, 'index'])->name('supplier');
+    Route::get('master/supplier/{supplier_id}/show', [\App\Http\Controllers\Master\SupplierController::class, 'show'])->name('supplier.show');
     Route::get('master/supplier/form', \App\Http\Livewire\Master\SupplierForm::class)->name('supplier.form');
     Route::get('master/supplier/form/{supplier_id}', \App\Http\Livewire\Master\SupplierForm::class);
 
     Route::get('master/jabatan', [\App\Http\Controllers\Master\JabatanController::class, 'index'])->name('jabatan');
 
     Route::get('master/pegawai', [\App\Http\Controllers\Master\PegawaiController::class, 'index'])->name('pegawai');
+    Route::get('master/pegawai/{pegawai_id}/show', [\App\Http\Controllers\Master\PegawaiController::class, 'show'])->name('pegawai.show');
     Route::get('master/pegawai/form', \App\Http\Livewire\Master\PegawaiForm::class)->name('pegawai.form');
     Route::get('master/pegawai/form/{pegawai_id}', \App\Http\Livewire\Master\PegawaiForm::class);
 
@@ -49,7 +51,7 @@ Route::middleware('auth')->group(function (){
 
     Route::get('master/penerimacn', [\App\Http\Controllers\Master\PenerimaCNController::class, 'index'])->name('penerima-cn');
     Route::get('master/penerimacn/form', \App\Http\Livewire\Master\PenerimaCnForm::class)->name('penerima-cn.form');
-    Route::get('master/penerimacn/form/{penerimacn_id}', \App\Http\Livewire\Master\PenerimaCnForm::class);
+    Route::get('master/penerimacn/form/{penerimacn_id}', \App\Http\Livewire\Master\PenerimaCnForm::class)->name('penerima-cn.form.edit');
 
     Route::get('master/produkkategori', [\App\Http\Controllers\Master\ProdukKategoriController::class, 'index'])->name('produk-kategori');
 

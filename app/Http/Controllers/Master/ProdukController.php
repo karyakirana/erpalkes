@@ -16,6 +16,10 @@ class ProdukController extends Controller
         return view('pages.master.produk-index');
     }
 
+    public function show($produk_id)
+    {
+        return view('pages.master.produk-show', ['produk_id' => $produk_id]);
+    }
 
     /**
      * @param Request $request
