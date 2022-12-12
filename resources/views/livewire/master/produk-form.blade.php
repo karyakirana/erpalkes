@@ -1,4 +1,3 @@
-
 <div>
     <x-card.standart title="Form Produk" class="mt-5">
         <x-slot:toolbar>
