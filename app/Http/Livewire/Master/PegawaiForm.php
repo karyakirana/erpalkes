@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Master;
 
 use App\Mine\SubMaster\PegawaiRepository;
+use App\Models\Master\Jabatan;
 use App\Models\Master\Pegawai;
 use Livewire\Component;
 
@@ -41,6 +42,34 @@ class PegawaiForm extends Component
         // redirect
         session()->flash('message', 'Data '.$this->nama_pegawai.' sudah diupdate.');
         return redirect()->to(route('pegawai'));
+    }
+
+    public $add_nama_jabatan, $add_keterangan_jabatan;
+
+    protected function kodeJabatan()
+    {
+        $jabatan = Jabatan::latest('kode')->first();
+        if (!$jabatan){
+            $num = 1;
+        } else {
+            $lastNum = (int) $jabatan->last_num_master;
+            $num = $lastNum + 1;
+        }
+        return "J".sprintf("%05s", $num);
+    }
+
+    public function addJabatan()
+    {
+        $data = $this->validate([
+            'add_nama_jabatan' => 'required',
+            'add_keterangan_jabatan' => 'nullable'
+        ]);
+        Jabatan::create([
+            'kode' => $this->kodeJabatan(),
+            'nama_jabatan' => $this->add_nama_jabatan,
+            'keterangan' => $this->add_keterangan_jabatan
+        ]);
+        $this->reset(['add_nama_jabatan', 'add_keterangan_jabatan']);
     }
 
     public function render()

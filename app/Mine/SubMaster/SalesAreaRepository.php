@@ -53,4 +53,14 @@ class SalesAreaRepository implements MasterRepositoryInterface
         $salesArea->salesAreaDetail()->delete();
         return $salesArea->delete();
     }
+
+    public static function unDestroy($id)
+    {
+        // TODO: Implement unDestroy() method.
+    }
+
+    public static function forceDestroy($id)
+    {
+        // TODO: Implement forceDestroy() method.
+    }
 }

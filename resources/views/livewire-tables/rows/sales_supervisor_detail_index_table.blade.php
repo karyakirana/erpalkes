@@ -1,0 +1,10 @@
+<x-livewire-tables::bs5.table.cell>
+    {{$row->salesSupervisor->pegawai->nama_pegawai}}
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell>
+    {{$row->pegawai->nama_pegawai}}
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell>
+    {{$row->regency->name}}
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell></x-livewire-tables::bs5.table.cell>

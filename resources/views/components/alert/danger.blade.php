@@ -1,7 +1,7 @@
 @props([
     'title'=>'Warning'
 ])
-<div class="alert alert-danger d-flex align-items-center p-5 mb-10">
+<div {{$attributes->class('alert alert-danger d-flex align-items-center p-5 mb-10')}} >
     <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
     <span class="svg-icon svg-icon-2hx svg-icon-danger me-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

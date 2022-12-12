@@ -45,6 +45,11 @@ Route::middleware('auth')->group(function (){
     Route::get('master/pegawai/form', \App\Http\Livewire\Master\PegawaiForm::class)->name('pegawai.form');
     Route::get('master/pegawai/form/{pegawai_id}', \App\Http\Livewire\Master\PegawaiForm::class);
 
+    Route::get('master/sales', [\App\Http\Controllers\Master\SalesSupervisorController::class, 'index'])->name('sales');
+    Route::get('master/sales/{sales_supervisor_id}/show', [\App\Http\Controllers\Master\SalesSupervisorController::class, 'show']);
+    Route::get('master/sales/form', \App\Http\Livewire\Master\SalesSupervisorForm::class)->name('sales-supervisor.form');
+    Route::get('master/sales/form/{sales_supervisor_id}', \App\Http\Livewire\Master\SalesSupervisorForm::class)->name('sales-supervisor.form.edit');
+
     Route::get('master/area', [\App\Http\Controllers\Master\AreaController::class, 'index'])->name('area');
     Route::get('master/area/form', \App\Http\Livewire\Master\AreaForm::class)->name('area.form');
     Route::get('master/area/form/{area_id}', \App\Http\Livewire\Master\AreaForm::class);
