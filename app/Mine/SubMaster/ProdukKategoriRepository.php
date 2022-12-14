@@ -36,15 +36,31 @@ class ProdukKategoriRepository implements MasterRepositoryInterface
 
     public static function store(array $data)
     {
-        $data['active_cash'] = session('ClosedCash');
         $data['kode'] = self::kode();
         return ProdukKategori::create($data);
+    }
+
+    public static function storeFromProduk(array $data)
+    {
+        return ProdukKategori::create([
+            'kode' => self::kode(),
+            'kategori' => $data['produk_kategori_nama'],
+            'keterangan' => $data['produk_kategori_keterangan']
+        ]);
     }
 
     public static function update(array $data, $id)
     {
         $builder = ProdukKategori::find($id);
         return $builder->update($data);
+    }
+
+    public static function updateFromProduk(array $data, $id)
+    {
+        return ProdukKategori::find($id)->update([
+            'kategori' => $data['produk_kategori_nama'],
+            'keterangan' => $data['produk_kategori_keterangan']
+        ]);
     }
 
     public static function destroy($id)

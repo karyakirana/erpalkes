@@ -2,12 +2,13 @@
 
 namespace App\Models\Master;
 
+use App\Models\KodeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ProdukSubKategori extends Model
 {
-    use HasFactory;
+    use HasFactory, KodeTrait;
     protected $table = 'produk_sub_kategori';
     protected $fillable = [
         'kategori_id',

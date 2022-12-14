@@ -33,9 +33,7 @@ trait ProdukFormTrait
     protected function loadProduk($produk_id)
     {
         $produk = ProdukRepository::getById($produk_id);
-        $this->produk_kategori_id = $produk->produk_kategori_id;
-        $this->produk_sub_kategori = $produk->produk_sub_kategori;
-        $this->kode = $produk->kode;
+        $this->produk_sub_kategori = $produk->produk_sub_kategori_id;
         $this->nama_produk = $produk->nama_produk;
         $this->tipe = $produk->tipe;
         $this->isi_kemasan = $produk->isi_kemasan;

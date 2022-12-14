@@ -1,119 +1,57 @@
-<div>
-    <x-card.standart title="Form Produk" class="mt-5">
-        <x-slot:toolbar>
-            <h4>{{$kode}}</h4>
-        </x-slot:toolbar>
-        <div class="row">
-            <div class="col-6">
-                <x-input.group-vertical label="Nama" name="nama_produk">
-                    <x-input.text wire:model.defer="nama_produk" />
-                </x-input.group-vertical>
-            </div>
-            <div class="col-3">
-                <x-input.group-vertical label="Kategori" name="produk_kategori_id">
-                    @php
-                        $dataKategori = \App\Models\Master\ProdukKategori::all();
-                    @endphp
-                    <x-input.select wire:model.defer="produk_kategori_id">
-                        <option>Dipilih</option>
-                        @foreach($dataKategori as $row)
-                            <option value="{{$row->id}}">{{$row->kategori}}</option>
-                        @endforeach
-                    </x-input.select>
-                </x-input.group-vertical>
-            </div>
-            <div class="col-3">
-                <x-input.group-vertical label="Sub Kategori" name="sub_kategori">
-                    <x-input.text wire:model.defer="sub_kategori" />
-                </x-input.group-vertical>
-            </div>
-        </div>
+<div class="mt-5 form d-flex flex-column flex-lg-row fv-plugins-bootstrap5 fv-plugins-framework">
+    <!-- begin::aside Column -->
+    <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+        <livewire:master.image-form />
+        <livewire:master.kategori-sub-kategori-form/>
+    </div>
+    <!-- end::aside Column -->
+    <!-- begin::main Column -->
+    <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+        <!-- begin::tab -->
+        <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
+            <!-- begin::tab-items -->
+            <li class="nav-item">
+                <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#tab_general">General</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tab_detail">Detail</a>
+            </li>
+            <!-- end::tab-items -->
+        </ul>
+        <!-- end::tab -->
+        <!-- begin::tab-content -->
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab_general" role="tab-panel">
+                <div class="d-flex flex-column gap-7 gap-lg-10">
+                    <x-card.standart title="Form Produk" class="mt-5 card-flush">
+                        <x-input.group-vertical label="Product Name" name="nama_produk">
+                            <x-input.text wire:model.defer="nama_produk" />
+                        </x-input.group-vertical>
+                        <x-input.group-vertical label="Merk" name="nama_produk">
+                            <x-input.text wire:model.defer="nama_produk" />
+                        </x-input.group-vertical>
+                        <x-input.group-vertical label="Tipe">
+                            <div id="kt_ecommerce_add_product_description" name="kt_ecommerce_add_product_description" class="min-h-200px mb-2" wire:model.defer="tipe"></div>
+                        </x-input.group-vertical>
+                    </x-card.standart>
+                    <livewire:master.multiple-image-form />
+                    <livewire:master.produk-harga-form />
+                </div>
 
-        <div class="row">
-            <div class="col-3">
-                <x-input.group-vertical label="Tipe" name="tipe">
-                    <x-input.text wire:model.defer="tipe" />
-                </x-input.group-vertical>
             </div>
-            <div class="col-3">
-                <x-input.group-vertical label="Isi Kemasan" name="isi_kemasan">
-                    <x-input.text wire:model.defer="isi_kemasan" />
-                </x-input.group-vertical>
-            </div>
-            <div class="col-3">
-                <x-input.group-vertical label="Satuan Beli" name="satuan_beli">
-                    <x-input.text wire:model.defer="satuan_beli" />
-                </x-input.group-vertical>
-            </div>
-            <div class="col-3">
-                <x-input.group-vertical label="Satuan Jual" name="satuan_jual">
-                    <x-input.text wire:model.defer="satuan_jual" />
-                </x-input.group-vertical>
+            <div class="tab-pane fade" id="tab_detail" role="tab-panel">
+                <div class="d-flex flex-column gap-7 gap-lg-10">
+                    <x-card.standart></x-card.standart>
+                    <livewire:master.produk-kemasan-satuan-form />
+                </div>
             </div>
         </div>
-        <div class="row">
-{{--            <div class="col-6">--}}
-{{--                <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>--}}
-{{--                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>--}}
-{{--            </div>--}}
-            <div class="col-12">
-                <x-input.group-vertical label="Produk Brosur" ><br>
-                    <form id="addForm" method="post" action="" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <input type="file" name="image" id='image' class='p-5'>
-                        </div>
-                    </form>
-                    <span class="form-text fs-6 text-muted">Max file size is 1MB per file.</span>
-                </x-input.group-vertical>
-            </div>
-        </div>
+        <!-- end::tab-content -->
+    </div>
+    <!-- end::main Column -->
 
-        <div class="row">
-{{--            <div class="col-6">--}}
-{{--                <x-input.group-vertical label="Harga" name="harga">--}}
-{{--                    <x-input.text wire:model.defer="harga" />--}}
-{{--                </x-input.group-vertical>--}}
-{{--            </div>--}}
-            <div class="col-12">
-                <x-input.group-vertical label="Deskripsi" name="keterangan">
-                    <x-input.text wire:model.defer="keterangan" />
-                </x-input.group-vertical>
-            </div>
-        </div>
-        {{--        <div class="row">--}}
-        {{--            <div class="col-4">--}}
-        {{--                <x-input.group-vertical label="Alamat" name="alamat">--}}
-        {{--                    <x-input.text wire:model.defer="alamat"/>--}}
-        {{--                </x-input.group-vertical>--}}
-        {{--            </div>--}}
-        {{--            <div class="col-8">--}}
-        {{--                <x-input.group-vertical label="Keterangan" name="keterangan">--}}
-        {{--                    <x-input.text wire:model.defer="keterangan"/>--}}
-        {{--                </x-input.group-vertical>--}}
-        {{--            </div>--}}
-        {{--        </div>--}}
-        <x-slot:footer>
-            @if($update)
-                <x-button.btn-base wire:click="update">Update</x-button.btn-base>
-            @else
-                <x-button.btn-base wire:click="store">Simpan</x-button.btn-base>
-            @endif
-        </x-slot:footer>
-    </x-card.standart>
 
     @section('scripts')
-{{--        <script>--}}
-{{--            // get a collection of elements with class filepond--}}
-{{--            const inputElements = document.querySelectorAll('input.filepond');--}}
-
-{{--            // loop over input elements--}}
-{{--            Array.from(inputElements).forEach(inputElement => {--}}
-
-{{--                // create a FilePond instance at the input element location--}}
-{{--                FilePond.create(inputElement);--}}
-
-{{--            })--}}
-{{--        </script>--}}
 
         <script>
             //configuration filepond
