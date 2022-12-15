@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('active_cash');
             $table->string('kode');
+            $table->string('stock_masuk');
             $table->string('status_masuk');
             $table->unsignedBigInteger('stockable_masuk_id')->nullable();
             $table->string('stockable_masuk_type')->nullable();

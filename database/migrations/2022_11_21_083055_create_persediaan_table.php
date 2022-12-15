@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('active_cash');
             $table->unsignedBigInteger('produk_id');
+            $table->unsignedBigInteger('gudang_id');
             $table->date('tgl_produksi')->nullable();
             $table->date('tgl_expired')->nullable();
             $table->bigInteger('harga_dasar');

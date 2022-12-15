@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nama_produk');
             $table->boolean('is_expired');
             $table->text('tipe');
+            $table->string('merk', 50);
             $table->string('satuan_beli');
             $table->bigInteger('isi_kemasan');
             $table->string('satuan_jual');

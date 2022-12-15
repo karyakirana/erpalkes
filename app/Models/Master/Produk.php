@@ -17,6 +17,7 @@ class Produk extends Model
         'kode',
         'nama_produk',
         'tipe',
+        'merk',
         'isi_kemasan',
         'satuan_beli',
         'satuan_jual',
