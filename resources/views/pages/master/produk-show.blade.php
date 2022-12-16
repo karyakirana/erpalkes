@@ -145,7 +145,7 @@
 															<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor" />
 														</svg>
 													</span>
-                                            <!--end::Svg Icon-->Tambah kategori</a>
+                                            <!--end::Svg Icon-->Tambah kemasan</a>
                                         <!--end::Button-->
                                     </div>
                                 </div>
