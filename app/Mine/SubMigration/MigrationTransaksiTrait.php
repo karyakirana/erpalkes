@@ -6,8 +6,8 @@ trait MigrationTransaksiTrait
 {
     public function fieldTransaksiStock(Blueprint $table)
     {
-        $table->string('active_cash', 100)->after('id');
-        $table->string('kode', 20)->after('active_cash');
+        $table->string('active_cash', 100);
+        $table->string('kode', 20);
         $table->string('kondisi', 20);
         $table->string('status');
         $table->unsignedBigInteger('gudang_id');
@@ -26,8 +26,8 @@ trait MigrationTransaksiTrait
 
     public function fieldPenjualan(Blueprint $table)
     {
-        $table->string('active_cash', 100)->after('id');
-        $table->string('kode', 20)->after('active_cash');
+        $table->string('active_cash', 100);
+        $table->string('kode', 20);
         $table->string('tipe', 20);
         $table->unsignedBigInteger('customer_id');
         $table->unsignedBigInteger('sales_id');
@@ -63,8 +63,8 @@ trait MigrationTransaksiTrait
 
     public function fieldPembelian(Blueprint $table)
     {
-        $table->string('active_cash', 100)->after('id');
-        $table->string('kode', 20)->after('active_cash');
+        $table->string('active_cash', 100);
+        $table->string('kode', 20);
         $table->unsignedBigInteger('supplier_id');
         $table->unsignedBigInteger('user_id');
         $table->string('status', 20);
@@ -88,8 +88,8 @@ trait MigrationTransaksiTrait
 
     public function fieldPersediaanTransaksi(Blueprint $table)
     {
-        $table->string('active_cash')->after('id');
-        $table->string('kode')->after('active_cash');
+        $table->string('active_cash');
+        $table->string('kode');
         $table->string('kondisi', 10);
         $table->unsignedBigInteger('gudang_id');
         $table->unsignedBigInteger('user_id');

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('produk_satuan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('satuan', 20);
+            $table->string('satuan', 20);
         });
     }
 

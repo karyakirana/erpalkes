@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('penjualan_preorder_id')->nullable();
             $table->date('tgl_penjualan');
             $table->date('tgl_tempo')->nullable();
-            $this->fieldPenjualan();
+            $this->fieldPenjualan($table);
         });
     }
 

@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('penjualan_detail', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('penjualan_id');
-            $this->fieldPenjualanDetail();
+            $this->fieldPenjualanDetail($table);
         });
     }
 
