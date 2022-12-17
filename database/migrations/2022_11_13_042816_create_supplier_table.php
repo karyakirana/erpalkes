@@ -15,15 +15,17 @@ return new class extends Migration
     {
         Schema::create('supplier', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('nama_supplier');
-            $table->string('telepon')->nullable();
-            $table->string('email')->nullable();
-            $table->string('npwp')->nullable();
+            $table->string('kode', 10);
+            $table->string('status', 10);
+            $table->string('nama', 50);
+            $table->string('telepon', 20)->nullable();
+            $table->string('email', 50)->nullable();
+            $table->string('npwp', 20)->nullable();
             $table->text('alamat');
             $table->char('regencies_id', 4);
             $table->text('keterangan')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

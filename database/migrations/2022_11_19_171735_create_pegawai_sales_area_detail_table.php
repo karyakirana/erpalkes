@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sales_area', function (Blueprint $table) {
+        Schema::create('pegawai_sales_area_detail', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_area');
-            $table->string('nama_area');
-            $table->text('keterangan')->nullable();
-            $table->timestamps();
+            $table->unsignedBigInteger('pegawai_sales_area_id');
+            $table->unsignedBigInteger('kota_id');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales_area');
+        Schema::dropIfExists('pegawai_sales_area_detail');
     }
 };

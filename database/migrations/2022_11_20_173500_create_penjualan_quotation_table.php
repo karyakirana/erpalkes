@@ -1,11 +1,13 @@
 <?php
 
+use App\Mine\SubMigration\MigrationTransaksiTrait;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use MigrationTransaksiTrait;
     /**
      * Run the migrations.
      *
@@ -13,14 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('closed_cash', function (Blueprint $table) {
+        Schema::create('penjualan_quotation', function (Blueprint $table) {
             $table->id();
-            $table->string('active_cash')->unique();
-            $table->string('closed_cash')->nullable();
-            $table->dateTime('started');
-            $table->dateTime('closed')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->timestamps();
+            $table->date('tgl_quotation');
+            $this->fieldPenjualan($table);
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('closed_cash');
+        Schema::dropIfExists('penjualan_quotation');
     }
 };

@@ -1,11 +1,13 @@
 <?php
 
+use App\Mine\SubMigration\MigrationTransaksiTrait;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use MigrationTransaksiTrait;
     /**
      * Run the migrations.
      *
@@ -15,24 +17,10 @@ return new class extends Migration
     {
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id();
-            $table->string('active_cash');
-            $table->string('kode');
-            $table->unsignedBigInteger('penjualan_quotation_id')->nullable();
-            $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('sales_id')->nullable();
-            $table->unsignedBigInteger('user_id'); // pembuat atau pengedit
-            $table->string('jenis_penjualan'); // tunai|tempo|dimuka
-            $table->string('status_invoice'); // belum|sebagian|lunas
-            $table->date('tgl_nota');
+            $table->unsignedBigInteger('penjualan_preorder_id')->nullable();
+            $table->date('tgl_penjualan');
             $table->date('tgl_tempo')->nullable();
-            $table->bigInteger('total_barang');
-            $table->bigInteger('total_ppn')->nullable();
-            $table->bigInteger('total_biaya_lain')->nullable();
-            $table->bigInteger('total_bayar');
-            $table->text('keterangan')->nullable();
-            $table->integer('print')->nullable();
-            $table->softDeletes(); // softdeletes
-            $table->timestamps();
+            $this->fieldPenjualan();
         });
     }
 

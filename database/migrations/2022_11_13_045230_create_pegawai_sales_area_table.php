@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('marketing', function (Blueprint $table) {
+        Schema::create('pegawai_sales_area', function (Blueprint $table) {
             $table->id();
+            $table->string('kode', 10);
             $table->unsignedBigInteger('pegawai_id');
-            $table->unsignedBigInteger('area_id');
-            $table->timestamps();
+            $table->string('nama', 50);
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('marketing');
+        Schema::dropIfExists('pegawai_sales_area');
     }
 };

@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sales_and_supervisor_detail', function (Blueprint $table) {
+        Schema::create('produk_kategori', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sales_supervisor_id');
-            $table->unsignedBigInteger('sales_id');
-            $table->char('kota', 4);
-            $table->timestamps();
+            $table->string('kode', 10);
+            $table->string('nama', 50);
+            $table->text('keterangan')->nullable();
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales_and_supervisor_detail');
+        Schema::dropIfExists('produk_kategori');
     }
 };

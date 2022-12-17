@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('penjualan_cn_id');
             $table->unsignedBigInteger('penjualan_detail_id_cn')->nullable();
-            $table->float('nilai_persen_cn');
+            $table->float('nilai_persen_cn', 3);
             $table->bigInteger('nilai_nominal_cn');
             $table->text('keterangan')->nullable();
-            $table->timestamps();
         });
     }
 

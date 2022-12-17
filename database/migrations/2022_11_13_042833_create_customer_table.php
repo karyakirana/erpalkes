@@ -15,18 +15,19 @@ return new class extends Migration
     {
         Schema::create('customer', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('jenis_instansi');
-            $table->string('nama_customer');
-            $table->string('telepon')->nullable();
-            $table->string('email')->nullable();
-            $table->string('npwp')->nullable();
-            $table->text('alamat')->nullable();
+            $table->string('kode', 10);
+            $table->string('status', 20);
+            $table->string('jenis_instansi', 20);
+            $table->string('nama_customer', 50);
+            $table->string('telepon', 20)->nullable();
+            $table->string('email', 50)->nullable();
+            $table->string('npwp', 20)->nullable();
+            $table->text('alamat');
             $table->char('regencies_id', 4);
             $table->double('diskon', 2)->nullable()->default(0);
             $table->text('keterangan')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

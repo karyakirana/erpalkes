@@ -15,13 +15,15 @@ return new class extends Migration
     {
         Schema::create('penjualan_cn', function (Blueprint $table) {
             $table->id();
-            $table->string('active_cash');
-            $table->string('kode');
+            $table->string('active_cash', 50);
+            $table->string('kode', 20);
+            $table->string('status', 20);
             $table->unsignedBigInteger('penjualan_id');
             $table->unsignedBigInteger('penerima_cn_id');
             $table->bigInteger('total_cn');
             $table->text('keterangan')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

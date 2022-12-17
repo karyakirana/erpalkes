@@ -1,11 +1,13 @@
 <?php
 
+use App\Mine\SubMigration\MigrationTransaksiTrait;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use MigrationTransaksiTrait;
     /**
      * Run the migrations.
      *
@@ -19,13 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('gudang_id');
             $table->unsignedBigInteger('produk_id');
             $table->date('tgl_produksi')->nullable();
-            $table->string('batch')->nullable();
-            $table->bigInteger('stock_awal')->nullable()->default(0);
-            $table->bigInteger('stock_masuk')->nullable()->default(0);
-            $table->bigInteger('stock_keluar')->nullable()->default(0);
-            $table->bigInteger('stock_saldo')->nullable()->default(0);
-            $table->bigInteger('stock_saldo_koreksi')->nullable()->default(0);
-            $table->bigInteger('stock_saldo_lost')->nullable()->default(0);
+            $table->string('batch', 20)->nullable();
+            $this->fieldStock($table);
             $table->timestamps();
         });
     }

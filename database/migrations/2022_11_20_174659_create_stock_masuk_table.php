@@ -1,11 +1,13 @@
 <?php
 
+use App\Mine\SubMigration\MigrationTransaksiTrait;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use MigrationTransaksiTrait;
     /**
      * Run the migrations.
      *
@@ -15,19 +17,10 @@ return new class extends Migration
     {
         Schema::create('stock_masuk', function (Blueprint $table) {
             $table->id();
-            $table->string('active_cash');
-            $table->string('kode');
-            $table->string('stock_masuk');
-            $table->string('status_masuk');
             $table->unsignedBigInteger('stockable_masuk_id')->nullable();
-            $table->string('stockable_masuk_type')->nullable();
-            $table->unsignedBigInteger('customer_id')->nullable();
-            $table->unsignedBigInteger('supplier_id')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->bigInteger('total_barang');
-            $table->text('keterangan')->nullable();
-            $table->softDeletes();
-            $table->timestamps();
+            $table->string('stockable_masuk_type', 100)->nullable();
+            $table->date('tgl_masuk');
+            $this->fieldTransaksiStock($table);
         });
     }
 

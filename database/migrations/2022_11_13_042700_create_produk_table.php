@@ -16,20 +16,19 @@ return new class extends Migration
         Schema::create('produk', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('produk_sub_kategori_id');
-            $table->string('kode');
-            $table->string('nama_produk');
-            $table->boolean('is_expired');
+            $table->string('kode', 10);
+            $table->string('status', 20);
+            $table->string('nama_produk', 50);
             $table->text('tipe');
             $table->string('merk', 50);
-            $table->string('satuan_beli');
-            $table->bigInteger('isi_kemasan');
-            $table->string('satuan_jual');
+            $table->string('satuan_beli', 20);
+            $table->string('satuan_jual', 20);
             $table->bigInteger('harga');
+            $table->bigInteger('buffer_stock')->nullable()->default(0);
+            $table->bigInteger('minimum_stock')->nullable()->default(0);
             $table->text('keterangan')->nullable();
-            $table->unsignedBigInteger('produk_image_id')->nullable();
-            $table->unsignedBigInteger('produk_brosur_id')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

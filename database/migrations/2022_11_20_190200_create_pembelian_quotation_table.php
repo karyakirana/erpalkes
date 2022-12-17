@@ -1,11 +1,13 @@
 <?php
 
+use App\Mine\SubMigration\MigrationTransaksiTrait;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use MigrationTransaksiTrait;
     /**
      * Run the migrations.
      *
@@ -13,12 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('packing_list_detail', function (Blueprint $table) {
+        Schema::create('pembelian_quotation', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('stock_keluar_id');
-            $table->unsignedBigInteger('produk_id');
-            $table->bigInteger('jumlah');
-            $table->timestamps();
+            $table->date('tgl_pembelian_quotation');
+            $this->fieldPembelian($table);
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packing_list_detail');
+        Schema::dropIfExists('pembelian_quotation');
     }
 };

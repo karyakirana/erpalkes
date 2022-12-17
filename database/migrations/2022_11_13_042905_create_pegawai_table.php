@@ -15,18 +15,19 @@ return new class extends Migration
     {
         Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('nama_pegawai');
-            $table->string('gender');
-            $table->string('telepon');
-            $table->string('email')->nullable();
-            $table->string('npwp')->nullable();
+            $table->string('kode', 10);
+            $table->string('status', 20);
+            $table->string('nama', 50);
+            $table->string('gender', 20);
+            $table->string('telepon', 20);
+            $table->string('email', 50)->nullable();
+            $table->string('npwp', 20)->nullable();
             $table->unsignedBigInteger('jabatan_id')->nullable();
-            $table->text('alamat')->nullable();
+            $table->text('alamat');
             $table->char('regencies_id', 4);
             $table->text('keterangan')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

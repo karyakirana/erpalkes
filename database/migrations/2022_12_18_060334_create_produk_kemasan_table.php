@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sales_and_supervisor', function (Blueprint $table) {
+        Schema::create('produk_kemasan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pegawai_id');
-            $table->unsignedBigInteger('area_id');
-            $table->timestamps();
+            $table->unsignedBigInteger('produk_id');
+            $table->string('kemasan');
+            $table->integer('isi');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales_and_supervisor');
+        Schema::dropIfExists('produk_kemasan');
     }
 };

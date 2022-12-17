@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('packing_list', function (Blueprint $table) {
+        Schema::create('closed_cash', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('no_colley');
-            $table->string('kota');
-            $table->text('keterangan')->nullable();
+            $table->string('active_cash', 100)->unique();
+            $table->string('closed_cash', 100)->nullable();
+            $table->dateTime('started');
+            $table->dateTime('closed')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packing_list');
+        Schema::dropIfExists('closed_cash');
     }
 };

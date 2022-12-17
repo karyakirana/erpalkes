@@ -17,13 +17,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pembelian_id');
             $table->unsignedBigInteger('produk_id');
-            $table->string('batch')->nullable();
+            $table->string('batch', 50)->nullable();
             $table->date('tgl_expired')->nullable();
             $table->bigInteger('harga');
             $table->bigInteger('jumlah');
-            $table->float('diskon');
+            $table->float('diskon', 3);
             $table->bigInteger('sub_total');
-            $table->timestamps();
         });
     }
 

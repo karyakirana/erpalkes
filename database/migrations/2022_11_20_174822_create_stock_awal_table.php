@@ -15,15 +15,16 @@ return new class extends Migration
     {
         Schema::create('stock_awal', function (Blueprint $table) {
             $table->id();
-            $table->string('active_cash');
-            $table->string('kode');
+            $table->string('active_cash', 100);
+            $table->string('kode', 20);
+            $table->string('kondisi', 20);
             $table->unsignedBigInteger('gudang_id');
             $table->unsignedBigInteger('persediaan_awal_id');
             $table->unsignedBigInteger('user_id');
             $table->bigInteger('total_barang');
             $table->text('keterangan')->nullable();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

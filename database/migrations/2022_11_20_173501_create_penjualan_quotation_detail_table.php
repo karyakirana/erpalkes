@@ -1,11 +1,13 @@
 <?php
 
+use App\Mine\SubMigration\MigrationTransaksiTrait;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use MigrationTransaksiTrait;
     /**
      * Run the migrations.
      *
@@ -13,11 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sales_area_set', function (Blueprint $table) {
+        Schema::create('penjualan_quotation_detail', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pegawai_id');
-            $table->unsignedBigInteger('sales_area_id');
-            $table->timestamps();
+            $table->unsignedBigInteger('penjualan_quotation_id');
+            $this->fieldPenjualan($table);
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales_area_set');
+        Schema::dropIfExists('penjualan_quotation_detail');
     }
 };
