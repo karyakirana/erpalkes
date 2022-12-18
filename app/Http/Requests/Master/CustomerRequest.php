@@ -26,6 +26,7 @@ class CustomerRequest extends FormRequest
         return [
             'customer_id' => 'nullable',
             'kode' => 'nullable',
+            'status' => 'required',
             'jenis_instansi' => 'required',
             'nama_customer' => 'required|min:3',
             'telepon' => 'nullable',

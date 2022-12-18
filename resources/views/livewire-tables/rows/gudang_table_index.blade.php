@@ -1,0 +1,9 @@
+<x-livewire-tables::bs5.table.cell>
+    {{$row->kode}}
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell>
+    {{$row->nama}}
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell>
+    {{$row->id}}
+</x-livewire-tables::bs5.table.cell>

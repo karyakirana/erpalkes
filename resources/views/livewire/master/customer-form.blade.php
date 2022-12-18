@@ -73,54 +73,6 @@
     <x-datatables.city-set />
     @push('scripts')
         <script>
-            let areaSelect2 = function () {
-
-                let initSelect = function () {
-                    $('#areaSelect2').select2({
-                        ajax: {
-                            url: '{{route('helper-area.salesarea')}}',
-                            type: 'post',
-                            dataType: 'json',
-                            data: function (params) {
-                                // Query parameters will be ?search=[term]
-                                return {
-                                    search: params.term,
-                                };
-                            },
-                            processResults: function (data) {
-                                return {
-                                    results: data,
-                                };
-                            },
-                            cache: true
-                        }
-                    })
-                }
-
-                return {
-                    init: function () {
-                        initSelect()
-                    }
-                }
-            }()
-
-            let area = $('#areaSelect2');
-
-            area.on('change', function (e) {
-                let areaId = $(this).data('$areaSelect2');
-                @this.area_id = e.target.value;
-            })
-
-            // On document ready
-            KTUtil.onDOMContentLoaded(function () {
-                areaSelect2.init();
-            });
-
-            document.addEventListener("livewire:load", () => {
-                Livewire.hook('message.processed', (message, component) => {
-                    areaSelect2.init();
-                });
-            });
         </script>
     @endpush
 </div>

@@ -7,6 +7,7 @@ trait CustomerFormTrait
 {
     public $customer_id;
     public $kode;
+    public $status = 'active';
     public $jenis_instansi;
     public $area_id, $nama_area;
     public $nama_customer;
