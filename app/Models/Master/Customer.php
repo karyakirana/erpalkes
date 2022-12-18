@@ -18,8 +18,8 @@ class Customer extends Model
     protected $table = 'customer';
     protected $fillable = [
         'kode',
+        'status',
         'jenis_instansi',
-        'area_id',
         'nama_customer',
         'telepon',
         'email',

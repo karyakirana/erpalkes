@@ -5,15 +5,12 @@ namespace App\Models\Master;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProdukBrosur extends Model
+class PegawaiSalesAreaDetail extends Model
 {
     use HasFactory;
-    use ProdukModelTrait;
-    use ImageModelTrait;
-
-    protected $table = 'produk_brosur';
+    protected $table = 'pegawai_sales_area_detail';
     protected $fillable = [
-        'produk_id',
-        'image_id'
+        'pegawai_sales_area_id',
+        'kota_id'
     ];
 }

@@ -12,10 +12,10 @@ class ProdukKategori extends Model
     use KodeTrait;
 
     protected $table = 'produk_kategori';
+    public $timestamps = false;
     protected $fillable = [
         'kode',
-        'kategori',
-        'sub_kategori',
+        'nama',
         'keterangan'
     ];
 

@@ -21,13 +21,13 @@ class Pegawai extends Model
     protected $table = 'pegawai';
     protected $fillable = [
         'kode',
-        'nama_pegawai',
+        'status',
+        'nama',
         'gender',
         'telepon',
         'email',
         'npwp',
         'jabatan_id',
-        'area_id',
         'alamat',
         'regencies_id',
         'keterangan',
