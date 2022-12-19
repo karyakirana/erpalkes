@@ -8,6 +8,5 @@
     </div>
     <div class="col-8">
         {{$slot}}
-        <x-input.error :messages="$errors->get($name)" />
     </div>
 </div>

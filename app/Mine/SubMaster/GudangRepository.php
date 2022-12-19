@@ -29,6 +29,7 @@ class GudangRepository implements MasterRepositoryInterface
 
     public static function store(array $data)
     {
+        $data['kode'] = self::kode();
         return Gudang::create($data);
     }
 

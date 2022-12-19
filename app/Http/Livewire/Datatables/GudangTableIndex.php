@@ -15,6 +15,7 @@ class GudangTableIndex extends DataTableComponent
         return [
             Column::make('ID', 'kode'),
             Column::make('Gudang', 'nama'),
+            Column::make('Keterangan'),
             Column::make('')
         ];
     }
