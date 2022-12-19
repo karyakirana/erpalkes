@@ -5,8 +5,8 @@
         <x-input.group-horizontal label="Kode" name="kode">
             <x-input.text wire:model.defer="kode" disabled />
         </x-input.group-horizontal>
-        <x-input.group-horizontal label="Jabatan" name="nama_jabatan">
-            <x-input.text wire:model.defer="nama_jabatan" />
+        <x-input.group-horizontal label="Jabatan" name="nama">
+            <x-input.text wire:model.defer="nama" />
         </x-input.group-horizontal>
         <x-input.group-horizontal label="Keterangan" name="keterangan">
             <x-input.text wire:model.defer="keterangan" />

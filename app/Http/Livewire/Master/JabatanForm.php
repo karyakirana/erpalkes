@@ -9,25 +9,26 @@ class JabatanForm extends Component
 {
     public $jabatan_id;
     public $kode;
-    public $nama_jabatan;
+    public $nama;
     public $keterangan;
 
     public $update = false;
 
     protected $listeners = [
         'resetForm',
-        'edit'
+        'edit',
+        'destroy'
     ];
 
     protected $rules = [
-        'nama_jabatan'=> 'required|min:3'
+        'nama'=> 'required|min:3'
     ];
 
     public function resetForm()
     {
         $this->update = false;
         $this->reset([
-            'jabatan_id', 'kode', 'nama_jabatan', 'keterangan'
+            'jabatan_id', 'kode', 'nama', 'keterangan'
         ]);
         $this->resetErrorBag();
         $this->resetValidation();
@@ -50,10 +51,11 @@ class JabatanForm extends Component
         $this->validate();
         Jabatan::create([
             'kode' => $this->kode(),
-            'nama_jabatan' => $this->nama_jabatan,
+            'nama' => $this->nama,
             'keterangan' => $this->keterangan
         ]);
         $this->emit('modalJabatanHide');
+        $this->emit('refreshDatatable');
     }
 
     public function edit($jabatanId)
@@ -62,7 +64,7 @@ class JabatanForm extends Component
         $this->update = true;
         $this->jabatan_id = $jabatan->id;
         $this->kode = $jabatan->kode;
-        $this->nama_jabatan = $jabatan->nama_jabatan;
+        $this->nama = $jabatan->nama;
         $this->keterangan = $jabatan->keterangan;
         $this->emit('modalJabatanShow');
     }
@@ -72,10 +74,17 @@ class JabatanForm extends Component
         $this->validate();
         $jabatan = Jabatan::find($this->jabatan_id);
         $jabatan->update([
-            'nama_jabatan' => $this->nama_jabatan,
+            'nama_jabatan' => $this->nama,
             'keterangan' => $this->keterangan
         ]);
         $this->emit('modalJabatanHide');
+        $this->emit('refreshDatatable');
+    }
+
+    public function destroy($id)
+    {
+        Jabatan::destroy($id);
+        $this->emit('refreshDatatable');
     }
 
     public function render()
