@@ -20,20 +20,6 @@ class CustomerController extends Controller
         return view('pages.master.customer-show', ['customer_id' => $customer_id]);
     }
 
-    /**
-     * @throws Exception
-     */
-    public function datatables(Request $request)
-    {
-        if($request->ajax()){
-            $data = Customer::with(['area'])
-                ->latest();
-            return DataTables::of($data)
-                ->make(true);
-        }
-        return null;
-    }
-
     public function destroy(Request $request)
     {
         return Customer::destroy($request->id);
