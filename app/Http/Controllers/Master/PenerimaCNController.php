@@ -17,17 +17,4 @@ class PenerimaCNController extends Controller
     {
         return view('');
     }
-
-    public function datatables(Request $request)
-    {
-        if ($request->ajax()){
-            $builder = PenerimaCN::latest()->get();
-            return \DataTables::of($builder)->make(true);
-        }
-    }
-
-    public function destroy(Request $request)
-    {
-        return PenerimaCN::destroy($request->id);
-    }
 }

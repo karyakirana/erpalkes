@@ -35,7 +35,7 @@ class SupplierForm extends Component
         //dd($data);
         SupplierRepository::store($data);
         // redirect
-        session()->flash('message', 'Data '.$this->nama_supplier.' sudah disimpan.');
+        session()->flash('message', 'Data '.$this->nama.' sudah disimpan.');
         return redirect()->to(route('supplier'));
     }
 
@@ -44,7 +44,7 @@ class SupplierForm extends Component
         $data = $this->setData();
         SupplierRepository::update($data, $this->supplier_id);
         // redirect
-        session()->flash('message', 'Data '.$this->nama_supplier.' sudah diperbarui.');
+        session()->flash('message', 'Data '.$this->nama.' sudah diperbarui.');
         return redirect()->to(route('supplier'));
     }
 

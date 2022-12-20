@@ -2,7 +2,7 @@
     {{$row->kode}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell width="20%">
-    {{$row->nama_supplier}}
+    {{$row->nama}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell width="15%">
     {{$row->telepon}}

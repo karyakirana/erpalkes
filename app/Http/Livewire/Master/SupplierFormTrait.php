@@ -7,7 +7,8 @@ trait SupplierFormTrait
 {
     public $supplier_id;
     public $kode;
-    public $nama_supplier;
+    public $status = 'active';
+    public $nama;
     public $telepon;
     public $email;
     public $npwp;

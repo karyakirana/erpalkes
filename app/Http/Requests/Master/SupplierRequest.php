@@ -26,7 +26,8 @@ class SupplierRequest extends FormRequest
         return [
             'supplier_id' => 'nullable',
             'kode' => 'nullable',
-            'nama_supplier' => 'required|min:3',
+            'status' => 'required',
+            'nama' => 'required|min:3',
             'telepon' => 'nullable',
             'email' => 'nullable|email',
             'npwp' => 'nullable',
@@ -40,7 +41,8 @@ class SupplierRequest extends FormRequest
     public function messages()
     {
         return [
-            'regencies_id.required' => 'Kota / Kabupaten harus diisi.'
+            'regencies_id.required' => 'Kota / Kabupaten harus diisi.',
+            'nama.required' => 'Nama Supplier harus diisi.'
         ];
     }
 }

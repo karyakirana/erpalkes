@@ -7,6 +7,11 @@ trait KodeTrait
         return substr($this->kode, 1, 5);
     }
 
+    public function getLastNum2MasterAttribute()
+    {
+        return substr($this->kode, 2, 6);
+    }
+
     public function getLastNumTransAttribute()
     {
         return substr($this->kode, 0, 4);

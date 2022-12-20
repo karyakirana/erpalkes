@@ -52,11 +52,11 @@ Route::middleware('auth')->group(function (){
 
     Route::get('master/area', [\App\Http\Controllers\Master\AreaController::class, 'index'])->name('area');
     Route::get('master/area/form', \App\Http\Livewire\Master\AreaForm::class)->name('area.form');
-    Route::get('master/area/form/{area_id}', \App\Http\Livewire\Master\AreaForm::class);
+    Route::get('master/area/form/{area_id}', \App\Http\Livewire\Master\AreaForm::class)->name('area.form.edit');
 
-    Route::get('master/penerimacn', [\App\Http\Controllers\Master\PenerimaCNController::class, 'index'])->name('penerima-cn');
-    Route::get('master/penerimacn/form', \App\Http\Livewire\Master\PenerimaCnForm::class)->name('penerima-cn.form');
-    Route::get('master/penerimacn/form/{penerimacn_id}', \App\Http\Livewire\Master\PenerimaCnForm::class)->name('penerima-cn.form.edit');
+    Route::get('master/customercn', [\App\Http\Controllers\Master\CustomerCNController::class, 'index'])->name('customercn');
+    Route::get('master/customercn/form', \App\Http\Livewire\Master\CustomercnForm::class)->name('customercn.form');
+    Route::get('master/customercn/form/{customercn_id}', \App\Http\Livewire\Master\CustomercnForm::class)->name('customercn.form.edit');
 
     Route::get('master/produkkategori', [\App\Http\Controllers\Master\ProdukKategoriController::class, 'index'])->name('produk-kategori');
 

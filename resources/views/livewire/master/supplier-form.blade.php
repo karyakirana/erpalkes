@@ -13,8 +13,8 @@
             </x-alert.danger>
         @endif
         <div class="row">
-            <x-input.group-horizontal label="Nama" name="nama_supplier">
-                <x-input.text wire:model.defer="nama_supplier" />
+            <x-input.group-horizontal label="Nama" name="nama">
+                <x-input.text wire:model.defer="nama" />
             </x-input.group-horizontal>
             <x-input.group-horizontal label="Email" name="email">
                 <x-input.text wire:model.defer="email"/>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Master;
 
-use App\Mine\SubMaster\SalesAreaRepository;
+use App\Http\Requests\Master\PegawaiSalesAreaRequest;
+use App\Mine\SubMaster\PegawaiSalesAreaRepository;
+use App\Models\Master\Pegawai;
 use App\Models\Regency;
 use DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -10,69 +12,68 @@ use Livewire\Component;
 
 class AreaForm extends Component
 {
-    public $area_id;
-    public $kode_area;
-    public $nama_area;
-    public $keterangan;
+    public $pegawai_sales_area_id;
+    public $kode;
+    public $pegawai_id, $pegawai_nama;
+    public $nama;
 
     public $dataDetail = [];
     public $index;
-    public $regencies_id, $regencies_name;
-    public $provinces_id, $provinces_name;
+    public $kota_id, $kota_nama;
+    public $provinces_nama;
 
     public $mode = 'create';
     public $update = false;
 
     protected $listeners = [
-        'setRegencies',
+        'setCity',
+        'setPegawai',
         'updateLine',
-    ];
-
-    protected $rules = [
-        'nama_area' => 'required|min:3',
-    ];
-
-    protected $messages = [
-        'regencies_id.required' => 'The City cannot be empty.',
-        'dataDetail.required' => 'Nama Kota Belum diinputkan'
     ];
 
     public function mount($area_id = null)
     {
         if ($area_id) {
             $this->update = true;
-            $area = SalesAreaRepository::getById($area_id);
-            $this->kode_area = $area->kode_area;
-            $this->nama_area = $area->nama_area;
-            $this->keterangan = $area->keterangan;
+            $area = PegawaiSalesAreaRepository::getById($area_id);
+            $this->nama = $area->nama;
 
-            foreach ($area->salesAreaDetail as $item) {
+            foreach ($area->pegawaiSalesAreaDetail as $item) {
                 $this->dataDetail[] = [
-                    'regencies_id'=>$item->regencies_id,
-                    'regencies_name'=>$item->regencies->name,
-                    'provinces_name'=>$item->regencies->province->name
+                    'kota_id'=>$item->regencies_id,
+                    'kota_nama'=>$item->kota->name,
+                    'provinces_name'=>$item->kota->province->name
                 ];
             }
         }
     }
 
-    public function setRegencies($id)
+    public function rules()
     {
-        $this->regencies_id = $id;
-        $this->dispatchBrowserEvent('pharaonic.select2.init');
+        return (new PegawaiSalesAreaRequest())->rules();
     }
 
-    public function addLine()
+    public function setRegencies($id)
     {
-        $this->validate([
-            'regencies_id'=>'required'
-        ]);
-        $regencies = Regency::find($this->regencies_id);
+        $this->kota_id = $id;
+    }
+
+    public function setCity($kota_id)
+    {
+        $regencies = Regency::find($kota_id);
         $this->dataDetail[] = [
-            'regencies_id'=>$regencies->id,
-            'regencies_name'=>$regencies->name,
+            'kota_id'=>$regencies->id,
+            'kota_nama'=>$regencies->name,
             'provinces_name'=>$regencies->province->name
         ];
+        $this->emit('modalCitySetHide');
+    }
+
+    public function setPegawai(Pegawai $pegawai)
+    {
+        $this->pegawai_id = $pegawai->id;
+        $this->pegawai_nama = $pegawai->nama;
+        $this->emit('modalPegawaiSetHide');
     }
 
     public function removeLine($index)
@@ -81,23 +82,13 @@ class AreaForm extends Component
         $this->dataDetail = array_values($this->dataDetail);
     }
 
-    protected function setData()
-    {
-        return $this->validate([
-            'area_id'=>($this->area_id) ? 'required' : 'nullable',
-            'nama_area'=> 'required|min:3',
-            'keterangan'=>'nullable',
-            'dataDetail'=>'required|array'
-        ]);
-    }
-
     public function store()
     {
-        $data = $this->setData();
+        $data = $this->validate();
         DB::beginTransaction();
         try {
             DB::commit();
-            SalesAreaRepository::store($data);
+            PegawaiSalesAreaRepository::store($data);
         } catch (ModelNotFoundException $e){
             DB::rollBack();
         }
@@ -108,11 +99,11 @@ class AreaForm extends Component
 
     public function update()
     {
-        $data = $this->setData();
+        $data = $this->validate();
         DB::beginTransaction();
         try {
             DB::commit();
-            SalesAreaRepository::update($data);
+            PegawaiSalesAreaRepository::update($data, $this->pegawai_sales_area_id);
         } catch (ModelNotFoundException $e){
             DB::rollBack();
         }

@@ -17,7 +17,7 @@ class SupplierIndexTable extends DataTableComponent
         return [
             Column::make('ID', 'kode')
                 ->sortable(),
-            Column::make('Nama', 'nama_supplier')
+            Column::make('Nama', 'nama')
                 ->searchable()
                 ->sortable(),
             Column::make('Telepon')

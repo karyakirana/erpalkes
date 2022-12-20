@@ -1,35 +1,30 @@
 <div>
+    @if($errors->all())
+        <x-alert.danger>
+            <ul>
+                @foreach($errors->all() as $messages)
+                    <li>{{$messages}}</li>
+                @endforeach
+            </ul>
+        </x-alert.danger>
+    @endif
     <x-card.standart class="mt-5" title="Form Area">
-        @if($errors->all())
-            <x-alert.danger>
-                <ul>
-                    @foreach($errors->all() as $messages)
-                        <li>{{$messages}}</li>
-                    @endforeach
-                </ul>
-            </x-alert.danger>
-        @endif
+        <x-slot:toolbar>
+            <x-button.btn-base data-bs-toggle="modal" data-bs-target="#modalCitySet">Tambah Kota</x-button.btn-base>
+        </x-slot:toolbar>
         <div class="row">
             <div>
                 <div class="row">
                     <div class="col-6">
-                        <x-input.group-horizontal label="Area" name="nama_area">
-                            <x-input.text wire:model.defer="nama_area"/>
+                        <x-input.group-horizontal label="Area" name="nama">
+                            <x-input.text wire:model.defer="nama"/>
                         </x-input.group-horizontal>
-                        <x-input.group-horizontal label="Keterangan" name="keterangan">
-                            <x-input.text wire:model.defer="keterangan" />
-                        </x-input.group-horizontal>
+
                     </div>
-                    <div class="col-4">
-                        <x-input.group-horizontal label="Provinsi" name="provinces_id" wire:ignore>
-                            <x-input.select id="selectProvinsi" data-placeholder="Select an option" data-allow-clear="true"></x-input.select>
+                    <div class="col-6">
+                        <x-input.group-horizontal label="Pegawai" name="pegawai_nama">
+                            <x-input.text wire:model.defer="pegawai_nama" data-bs-toggle="modal" data-bs-target="#modalPegawaiSet" readonly/>
                         </x-input.group-horizontal>
-                        <x-input.group-horizontal label="Kota" name="regencies_id" wire:ignore>
-                            <x-input.select name="regencies_id" id="selectCity" data-placeholder="Select an option"></x-input.select>
-                        </x-input.group-horizontal>
-                    </div>
-                    <div class="col-2 mx-auto">
-                        <x-button.btn-base class="btn-flex" wire:click="addLine">ADD</x-button.btn-base>
                     </div>
                 </div>
                 <!--begin::table-->
@@ -48,9 +43,9 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$row['provinces_name']}}</td>
-                                    <td>{{$row['regencies_name']}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-light btn-active-light-primary" wire:click="removeLine({{$index}})">Delete</button>
+                                    <td>{{$row['kota_nama']}}</td>
+                                    <td width="10%">
+                                        <x-button.btn-icon-delete wire:click="removeLine({{$index}})" />
                                     </td>
                                 </tr>
                             @empty
@@ -72,100 +67,8 @@
             @endif
         </x-slot:footer>
     </x-card.standart>
+    <x-datatables.city-set />
+    <x-datatables.pegawai-set />
     @push('scripts')
-        <script src="{{ asset('vendor/pharaonic/pharaonic.select2.min.js') }}"></script>
-        <script>
-
-            let provinsi;
-
-            let selectProvinsi = $('#selectProvinsi')
-
-            selectProvinsi.on('change', function (e) {
-                provinsi = $('#selectProvinsi').select2("val");
-            });
-
-            document.addEventListener("livewire:load", () => {
-                Livewire.hook('message.processed', (message, component) => {
-                    citySelect2.init();
-                    provinsiSelect2.init();
-                });
-            });
-
-            let provinsiSelect2 = function (){
-                let initSelect = function (){
-                    $('#selectProvinsi').select2({
-                        ajax: {
-                            url: '{{route('helper-area.province')}}',
-                            type: 'post',
-                            dataType: 'json',
-                            data: function (params) {
-                                // Query parameters will be ?search=[term]
-                                return {
-                                    search: params.term,
-                                };
-                            },
-                            processResults: function (data) {
-                                return {
-                                    results: data,
-                                };
-                            },
-                            cache: true
-                        }
-                    })
-                }
-
-                return {
-                    init: function (){
-                        initSelect()
-                    }
-                }
-            }()
-
-            let citySelect2 = function (){
-                let initSelect = function () {
-                    $('#selectCity').select2({
-                        ajax: {
-                            url: '{{route('helper-area.city')}}',
-                            type: 'post',
-                            dataType: 'json',
-                            data: function (params) {
-                                // Query parameters will be ?search=[term]
-                                return {
-                                    search: params.term,
-                                    provinsi: provinsi,
-                                };
-                            },
-                            processResults: function (data) {
-                                return {
-                                    results: data,
-                                };
-                            },
-                            cache: true
-                        }
-                    });
-                }
-
-                return {
-                    init: function (){
-                        initSelect()
-                    }
-                }
-            }()
-
-            let city = $('#selectCity')
-
-            city.on('change', function (e) {
-                let regenciesId = $(this).data("#selectCity")
-                //window.livewire.emit('setRegencies', e.target.value)
-                @this.regencies_id = e.target.value
-            })
-
-            // On document ready
-            KTUtil.onDOMContentLoaded(function () {
-                citySelect2.init();
-                provinsiSelect2.init();
-            });
-
-        </script>
     @endpush
 </div>
