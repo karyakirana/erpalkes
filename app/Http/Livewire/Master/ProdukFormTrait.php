@@ -8,8 +8,6 @@ trait ProdukFormTrait
     public $produk_id;
     public $produk_kategori_id;
     public $produk_sub_kategori;
-    public $kode;
-    public $is_expired;
     public $nama_produk;
     public $tipe;
     public $isi_kemasan;

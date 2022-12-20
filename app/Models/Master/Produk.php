@@ -32,13 +32,13 @@ class Produk extends Model
         return $this->belongsTo(ProdukKategori::class, 'produk_sub_kategori_id');
     }
 
-    public function produkBrosur()
-    {
-        return $this->hasMany(ProdukBrosur::class, 'produk_id');
-    }
-
     public function produkImage()
     {
         return $this->hasMany(ProdukImage::class, 'produk_id');
+    }
+
+    public function produkHarga()
+    {
+        return $this->hasOne(ProdukHarga::class, 'produk_id');
     }
 }
