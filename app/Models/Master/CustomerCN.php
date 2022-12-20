@@ -2,6 +2,7 @@
 
 namespace App\Models\Master;
 
+use App\Models\KodeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,7 @@ class CustomerCN extends Model
 {
     use HasFactory;
     use CustomerModelTrait;
+    use KodeTrait;
 
     protected $table = 'customer_cn';
     protected $fillable = [
