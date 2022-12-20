@@ -31,7 +31,7 @@ class PegawaiForm extends Component
         $data = $this->validate();
         PegawaiRepository::store($data);
         // redirect
-        session()->flash('message', 'Data '.$this->nama_pegawai.' sudah disimpan.');
+        session()->flash('message', 'Data '.$this->nama.' sudah disimpan.');
         return redirect()->to(route('pegawai'));
     }
 
@@ -40,7 +40,7 @@ class PegawaiForm extends Component
         $data = $this->validate();
         PegawaiRepository::update($data, $this->pegawai_id);
         // redirect
-        session()->flash('message', 'Data '.$this->nama_pegawai.' sudah diupdate.');
+        session()->flash('message', 'Data '.$this->nama.' sudah diupdate.');
         return redirect()->to(route('pegawai'));
     }
 
@@ -66,7 +66,7 @@ class PegawaiForm extends Component
         ]);
         Jabatan::create([
             'kode' => $this->kodeJabatan(),
-            'nama_jabatan' => $this->add_nama_jabatan,
+            'nama' => $this->add_nama_jabatan,
             'keterangan' => $this->add_keterangan_jabatan
         ]);
         $this->reset(['add_nama_jabatan', 'add_keterangan_jabatan']);

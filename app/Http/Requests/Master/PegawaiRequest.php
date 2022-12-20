@@ -24,7 +24,8 @@ class PegawaiRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_pegawai' => 'required|min:3',
+            'nama' => 'required|min:3',
+            'status' => 'required',
             'gender' => 'required',
             'telepon' => 'required',
             'email' => 'nullable|email',

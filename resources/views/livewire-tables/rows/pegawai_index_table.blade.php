@@ -2,10 +2,10 @@
     {{$row->kode}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell width="35%">
-    {{$row->nama_pegawai}}
+    {{$row->nama}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell width="20%">
-    {{$row->jabatan->nama_jabatan}}
+    {{$row->jabatan->nama}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell width="20%">
     {{$row->telepon}}

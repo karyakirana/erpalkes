@@ -14,8 +14,8 @@
                 <x-slot:toolbar>
                     <h4>{{$kode}}</h4>
                 </x-slot:toolbar>
-                <x-input.group-horizontal label="Nama" name="nama_pegawai">
-                    <x-input.text wire:model.defer="nama_pegawai" />
+                <x-input.group-horizontal label="Nama" name="nama">
+                    <x-input.text wire:model.defer="nama" />
                 </x-input.group-horizontal>
                 <x-input.group-horizontal label="Gender" name="gender">
                     <x-input.select wire:model.defer="gender">
@@ -26,12 +26,12 @@
                 </x-input.group-horizontal>
                 <x-input.group-horizontal label="Jabatan" name="jabatan_nama">
                     @php
-                        $jabatan = \App\Models\Master\Jabatan::query()->latest()->get();
+                        $jabatan = \App\Models\Master\Jabatan::query()->get();
                     @endphp
                     <x-input.select wire:model.defer="jabatan_id">
                         <option>Dipilih</option>
                         @foreach($jabatan as $row)
-                            <option value="{{$row->id}}">{{$row->nama_jabatan}}</option>
+                            <option value="{{$row->id}}">{{$row->nama}}</option>
                         @endforeach
                     </x-input.select>
                 </x-input.group-horizontal>

@@ -6,8 +6,9 @@ use App\Mine\SubMaster\PegawaiRepository;
 trait PegawaiFormTrait
 {
     public $pegawai_id;
+    public $status = 'active';
     public $kode;
-    public $nama_pegawai;
+    public $nama;
     public $gender;
     public $telepon;
     public $email;
@@ -30,7 +31,7 @@ trait PegawaiFormTrait
     {
         $builder = PegawaiRepository::getById($pegawai_id);
         $this->kode = $builder->kode;
-        $this->nama_pegawai = $builder->nama_pegawai;
+        $this->nama = $builder->nama;
         $this->gender = $builder->gender;
         $this->telepon = $builder->telepon;
         $this->email = $builder->email;
