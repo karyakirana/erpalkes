@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('active_cash');
             $table->unsignedBigInteger('gudang_id');
             $table->unsignedBigInteger('produk_id');
-            $table->date('tgl_produksi')->nullable();
             $table->string('batch', 20)->nullable();
+            $table->date('tgl_expired')->nullable();
             $this->fieldStock($table);
             $table->timestamps();
         });
