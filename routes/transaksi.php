@@ -15,3 +15,6 @@ Route::get('penjualan/retur/form', \App\Http\Livewire\Penjualan\PenjualanReturFo
 Route::get('stock/stockawal', [\App\Http\Controllers\Stock\StockAwalController::class, 'index'])->name('stock-awal');
 Route::get('stock/awal/form', \App\Http\Livewire\Stock\StockAwalForm::class)->name('stock-awal.form');
 Route::get('stock/awal/form/{stock_awal_id}', \App\Http\Livewire\Stock\StockAwalForm::class);
+
+Route::get('pembelian/quotation',[\App\Http\Controllers\Pembelian\PembelianQuotationController::class,'index'])->name('pembelian.quotation');
+Route::get('pembelian/quotation/form', \App\Http\Livewire\Pembelian\PembelianQuotaionForm::class)->name('pembelian.quotation.form');
