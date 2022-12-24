@@ -2,6 +2,7 @@
 
 namespace App\Models\Stock;
 
+use App\Models\KodeTrait;
 use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class StockAwal extends Model
 {
     use HasFactory;
-    use UsersModelTrait;
+    use UsersModelTrait, KodeTrait;
 
     protected $table = 'stock_awal';
     protected $fillable = [

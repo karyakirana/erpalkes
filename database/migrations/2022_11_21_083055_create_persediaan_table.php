@@ -17,8 +17,12 @@ return new class extends Migration
     {
         Schema::create('persediaan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('stock_id');
+            $table->string('active_cash');
+            $table->string('kondisi', 10);
             $table->unsignedBigInteger('gudang_id');
+            $table->unsignedBigInteger('produk_id');
+            $table->string('batch')->nullable();
+            $table->date('tgl_expired')->nullable();
             $table->bigInteger('harga');
             $this->fieldStock($table);
             $table->timestamps();

@@ -2,7 +2,9 @@
 
 namespace App\Models\Stock;
 
+use App\Models\Master\Gudang;
 use App\Models\Master\ProdukModelTrait;
+use App\Models\Persediaan\Persediaan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,8 +17,10 @@ class Stock extends Model
 
     protected $fillable = [
         'active_cash',
+        'kondisi',
+        'gudang_id',
         'produk_id',
-        'tgl_produksi',
+        'batch',
         'tgl_expired',
         'stock_awal',
         'stock_masuk',
@@ -25,4 +29,14 @@ class Stock extends Model
         'stock_saldo_koreksi',
         'stock_saldo_lost'
     ];
+
+    public function gudang()
+    {
+        return $this->belongsTo(Gudang::class, 'gudang_id');
+    }
+
+    public function persediaan()
+    {
+        return $this->hasMany(Persediaan::class, 'stock_id');
+    }
 }

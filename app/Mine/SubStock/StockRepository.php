@@ -4,148 +4,133 @@ use App\Models\Stock\Stock;
 
 class StockRepository
 {
-    protected $active_cash;
-    protected $produk_id;
-    protected $field;
-    protected $jumlah;
-    protected $stock_saldo;
-    protected $tgl_produksi;
-    protected $batch;
+    public $active_cash;
+    public $kondisi;
+    public $gudang_id;
+    public $produk_id;
+    public $batch;
+    public $tgl_expired;
+    public $field;
+    public $jumlah;
 
-    public function __construct(
-        $produk_id,
-        $field,
-        $jumlah,
-        $tgl_produksi = null,
-        $batch = null,
-    )
+    public function __construct($active_cash, $kondisi, $gudang_id, $field, $dataDetail)
     {
-        $this->active_cash = session('ClosedCash');
-        $this->produk_id = $produk_id;
+        $this->active_cash = $active_cash;
+        $this->gudang_id = $gudang_id;
+        $this->kondisi = $kondisi;
         $this->field = $field;
-        $this->jumlah = $jumlah;
-        $this->tgl_produksi = $tgl_produksi;
-        $this->batch = $batch;
 
-        $this->stock_saldo = 0;
-
-        // keadaan stock saldo bertambah
-        if ($field === 'stock_masuk' || $field === 'stock_awal' ){
-            $this->stock_saldo = $jumlah;
+        if (is_array($dataDetail)){
+            $this->produk_id = $dataDetail['produk_id'];
+            $this->batch = $dataDetail['batch'];
+            $this->tgl_expired = $dataDetail['tgl_expired'];
+            $this->jumlah = $dataDetail['jumlah'];
         }
 
-        // stock_keluar maka saldo berkurang
-        if ($field === 'stock_keluar'){
-            $this->stock_saldo = 0 - $jumlah;
+        if (is_object($dataDetail)){
+            $this->produk_id = $dataDetail->produk_id;
+            $this->batch = $dataDetail->batch;
+            $this->tgl_expired = $dataDetail->tgl_expired;
+            $this->jumlah = $dataDetail->jumlah;
         }
     }
 
-    /**
-     * @param $produkId
-     * @param bool $activeCash
-     * @return Stock[]|\LaravelIdea\Helper\App\Models\Stock\_IH_Stock_C
-     */
-    public static function getStockBYProdukId($produkId, bool $activeCash = true)
+    public static function build(...$params)
     {
-        if (!$activeCash){
-            return Stock::where('active_cash', session('ClosedCash'))
-                ->where('produk_id', $produkId)
-                ->get();
-        }
-        return Stock::where('produk_id', $produkId)->get();
+        return new static(...$params);
     }
 
-    public static function getStockByActiveCash()
+    public static function builder()
     {
-        //
+        return Stock::query();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    protected function baseQueryStock()
+    public function baseQuery()
     {
-        return Stock::query()->where('active_cash', session('ClosedCash'))
+        return Stock::where('active_cash', session('ClosedCash'))
+            ->where('kondisi', $this->kondisi)
+            ->where('gudang_id', $this->gudang_id)
             ->where('produk_id', $this->produk_id)
-            ->where('tgl_produksi', $this->tgl_produksi)
-            ->where('batch', $this->batch);
+            ->where('batch', $this->batch)
+            ->where('tgl_expired', $this->tgl_expired);
     }
 
-    /**
-     * @return bool
-     */
-    protected function checkStock()
+    public function check()
     {
-        return $this->baseQueryStock()->exists();
+        return $this->baseQuery()->exists();
     }
 
     /**
      * @return Stock
      */
-    public function createStock()
+    public function create()
     {
         return Stock::create([
             'active_cash' => $this->active_cash,
+            'gudang_id' => $this->gudang_id,
             'produk_id' => $this->produk_id,
-            'tgl_produksi' => $this->tgl_produksi,
             'batch' => $this->batch,
+            'tgl_expired' => $this->tgl_expired,
             $this->field => $this->jumlah,
-            'stock_saldo' => $this->stock_saldo
+            'stock_saldo' => ($this->field == 'stock_keluar') ? 0 - $this->jumlah : $this->jumlah
         ]);
     }
 
-    public function addStockAwal()
+    /**
+     * @return Stock
+     */
+    public function addStockIn()
     {
-        if ($this->checkStock()){
-            $this->baseQueryStock()
-                ->update([
-                    'stock_awal'=>\DB::raw('stock_awal + '.$this->jumlah),
-                    'stock_saldo'=>\DB::raw('stock_saldo + '.$this->jumlah),
-                ]);
+        if ($this->check()){
+            $stock = $this->baseQuery()->first();
+            $stock->update([
+                $this->field => \DB::raw($this->field." + ".$this->jumlah),
+                'stock_saldo' => \DB::raw("stock_saldo + ".$this->jumlah),
+            ]);
+            return $stock;
         }
+        return $this->create();
     }
 
     /**
-     * @return Stock|int
+     * @return Stock
      */
-    public function addStockMasuk()
+    public function rollbackStockIn()
     {
-        if ($this->checkStock()){
-            return $this->baseQueryStock()
-                ->update([
-                    'stock_awal'=>\DB::raw('stock_awal + '.$this->jumlah),
-                    'stock_saldo'=>\DB::raw('stock_saldo + '.$this->jumlah),
-                ]);
-        }
-        return $this->createStock();
+        $stock = $this->baseQuery()->first();
+        $stock->update([
+            $this->field => \DB::raw($this->field." - ".$this->jumlah),
+            'stock_saldo' => \DB::raw("stock_saldo - ".$this->jumlah),
+        ]);
+        return $stock;
     }
 
     /**
-     * @return Stock|int
+     * @return Stock
      */
-    public function addStockKeluar()
+    public function addStockOut()
     {
-        if ($this->checkStock()){
-            return $this->baseQueryStock()
-                ->update([
-                    'stock_awal'=>\DB::raw('stock_keluar + '.$this->jumlah),
-                    'stock_saldo'=>\DB::raw('stock_saldo - '.$this->jumlah),
-                ]);
+        if ($this->check()){
+            $stock = $this->baseQuery()->first();
+            $stock->update([
+                $this->field => \DB::raw($this->field." + ".$this->jumlah),
+                'stock_saldo' => \DB::raw("stock_saldo - ".$this->jumlah),
+            ]);
+            return $stock->id;
         }
-        return $this->createStock();
+        return $this->create()->id;
     }
 
     /**
-     * @return Stock|int
+     * @return Stock
      */
-    public function addStockSaldoKoreksi()
+    public function rollbackStockOut()
     {
-        if ($this->checkStock()){
-            return $this->baseQueryStock()
-                ->update([
-                    'stock_awal'=>\DB::raw('stock_saldo_koreksi + '.$this->jumlah),
-                ]);
-        }
-        return $this->createStock();
+        $stock = $this->baseQuery()->first();
+        $stock->update([
+            $this->field => \DB::raw($this->field." - ".$this->jumlah),
+            'stock_saldo' => \DB::raw("stock_saldo + ".$this->jumlah),
+        ]);
+        return $stock;
     }
 }

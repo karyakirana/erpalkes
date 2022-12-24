@@ -25,17 +25,20 @@ class ProdukRequest extends FormRequest
     {
         return [
             'produk_id' => 'nullable',
-            'produk_sub_kategori' => 'required',
-            'produk_kategori' => 'required',
-            'kode' => 'nullable',
+            'produk_sub_kategori_id' => 'required',
             'nama_produk' => 'required',
-            'is_expired' => 'nullable',
+            'merk' => 'required',
             'tipe' => 'required',
             'satuan_beli' => 'required',
-            'isi_kemasan' => 'required',
             'satuan_jual' => 'required',
             'harga' => 'required',
-            'keterangan' => 'nullable'
+            'buffer_stock' => 'nullable|int',
+            'minimum_stock' => 'nullable|int',
+            'keterangan' => 'nullable',
+
+            'dataImage' => 'nullable|array',
+            'dataHarga' => 'nullable|array',
+            'dataKemasan' => 'nullable|array'
 
         ];
     }

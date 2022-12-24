@@ -4,91 +4,117 @@ use App\Models\Persediaan\Persediaan;
 
 class PersediaanRepository
 {
-    protected $produk_id;
-    protected $harga;
-    protected $field;
-    protected $jumlah;
-    protected $tgl_expired;
+    public $active_cash;
+    public $kondisi;
+    public $gudang_id;
+    public $produk_id;
+    public $batch;
+    public $tgl_expired;
+    public $harga;
+    public $field;
+    public $jumlah;
 
-    public function __construct($produk_id, $harga, $field, $jumlah, $tgl_expired = null)
+    public function __construct($active_cash, $kondisi, $gudang_id, $field, $dataDetail)
     {
-        $this->produk_id = $produk_id;
-        $this->harga = $harga;
+        $this->active_cash = $active_cash;
+        $this->gudang_id = $gudang_id;
+        $this->kondisi = $kondisi;
         $this->field = $field;
-        $this->jumlah = $jumlah;
-        $this->tgl_expired = $tgl_expired;
-    }
 
-    public static function build($produk_id, $harga, $field, $jumlah, $tgl_expired = null)
-    {
-        return new static($produk_id, $harga, $field, $jumlah, $tgl_expired = null);
-    }
-
-    /**
-     * @return Persediaan
-     */
-    public function query()
-    {
-        $query = Persediaan::where('active_cash', session('ClosedCash'))
-        ->where('produk_id', $this->produk_id)
-        ->where('harga_dasar', $this->harga);
-        if ($this->tgl_expired){
-            return $query->where('tgl_expired', $this->tgl_expired);
+        if (is_array($dataDetail)){
+            $this->produk_id = $dataDetail['produk_id'];
+            $this->batch = $dataDetail['batch'];
+            $this->tgl_expired = $dataDetail['tgl_expired'];
+            $this->harga = $dataDetail['harga'];
+            $this->jumlah = $dataDetail['jumlah'];
         }
-        return $query;
+
+        if (is_object($dataDetail)){
+            $this->produk_id = $dataDetail->produk_id;
+            $this->batch = $dataDetail->batch;
+            $this->tgl_expired = $dataDetail->tgl_expired;
+            $this->harga = $dataDetail->harga;
+            $this->jumlah = $dataDetail->jumlah;
+        }
     }
 
-    public function addPersediaan()
+    public static function build(...$params)
     {
-        // check
-        if ($this->query()->exists()){
-            return $this->query()->update([
-                $this->field => \DB::raw($this->field.' + '.$this->jumlah),
-                'stock_saldo' => \DB::raw('stock_saldo + '.$this->jumlah),
+        return new static(...$params);
+    }
+
+    public function baseQuery()
+    {
+        return Persediaan::where('active_cash', $this->active_cash)
+            ->where('kondisi', $this->kondisi)
+            ->where('gudang_id', $this->gudang_id)
+            ->where('produk_id', $this->produk_id)
+            ->where('batch', $this->batch)
+            ->where('tgl_expired', $this->tgl_expired)
+            ->where('harga', $this->harga);
+    }
+
+    public function check()
+    {
+        return $this->baseQuery()->exists();
+    }
+
+    public function create()
+    {
+        return Persediaan::create([
+            'active_cash' => $this->active_cash,
+            'gudang_id' => $this->gudang_id,
+            'produk_id' => $this->produk_id,
+            'batch' => $this->batch,
+            'tgl_expired' => $this->tgl_expired,
+            'harga' => $this->harga,
+            $this->field => $this->jumlah,
+            'stock_saldo' => ($this->field == 'stock_keluar') ? 0 - $this->jumlah : $this->jumlah
+        ]);
+    }
+
+    public function addPersedianIn()
+    {
+        if ($this->check()){
+            $persediaan = $this->baseQuery()->first();
+            $persediaan->update([
+                $this->field => \DB::raw($this->field." + ".$this->jumlah),
+                'stock_saldo' => \DB::raw("stock_saldo + ".$this->jumlah),
             ]);
         }
-        return $this->query()->create([
-            'active_cash' => session('active_cash'),
-            'produk_id' => $this->produk_id,
-            'tgl_expired' => $this->tgl_expired,
-            'harga_dasar' => $this->harga,
-            $this->field => $this->jumlah,
-            'stock_saldo' => $this->jumlah
-        ]);
+        return $this->create();
     }
 
-    public function addPersediaanKeluar()
+    public function rollbackPersediaanIn()
     {
-        // check
-        if ($this->query()->exists()){
-            return $this->query()->update([
-                $this->field => \DB::raw($this->field.' + '.$this->jumlah),
-                'stock_saldo' => \DB::raw('stock_saldo - '.$this->jumlah),
+        $persediaan = $this->baseQuery()->first();
+        $persediaan->update([
+            $this->field => \DB::raw($this->field." - ".$this->jumlah),
+            'stock_saldo' => \DB::raw("stock_saldo - ".$this->jumlah),
+        ]);
+        return $persediaan;
+    }
+
+    public function addPersediaanOut()
+    {
+        if ($this->check()){
+            $stock = $this->baseQuery()->first();
+            $stock->update([
+                $this->field => \DB::raw($this->field." + ".$this->jumlah),
+                'stock_saldo' => \DB::raw("stock_saldo - ".$this->jumlah),
             ]);
+            return $stock->id;
         }
-        return $this->query()->create([
-            'active_cash' => session('active_cash'),
-            'produk_id' => $this->produk_id,
-            'tgl_expired' => $this->tgl_expired,
-            'harga_dasar' => $this->harga,
-            $this->field => $this->jumlah,
-            'stock_saldo' => 0 - $this->jumlah
-        ]);
+        return $this->create();
     }
 
-    public function rollback()
+    public function rollbackPersediaanOut()
     {
-        return $this->query()->update([
-            $this->field => \DB::raw($this->field.' - '.$this->jumlah),
-            'stock_saldo' => \DB::raw('stock_saldo - '.$this->jumlah),
+        $stock = $this->baseQuery()->first();
+        $stock->update([
+            $this->field => \DB::raw($this->field." - ".$this->jumlah),
+            'stock_saldo' => \DB::raw("stock_saldo + ".$this->jumlah),
         ]);
-    }
-
-    public function rollbackKeluar()
-    {
-        return $this->query()->update([
-            $this->field => \DB::raw($this->field.' - '.$this->jumlah),
-            'stock_saldo' => \DB::raw('stock_saldo + '.$this->jumlah),
-        ]);
+        return $stock;
     }
 }

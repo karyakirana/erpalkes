@@ -38,19 +38,23 @@ class ProdukRepository implements MasterRepositoryInterface
     {
         $data['active_cash'] = session('ClosedCash');
         $data['kode'] = self::kode();
+        $data['status'] = 'active';
         $produk = Produk::create($data);
-        $harga_diskon = $data['harga_diskon'];
-        $persen_diskon = $data['persen_diskon'];
-        $produk->produkHarga()->create([
-            'harga_diskon' => $data['harga_diskon'],
-            'persen_diskon' => $data['persen_diskon']
-        ]);
+        $produk->produkHarga()->create($data['dataHarga']);
         $produk->produkImage()->createMany($data['dataImage']);
+        $produk->produkKemasan()->createMany($data['dataKemasan']);
+        return $produk;
     }
 
     public static function update(array $data, $id)
     {
         $builder = Produk::find($id);
+        $builder->produkHarga()->delete();
+        $builder->produkImage()->delete();
+        $builder->produkKemasan()->delete();
+        $builder->produkHarga()->create($data['dataHarga']);
+        $builder->produkImage()->createMany($data['dataImage']);
+        $builder->produkKemasan()->createMany($data['dataKemasan']);
         return $builder->update($data);
     }
 

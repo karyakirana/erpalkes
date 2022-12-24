@@ -5,7 +5,7 @@
     {{$row->nama_produk}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell>
-    {{$row->produkKategori->kategori}}
+    {{$row->produkSubKategori->nama_sub_kategori}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell>
     {{$row->harga}}

@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('persediaan_keluar_detail', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('persediaan_keluar_id');
-            $this->fieldPersediaanTransaksi($table);
+            $this->fieldPersediaanDetail($table);
         });
     }
 

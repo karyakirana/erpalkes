@@ -36,16 +36,15 @@ class PersediaanAwalRepository
         return sprintf("%04s", $num)."/{$kodeKondisi}/".date('Y');
     }
 
-    public static function setDetail($dataDetail)
-    {
-        //
-    }
-
     public static function store(array $data)
     {
         $data['kode'] = self::kode();
         $data['active_cash'] = session('ClosedCash');
         $query = PersediaanAwal::create($data);
+        foreach ($data['dataDetail'] as $row) {
+            // add persediaan
+            PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)->addPersedianIn();
+        }
         $query->persediaanAwalDetail()->createMany($data['dataDetail']);
         return $query;
     }
@@ -54,6 +53,10 @@ class PersediaanAwalRepository
     {
         $query = self::getById($persediaan_awal_id);
         $query->update($data);
+        foreach ($data['dataDetail'] as $row) {
+            // add persediaan
+            PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)->addPersedianIn();
+        }
         $query->persediaanAwalDetail()->createMany($data['dataDetail']);
         return $query;
     }
@@ -61,12 +64,20 @@ class PersediaanAwalRepository
     public static function destroyDetail($persediaan_awal_id)
     {
         $query = self::getById($persediaan_awal_id);
+        foreach ($query->persediaanAwalDetail as $row) {
+            // add persediaan
+            PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)->rollbackPersediaanIn();
+        }
         return $query->persediaanAwalDetail()->delete();
     }
 
     public static function destroy($persediaan_awal_id)
     {
         $query = self::getById($persediaan_awal_id);
+        foreach ($query->persediaanAwalDetail as $row) {
+            // add persediaan
+            PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)->rollbackPersediaanIn();
+        }
         $query->persediaanAwalDetail()->delete();
         return $query->delete();
     }

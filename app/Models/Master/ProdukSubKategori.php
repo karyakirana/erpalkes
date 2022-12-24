@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProdukSubKategori extends Model
 {
     use HasFactory, KodeTrait;
+    public $timestamps = false;
     protected $table = 'produk_sub_kategori';
     protected $fillable = [
         'kategori_id',

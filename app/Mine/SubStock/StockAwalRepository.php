@@ -10,7 +10,7 @@ class StockAwalRepository
         return $persediaanAwal->stockAwal;
     }
 
-    public static function getAllCurrentActiveCash($deleted = false)
+    public static function datatables($deleted = false)
     {
         if ($deleted){
             return StockAwal::withTrashed()
@@ -22,14 +22,22 @@ class StockAwalRepository
             ->latest()->get();
     }
 
-    public static function getAllByActiveCash()
+    public static function kode($kondisi = 'baik')
     {
-        return StockAwal::latest()->get();
-    }
+        $query = StockAwal::query()
+            ->where('active_cash', session('ClosedCash'))
+            ->where('kondisi', $kondisi)
+            ->latest('kode');
 
-    public static function kode()
-    {
-        return null;
+        $kodeKondisi = ($kondisi == 'baik') ? 'SA' : 'SAR';
+
+        // check last num
+        if ($query->doesntExist()){
+            return "0001/{$kodeKondisi}/".date('Y');
+        }
+
+        $num = (int) $query->first()->last_num_trans + 1;
+        return sprintf("%04s", $num)."/{$kodeKondisi}/".date('Y');
     }
 
     public static function store(PersediaanAwal $persediaanAwal)
@@ -42,13 +50,13 @@ class StockAwalRepository
             'keterangan' => $persediaanAwal->keterangan
         ]);
         foreach ($persediaanAwal->persediaanAwalDetail as $item) {
+            StockRepository::build($stockAwal->active_cash, $stockAwal->gudang_id, 'stock_awal', $item)->addStockIn();
             $stockAwal->stockAwalDetail()->create([
                 'produk_id' => $item->produk_id,
-                'tgl_produksi' => $item->tgl_produksi,
+                'batch' => $item->batch,
                 'tgl_expired' => $item->tgl_expired,
                 'jumlah' => $item->jumlah,
             ]);
-            // todo update stock
         }
         return $stockAwal;
     }
@@ -63,26 +71,32 @@ class StockAwalRepository
         ]);
         $stockAwal = $persediaanAwal->stockAwal;
         foreach ($persediaanAwal->persediaanAwalDetail as $item) {
+            StockRepository::build($persediaanAwal->active_cash, $persediaanAwal->gudang_id, 'stock_awal', $item)->addStockIn();
             $stockAwal->stockAwalDetail()->create([
                 'produk_id' => $item->produk_id,
                 'tgl_produksi' => $item->tgl_produksi,
                 'tgl_expired' => $item->tgl_expired,
                 'jumlah' => $item->jumlah,
             ]);
-            // todo update stock
         }
         return $stockAwal;
     }
 
-    public static function deleteDetail(PersediaanAwal $persediaanAwal)
+    public static function destroyDetail(PersediaanAwal $persediaanAwal)
     {
         $stockAwal = $persediaanAwal->stockAwal;
+        foreach ($stockAwal->stockAwalDetail as $row){
+            StockRepository::build($persediaanAwal->active_cash, $persediaanAwal->gudang_id, 'stock_awal', $row)->rollbackStockIn();
+        }
         return $stockAwal->stockAwalDetail()->delete();
     }
 
     public static function destroy(PersediaanAwal $persediaanAwal)
     {
         $stockAwal = $persediaanAwal->stockAwal;
+        foreach ($stockAwal->stockAwalDetail as $row){
+            StockRepository::build($persediaanAwal->active_cash, $persediaanAwal->gudang_id, 'stock_awal', $row)->rollbackStockIn();
+        }
         $stockAwal->stockAwalDetail()->delete();
         return $stockAwal->delete();
     }

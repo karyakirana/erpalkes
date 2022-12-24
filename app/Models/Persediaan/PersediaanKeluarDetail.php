@@ -12,7 +12,7 @@ class PersediaanKeluarDetail extends Model
     protected $table = 'persediaan_keluar_detail';
     protected $fillable = [
         'persediaan_keluar_id',
-        'stock_id',
+        'produk_id',
         'jumlah',
         'harga_dasar',
         'sub_total'

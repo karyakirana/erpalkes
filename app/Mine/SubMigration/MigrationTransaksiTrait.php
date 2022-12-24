@@ -102,7 +102,7 @@ trait MigrationTransaksiTrait
 
     public function fieldPersediaanDetail(Blueprint $table)
     {
-        $table->unsignedBigInteger('persediaan_id');
+        $table->unsignedBigInteger('produk_id');
         $table->string('batch')->nullable();
         $table->date('tgl_expired')->nullable();
         $table->bigInteger('jumlah');

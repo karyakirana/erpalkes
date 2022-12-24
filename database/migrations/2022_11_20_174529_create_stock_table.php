@@ -18,6 +18,7 @@ return new class extends Migration
         Schema::create('stock', function (Blueprint $table) {
             $table->id();
             $table->string('active_cash');
+            $table->string('kondisi', 10);
             $table->unsignedBigInteger('gudang_id');
             $table->unsignedBigInteger('produk_id');
             $table->string('batch', 20)->nullable();

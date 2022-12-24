@@ -27,9 +27,9 @@ class Produk extends Model
         'keterangan',
     ];
 
-    public function produkKategori()
+    public function produkSubKategori()
     {
-        return $this->belongsTo(ProdukKategori::class, 'produk_sub_kategori_id');
+        return $this->belongsTo(ProdukSubKategori::class, 'produk_sub_kategori_id');
     }
 
     public function produkImage()
@@ -40,5 +40,10 @@ class Produk extends Model
     public function produkHarga()
     {
         return $this->hasOne(ProdukHarga::class, 'produk_id');
+    }
+
+    public function produkKemasan()
+    {
+        return $this->hasMany(ProdukKemasan::class, 'produk_id');
     }
 }
