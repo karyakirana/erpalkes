@@ -6,74 +6,92 @@ use App\Models\Stock\StockKeluarDetail;
 
 class StockKeluarPenjualan
 {
-    protected $penjualan;
-
-    public function __construct(Penjualan $penjualan)
-    {
-        $this->penjualan = $penjualan;
-    }
-
-    public function getById()
-    {
-        return $this->penjualan->stockKeluar()->first();
-    }
-
-    public function detail($stockKeluarId)
-    {
-        foreach ($this->penjualan->penjualanDetail as $item) {
-            StockKeluarDetail::create([
-                'stock_keluar_id' => $stockKeluarId,
-                'stock_id' => $item->stock_id,
-                'jumlah' => $item->jumlah
-            ]);
-        }
-        // todo update stock
-    }
-
-    public function store()
+    /**
+     * Transaksi Ketika Penjualan dibuat dulu
+     */
+    public static function storeFromPenjualan(Penjualan $penjualan, $data)
     {
         $stockKeluar = StockKeluar::create([
-            'active_cash' => $this->penjualan->active_cash,
+            'stockable_keluar_id' => $penjualan->id,
+            'stockable_keluar_type' => $penjualan::class,
+            'customer_id' => $penjualan->customer_id,
+            'supplier_id' => null,
+            'active_cash' => $penjualan->active_cash,
             'kode' => StockKeluarRepository::kode(),
-            'status_keluar' => $this->penjualan->status_invoice,
-            'stockable_keluar_id' => $this->penjualan->id,
-            'stockable_keluar_type' => $this->penjualan::class,
-            'customer_id' => $this->penjualan->customer_id,
-            'supplier_id' => null,
-            'user_id' => $this->penjualan->user_id,
-            'total_barang' => $this->penjualan->total_barang,
-            'keterangan' => $this->penjualan->keterangan
+            'kondisi' => 'baik',
+            'status' => 'tercetak',
+            'gudang_id' => $data['gudang_id'],
+            'user_id' => $penjualan->user_id,
+            'total_barang' => $penjualan->total_barang,
+            'keterangan' => $penjualan->keterangan
         ]);
-        $this->detail($stockKeluar->id);
+        foreach ($data['dataDetail'] as $row) {
+            StockRepository::build(
+                $stockKeluar->active_cash,
+                $stockKeluar->kondisi,
+                $stockKeluar->gudang_id,
+                'stock_keluar',
+                $row
+            )->addStockOut();
+        }
+        $stockKeluar->stockKeluarDetail()->createMany($data['dataDetail']);
         return $stockKeluar;
     }
 
-    public function update()
+    public static function updateFromPenjualan(Penjualan $penjualan, $data)
     {
-        $stockKeluar = $this->getById();
+        $stockKeluar = StockKeluarRepository::getByMorph($penjualan->id, $penjualan::class);
         $stockKeluar->update([
-            'status_keluar' => $this->penjualan->status_invoice,
-            'stockable_keluar_id' => $this->penjualan->id,
-            'stockable_keluar_type' => $this->penjualan::class,
-            'customer_id' => $this->penjualan->customer_id,
-            'supplier_id' => null,
-            'user_id' => $this->penjualan->user_id,
-            'total_barang' => $this->penjualan->total_barang,
-            'keterangan' => $this->penjualan->keterangan
+            'customer_id' => $penjualan->customer_id,
+            'kondisi' => 'baik',
+            'status' => 'tercetak',
+            'gudang_id' => $data['gudang_id'],
+            'user_id' => $penjualan->user_id,
+            'total_barang' => $penjualan->total_barang,
+            'keterangan' => $penjualan->keterangan
         ]);
-        $this->detail($stockKeluar->id);
+        $stockKeluar = $stockKeluar->refresh();
+        foreach ($data['dataDetail'] as $row) {
+            StockRepository::build(
+                $stockKeluar->active_cash,
+                $stockKeluar->kondisi,
+                $stockKeluar->gudang_id,
+                'stock_keluar',
+                $row
+            )->addStockOut();
+        }
+        $stockKeluar->stockKeluarDetail()->createMany($data['dataDetail']);
         return $stockKeluar;
     }
 
-    public function destroyDetail()
+    public static function destroyDetailFromPenjualan(Penjualan $penjualan)
     {
-        $stockKeluar = $this->getById();
-        return $stockKeluar->stockKeluarDetail->delete();
+        $stockKeluar = StockKeluarRepository::getByMorph($penjualan->id, $penjualan::class);
+        foreach ($stockKeluar->stockKeluarDetail as $item) {
+            StockRepository::build(
+                $stockKeluar->active_cash,
+                $stockKeluar->kondisi,
+                $stockKeluar->gudang_id,
+                'stock_keluar',
+                $item
+            )->rollbackStockOut();
+        }
+        return $stockKeluar->stockKeluarDetail()->delete();
     }
 
-    public function destroy()
+    public static function destroyFromPenjualan(Penjualan $penjualan)
     {
-        $this->destroyDetail();
-        return $this->getById()->delete();
+        $stockKeluar = StockKeluarRepository::getByMorph($penjualan->id, $penjualan::class);
+        foreach ($stockKeluar->stockKeluarDetail as $item) {
+            StockRepository::build(
+                $stockKeluar->active_cash,
+                $stockKeluar->kondisi,
+                $stockKeluar->gudang_id,
+                'stock_keluar',
+                $item
+            )->rollbackStockOut();
+        }
+        $stockKeluar->stockKeluarDetail()->delete();
+        $stockKeluar->delete();
     }
 }

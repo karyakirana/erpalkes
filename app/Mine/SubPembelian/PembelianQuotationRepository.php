@@ -28,7 +28,17 @@ class PembelianQuotationRepository
 
     public static function kode()
     {
-        return null;
+        $query = PembelianQuotation::query()
+            ->where('active_cash', session('ClosedCash'))
+            ->latest('kode');
+
+        // check last num
+        if ($query->doesntExist()) {
+            return "0001/PB/" . date('Y');
+        }
+
+        $num = (int)$query->first()->last_num_trans + 1;
+        return sprintf("%04s", $num) . "/PQ/" . date('Y');
     }
 
     public static function store(array $data)

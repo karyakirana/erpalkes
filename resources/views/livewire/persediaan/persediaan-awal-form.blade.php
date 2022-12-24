@@ -8,12 +8,12 @@
                 <div class="row">
                     <div class="col-6">
                         <x-input.group-vertical class="mb-4" label="Harga">
-                            <x-input.text wire:model.defer="harga"/>
+                            <x-input.text wire:model="harga"/>
                         </x-input.group-vertical>
                     </div>
                     <div class="col-6">
                         <x-input.group-vertical class="mb-4" label="Jumlah">
-                            <x-input.text wire:model.defer="Jumlah"/>
+                            <x-input.text wire:model="jumlah"/>
                         </x-input.group-vertical>
                     </div>
                 </div>

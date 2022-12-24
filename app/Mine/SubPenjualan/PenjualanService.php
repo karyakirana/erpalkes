@@ -1,6 +1,8 @@
 <?php namespace App\Mine\SubPenjualan;
 
+use App\Mine\SubStock\StockKeluarPenjualan;
 use App\Mine\TransactionInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PenjualanService implements TransactionInterface
 {
@@ -12,17 +14,31 @@ class PenjualanService implements TransactionInterface
 
     public function handleById($id)
     {
-        // TODO: Implement handleById() method.
+        return PenjualanRepository::getById($id);
     }
 
     public function handleStore(array $data)
     {
-        // TODO: Implement handleStore() method.
+        \DB::beginTransaction();
+        try {
+            $penjualan = PenjualanRepository::store($data);
+            StockKeluarPenjualan::storeFromPenjualan($penjualan, $data);
+            \DB::commit();
+        } catch (ModelNotFoundException $e){
+            \DB::rollBack();
+        }
     }
 
     public function handleUpdate(array $data)
     {
-        // TODO: Implement handleUpdate() method.
+        \DB::beginTransaction();
+        try {
+            $penjualan = PenjualanRepository::update($data);
+            StockKeluarPenjualan::updateFromPenjualan($penjualan, $data);
+            \DB::commit();
+        } catch (ModelNotFoundException $e){
+            \DB::rollBack();
+        }
     }
 
     public function handleSoftDelete($id)

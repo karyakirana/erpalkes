@@ -28,7 +28,17 @@ class PenjualanRepository
 
     public static function kode()
     {
-        return null;
+        $query = Penjualan::query()
+            ->where('active_cash', session('ClosedCash'))
+            ->latest('kode');
+
+        // check last num
+        if ($query->doesntExist()) {
+            return "0001/PJ/" . date('Y');
+        }
+
+        $num = (int)$query->first()->last_num_trans + 1;
+        return sprintf("%04s", $num) . "/PJ/" . date('Y');
     }
 
     public static function store(array $data)

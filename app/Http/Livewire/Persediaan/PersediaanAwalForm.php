@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Persediaan;
 
+use App\Http\Livewire\Master\ProdukSetTrait;
 use App\Http\Requests\Persediaan\PersediaanAwalRequest;
 use App\Mine\SubMaster\GudangRepository;
 use App\Mine\SubPersediaan\PersediaanAwalService;
@@ -9,6 +10,11 @@ use Livewire\Component;
 
 class PersediaanAwalForm extends Component
 {
+    use ProdukSetTrait;
+
+    protected $listeners = [
+        'setProduk'
+    ];
     public $persediaan_awal_id;
     public $kondisi;
     public $gudang_id;
@@ -61,6 +67,21 @@ class PersediaanAwalForm extends Component
         }
     }
 
+    public function hitungSubTotal()
+    {
+        $this->sub_total = (int) $this->harga * (int) $this->jumlah;
+    }
+
+    public function updatedHarga()
+    {
+        $this->hitungSubTotal();
+    }
+
+    public function updatedJumlah()
+    {
+        $this->hitungSubTotal();
+    }
+
     public function resetForm()
     {
         $this->reset([
@@ -81,6 +102,7 @@ class PersediaanAwalForm extends Component
             'jumlah' => $this->jumlah,
             'sub_total' => $this->sub_total
         ];
+        $this->resetForm();
     }
 
     public function editLine($index)
@@ -93,6 +115,24 @@ class PersediaanAwalForm extends Component
         $this->tgl_expired = $this->dataDetail['tgl-expired'];
         $this->jumlah = $this->dataDetail['jumlah'];
         $this->sub_total = $this->dataDetail['sub_total'];
+    }
+
+    public function updateLine()
+    {
+        $index = $this->index;
+        $this->dataDetail['produk_id'] = $this->produk_id;
+        $this->dataDetail['produk_nama'] = $this->produk_nama;
+        $this->dataDetail['batch'] = $this->batch;
+        $this->dataDetail['tgl-expired'] = $this->tgl_expired;
+        $this->dataDetail['jumlah'] = $this->jumlah;
+        $this->dataDetail['sub_total'] = $this->sub_total;
+        $this->resetForm();
+    }
+
+    public function removeLine($index)
+    {
+        unset($this->dataDetail[$index]);
+        $this->dataDetail = array_values($this->dataDetail);
     }
 
     public function rules()

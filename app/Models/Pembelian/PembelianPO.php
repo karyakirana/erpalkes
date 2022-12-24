@@ -2,6 +2,7 @@
 
 namespace App\Models\Pembelian;
 
+use App\Models\KodeTrait;
 use App\Models\Master\SupplierModelTrait;
 use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +13,7 @@ class PembelianPO extends Model
     use HasFactory;
     use UsersModelTrait;
     use SupplierModelTrait;
+    use KodeTrait;
 
     protected $table = 'pembelian_po';
     protected $fillable = [

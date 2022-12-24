@@ -2,6 +2,7 @@
 
 namespace App\Models\Penjualan;
 
+use App\Models\KodeTrait;
 use App\Models\Master\CustomerModelTrait;
 use App\Models\Stock\StockKeluar;
 use App\Models\Stock\StockKeluarModelTrait;
@@ -15,6 +16,7 @@ class Penjualan extends Model
     use UsersModelTrait;
     use CustomerModelTrait;
     use StockKeluarModelTrait;
+    use KodeTrait;
 
     protected $table = 'penjualan';
     protected $fillable = [
