@@ -18,7 +18,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('stockable_keluar_id')->nullable();
             $table->string('stockable_keluar_type', 100)->nullable();
-            $table->date('tgl_masuk');
+            $table->date('tgl_keluar');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('supplier_id')->nullable();
             $this->fieldTransaksiStock($table);
         });
     }

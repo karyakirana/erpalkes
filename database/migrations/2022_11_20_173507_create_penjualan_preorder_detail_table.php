@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::create('penjualan_preorder_detail', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('penjualan_preorder');
+            $table->unsignedBigInteger('penjualan_preorder_id');
             $this->fieldPenjualanDetail($table);
         });
     }
