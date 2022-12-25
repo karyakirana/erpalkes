@@ -12,9 +12,16 @@ Route::get('penjualan/quotation/form', \App\Http\Livewire\Penjualan\PenjualanQuo
 Route::get('penjualan/retur', [\App\Http\Controllers\Penjualan\PenjualanReturController::class, 'index'])->name('penjualan.retur');
 Route::get('penjualan/retur/form', \App\Http\Livewire\Penjualan\PenjualanReturForm::class)->name('penjualan.retur.form');
 
+Route::get('penjualan/po', [\App\Http\Controllers\Penjualan\PenjualanPreOrderController::class, 'index'])->name('penjualan.po');
+Route::get('penjualan/po/form', \App\Http\Livewire\Penjualan\PenjualanPreOrderForm::class)->name('penjualan.po.form');
+
 Route::get('stock/stockawal', [\App\Http\Controllers\Stock\StockAwalController::class, 'index'])->name('stock-awal');
 Route::get('stock/awal/form', \App\Http\Livewire\Stock\StockAwalForm::class)->name('stock-awal.form');
 Route::get('stock/awal/form/{stock_awal_id}', \App\Http\Livewire\Stock\StockAwalForm::class);
 
 Route::get('pembelian/quotation',[\App\Http\Controllers\Pembelian\PembelianQuotationController::class,'index'])->name('pembelian.quotation');
 Route::get('pembelian/quotation/form', \App\Http\Livewire\Pembelian\PembelianQuotaionForm::class)->name('pembelian.quotation.form');
+
+Route::get('pembelian/po', [\App\Http\Controllers\Pembelian\PembelianPreOrderController::class, 'index'])->name('pembelian.po');
+Route::get('pembelian/po/form', \App\Http\Livewire\Pembelian\PembelianPreOrderForm::class)->name('pembelian.po.form');
+
