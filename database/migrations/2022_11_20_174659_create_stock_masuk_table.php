@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('stockable_masuk_id')->nullable();
             $table->string('stockable_masuk_type', 100)->nullable();
             $table->date('tgl_masuk');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('supplier_id')->nullable();
             $this->fieldTransaksiStock($table);
         });
     }
