@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function (){
 
     Route::get('keuangan/akun',[\App\Http\Controllers\Keuangan\KeuanganAkunController::class,'index'])->name('keuangan.akun');
-    Route::get('keuangan/akun/form', \App\Http\Livewire\Keuangan\KeuanganAkunForm::class)->name('keuangan.akun.form');
-    Route::get('keuangan/akun/form/{akun_id}',\App\Http\Livewire\Keuangan\KeuanganAkunForm::class)->name('keuangan.akun.form.edit');
+    Route::get('keuangan/akun/form', \App\Http\Livewire\Keuangan\AkunForm::class)->name('keuangan.akun.form');
+    Route::get('keuangan/akun/form/{akun_id}',\App\Http\Livewire\Keuangan\AkunForm::class)->name('keuangan.akun.form.edit');
 
     Route::get('keuangan/akun/tipe', [\App\Http\Controllers\Keuangan\KeuanganAkunTipeController::class,'index'])->name('keuangan.akun.tipe');
     Route::get('keuangan/akun/tipe/form', \App\Http\Livewire\Keuangan\KeuanganAkunTipeForm::class)->name('keuangan.akun.tipe.form');

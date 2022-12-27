@@ -41,4 +41,9 @@ class Pembelian extends Model
         return $this->hasMany(PembelianDetail::class, 'pembelian_id');
     }
 
+    public function pembelianPreorder()
+    {
+        return $this->belongsTo(PembelianPO::class, 'pembelian_po_id');
+    }
+
 }

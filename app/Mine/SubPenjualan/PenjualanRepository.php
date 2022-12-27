@@ -51,6 +51,9 @@ class PenjualanRepository
         $data['active_cash'] = session('ClosedCash');
         $penjualan = Penjualan::create($data);
         $penjualan->penjualanDetail()->createMany($data['dataDetail']);
+        $penjualan->piutangPenjualan()->create([
+            'debet' => $penjualan->total_bayar
+        ]);
         return $penjualan;
     }
 
@@ -59,7 +62,15 @@ class PenjualanRepository
         $penjualan = Penjualan::find($data['penjualan_id']);
         $penjualan->update($data);
         $penjualan->penjualanDetail()->createMany($data['dataDetail']);
+        $penjualan->piutangPenjualan()->update([
+            'debet' => $penjualan->total_bayar
+        ]);
         return $penjualan;
+    }
+
+    public static function updateStatus($penjualan_id, $status)
+    {
+        return Penjualan::find($penjualan_id)->update(['status' => $status]);
     }
 
     public static function deleteDetail($id)

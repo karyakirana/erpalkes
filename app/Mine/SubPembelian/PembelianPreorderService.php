@@ -1,35 +1,38 @@
-<?php namespace App\Mine\SubAkuntansi;
+<?php namespace App\Mine\SubPembelian;
 
-use App\Mine\SubPenjualan\PenjualanRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class PenerimaanPenjualanService
+class PembelianPreorderService
 {
     public function handleStore($data)
     {
         \DB::beginTransaction();
         try {
-            $penerimaan = PenerimaanPenjualanRepository::store($data);
+            $pembelianPreorder = PembelianPreorderRepository::store($data);
             \DB::commit();
         } catch (ModelNotFoundException $e){
             \DB::rollBack();
         }
     }
 
-    public function handleEdit($penerimaan_penjualan_id)
+    public function handleEdit($pembelian_preorder_id)
     {
-        return PenerimaanPenjualanRepository::getById($penerimaan_penjualan_id);
+        return PembelianPreorderRepository::getById($pembelian_preorder_id);
     }
 
     public function handleUpdate($data)
     {
         \DB::beginTransaction();
         try {
-            PenerimaanPenjualanRepository::deleteDetail($data['penerimaan_penjualan_id']);
-            $penerimaan = PenerimaanPenjualanRepository::store($data);
+            $pembelianPreorder = PembelianPreorderRepository::update($data);
             \DB::commit();
         } catch (ModelNotFoundException $e){
             \DB::rollBack();
         }
+    }
+
+    public function rollback($pembelian_predorder_id)
+    {
+        //
     }
 }

@@ -17,12 +17,16 @@ class PembelianPO extends Model
 
     protected $table = 'pembelian_po';
     protected $fillable = [
+        'pembelian_quotation_id',
+        'tgl_pembelian_po',
         'active_cash',
         'kode',
         'supplier_id',
         'user_id',
-        'status_po',
+        'status',
         'total_barang',
+        'ppn',
+        'biaya_lain',
         'total_bayar',
         'keterangan'
     ];

@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('pembelian_po_detail', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pembelian_po_id');
-            $this->fieldPembelian($table);
+            $this->fieldPembelianDetail($table);
         });
     }
 
