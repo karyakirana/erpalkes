@@ -2,6 +2,7 @@
 
 namespace App\Models\Pembelian;
 
+use App\Models\KodeTrait;
 use App\Models\Master\SupplierModelTrait;
 use App\Models\Stock\StockMasukModelTrait;
 use App\Models\UsersModelTrait;
@@ -14,6 +15,7 @@ class Pembelian extends Model
     use UsersModelTrait;
     use SupplierModelTrait;
     use StockMasukModelTrait;
+    use KodeTrait;
 
     protected $table = 'pembelian';
     protected $fillable = [

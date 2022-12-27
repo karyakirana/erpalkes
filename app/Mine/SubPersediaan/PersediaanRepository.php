@@ -81,6 +81,7 @@ class PersediaanRepository
                 $this->field => \DB::raw($this->field." + ".$this->jumlah),
                 'stock_saldo' => \DB::raw("stock_saldo + ".$this->jumlah),
             ]);
+            return $persediaan->refresh();
         }
         return $this->create();
     }
@@ -95,15 +96,24 @@ class PersediaanRepository
         return $persediaan;
     }
 
+    public static function rollbackStaticPersediaanIn($persediaan_id, $jumlah, $field)
+    {
+        return Persediaan::find($persediaan_id)
+            ->update([
+                $field => \DB::raw($field." - ".$jumlah),
+                'stock_saldo' => \DB::raw("stock_saldo - ".$jumlah),
+            ]);
+    }
+
     public function addPersediaanOut()
     {
         if ($this->check()){
-            $stock = $this->baseQuery()->first();
-            $stock->update([
+            $persediaan = $this->baseQuery()->first();
+            $persediaan->update([
                 $this->field => \DB::raw($this->field." + ".$this->jumlah),
                 'stock_saldo' => \DB::raw("stock_saldo - ".$this->jumlah),
             ]);
-            return $stock->id;
+            return $persediaan->refresh();
         }
         return $this->create();
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models\Persediaan;
 
+use App\Models\Master\Gudang;
 use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,11 +14,13 @@ class PersediaanMasuk extends Model
 
     protected $table = 'persediaan_masuk';
     protected $fillable = [
-        'active_cash',
-        'kode',
-        'user_id',
         'persedianable_masuk_id',
         'persediaanable_masuk_type',
+        'active_cash',
+        'kode',
+        'kondisi',
+        'gudang_id',
+        'user_id',
         'total_barang',
         'total_nominal',
         'keterangan'
@@ -31,5 +34,10 @@ class PersediaanMasuk extends Model
     public function persediaanableMasuk()
     {
         return $this->morphTo(__FUNCTION__, 'persediaanable_masuk_type', 'persedianable_masuk_id');
+    }
+
+    public function gudang()
+    {
+        return $this->belongsTo(Gudang::class, 'gudang_id');
     }
 }

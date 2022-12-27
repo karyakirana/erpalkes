@@ -2,8 +2,10 @@
 
 namespace App\Models\Penjualan;
 
+use App\Models\Akuntansi\PenerimaanPenjualanDetail;
 use App\Models\KodeTrait;
 use App\Models\Master\CustomerModelTrait;
+use App\Models\Persediaan\PersediaanKeluar;
 use App\Models\Stock\StockKeluar;
 use App\Models\Stock\StockKeluarModelTrait;
 use App\Models\UsersModelTrait;
@@ -45,5 +47,15 @@ class Penjualan extends Model
     public function penjualanQuotation()
     {
         return $this->belongsTo(PenjualanQuotation::class, 'penjualan_quotation_id');
+    }
+
+    public function persediaanKeluar()
+    {
+        return $this->morphOne(PersediaanKeluar::class, 'persediaanableKeluar', 'persediaanable_keluar_type', 'persediaanable_keluar_id');
+    }
+
+    public function penerimaanPenjualanDetail()
+    {
+        return $this->hasMany(PenerimaanPenjualanDetail::class, 'penjualan_id');
     }
 }

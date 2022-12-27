@@ -2,19 +2,25 @@
 
 namespace App\Models\Stock;
 
+use App\Models\KodeTrait;
+use App\Models\Master\CustomerModelTrait;
+use App\Models\Master\SupplierModelTrait;
+use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class StockMasuk extends Model
 {
-    use HasFactory;
+    use HasFactory, KodeTrait, CustomerModelTrait, SupplierModelTrait, UsersModelTrait;
     protected $table = 'stock_masuk';
     protected $fillable = [
-        'active_cash',
-        'kode',
-        'status_masuk',
         'stockable_masuk_id',
         'stockable_masuk_type',
+        'tgl_masuk',
+        'active_cash',
+        'kode',
+        'status',
+        'gudang_id',
         'customer_id',
         'supplier_id',
         'user_id',

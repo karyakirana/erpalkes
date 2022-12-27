@@ -43,9 +43,15 @@ class PersediaanAwalRepository
         $query = PersediaanAwal::create($data);
         foreach ($data['dataDetail'] as $row) {
             // add persediaan
-            PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)->addPersedianIn();
+            $persediaan = PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)
+                ->addPersedianIn();
+            $query->persediaanAwalDetail()->createMany([
+                'persediaan_id' => $persediaan->id,
+                'harga' => $row['harga'],
+                'jumlah' => $row['jumlah'],
+                'sub_total' => $row['sub_total']
+            ]);
         }
-        $query->persediaanAwalDetail()->createMany($data['dataDetail']);
         return $query;
     }
 
@@ -55,9 +61,15 @@ class PersediaanAwalRepository
         $query->update($data);
         foreach ($data['dataDetail'] as $row) {
             // add persediaan
-            PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)->addPersedianIn();
+            $persediaan = PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)
+                ->addPersedianIn();
+            $query->persediaanAwalDetail()->createMany([
+                'persediaan_id' => $persediaan->id,
+                'harga' => $row['harga'],
+                'jumlah' => $row['jumlah'],
+                'sub_total' => $row['sub_total']
+            ]);
         }
-        $query->persediaanAwalDetail()->createMany($data['dataDetail']);
         return $query;
     }
 
@@ -65,8 +77,8 @@ class PersediaanAwalRepository
     {
         $query = self::getById($persediaan_awal_id);
         foreach ($query->persediaanAwalDetail as $row) {
-            // add persediaan
-            PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)->rollbackPersediaanIn();
+            // rollback persediaan
+            PersediaanRepository::rollbackStaticPersediaanIn($row->persediaan_id, $row->jumlah, 'stock_masuk');
         }
         return $query->persediaanAwalDetail()->delete();
     }
@@ -75,8 +87,8 @@ class PersediaanAwalRepository
     {
         $query = self::getById($persediaan_awal_id);
         foreach ($query->persediaanAwalDetail as $row) {
-            // add persediaan
-            PersediaanRepository::build($query->active_cash, $query->gudang_id, 'stock_awal', $row)->rollbackPersediaanIn();
+            // rollback persediaan
+            PersediaanRepository::rollbackStaticPersediaanIn($row->persediaan_id, $row->jumlah, 'stock_masuk');
         }
         $query->persediaanAwalDetail()->delete();
         return $query->delete();

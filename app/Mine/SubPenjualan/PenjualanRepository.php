@@ -4,6 +4,10 @@ use App\Models\Penjualan\Penjualan;
 
 class PenjualanRepository
 {
+    /**
+     * @param $id
+     * @return Penjualan
+     */
     public static function getById($id)
     {
         return Penjualan::find($id);

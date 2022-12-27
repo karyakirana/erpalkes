@@ -4,7 +4,7 @@ use App\Models\Pembelian\Pembelian;
 
 class PembelianRepository
 {
-    public function getById($id)
+    public static function getById($id)
     {
         return Pembelian::find($id);
     }
@@ -28,7 +28,17 @@ class PembelianRepository
 
     public static function kode()
     {
-        return null;
+        $query = Pembelian::query()
+            ->where('active_cash', session('ClosedCash'))
+            ->latest('kode');
+
+        // check last num
+        if ($query->doesntExist()) {
+            return "0001/PB/" . date('Y');
+        }
+
+        $num = (int)$query->first()->last_num_trans + 1;
+        return sprintf("%04s", $num) . "/PB/" . date('Y');
     }
 
     public static function store(array $data)

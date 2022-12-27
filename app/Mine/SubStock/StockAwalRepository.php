@@ -52,9 +52,7 @@ class StockAwalRepository
         foreach ($persediaanAwal->persediaanAwalDetail as $item) {
             StockRepository::build($stockAwal->active_cash, $stockAwal->gudang_id, 'stock_awal', $item)->addStockIn();
             $stockAwal->stockAwalDetail()->create([
-                'produk_id' => $item->produk_id,
-                'batch' => $item->batch,
-                'tgl_expired' => $item->tgl_expired,
+                'stock_id' => $item->produk_id,
                 'jumlah' => $item->jumlah,
             ]);
         }
@@ -73,7 +71,7 @@ class StockAwalRepository
         foreach ($persediaanAwal->persediaanAwalDetail as $item) {
             StockRepository::build($persediaanAwal->active_cash, $persediaanAwal->gudang_id, 'stock_awal', $item)->addStockIn();
             $stockAwal->stockAwalDetail()->create([
-                'produk_id' => $item->produk_id,
+                'stock_id' => $item->produk_id,
                 'tgl_produksi' => $item->tgl_produksi,
                 'tgl_expired' => $item->tgl_expired,
                 'jumlah' => $item->jumlah,

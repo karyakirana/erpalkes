@@ -14,10 +14,7 @@ class PersediaanAwalDetail extends Model
     protected $table = 'persediaan_awal_detail';
     protected $fillable = [
         'persediaan_awal_id',
-        'produk_id',
-        'is_expired',
-        'batch',
-        'tgl_expired',
+        'persediaan_id',
         'jumlah',
         'harga_dasar',
         'sub_total',

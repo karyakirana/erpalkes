@@ -14,11 +14,10 @@ class PembelianPreorderRepository
         if ($deleted){
             return PembelianPO::withTrashed()
                 ->where('active_cash', session('ClosedCash'))
-                ->latest()
-                ->get();
+                ->latest();
         }
         return PembelianPO::where('active_cash', session('ClosedCash'))
-            ->latest()->get();
+            ->latest();
     }
 
     public static function getAllByActiveCash($activeCash)
@@ -34,11 +33,11 @@ class PembelianPreorderRepository
 
         // check last num
         if ($query->doesntExist()) {
-            return "0001/PB/" . date('Y');
+            return "0001/PB0/" . date('Y');
         }
 
         $num = (int)$query->first()->last_num_trans + 1;
-        return sprintf("%04s", $num) . "/PB/" . date('Y');
+        return sprintf("%04s", $num) . "/PB0/" . date('Y');
     }
 
     public static function store(array $data)

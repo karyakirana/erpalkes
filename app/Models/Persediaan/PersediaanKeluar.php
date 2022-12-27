@@ -2,6 +2,7 @@
 
 namespace App\Models\Persediaan;
 
+use App\Models\KodeTrait;
 use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ class PersediaanKeluar extends Model
 {
     use HasFactory;
     use UsersModelTrait;
+    use KodeTrait;
 
     protected $table = 'persediaan_keluar';
     protected $fillable = [
@@ -23,7 +25,7 @@ class PersediaanKeluar extends Model
         'keterangan'
     ];
 
-    public function persediaanKeluar()
+    public function persediaanKeluarDetail()
     {
         return $this->hasMany(PersediaanKeluarDetail::class, 'perseidaan_keluar_id');
     }

@@ -14,11 +14,11 @@ class PersediaanMasukDetail extends Model
     protected $table = 'persediaan_masuk_detail';
     protected $fillable = [
         'persediaan_masuk_id',
-        'produk_id',
+        'persediaan_id',
         'batch',
         'tgl_expired',
         'jumlah',
-        'harga_dasar',
+        'harga',
         'sub_total'
     ];
 
