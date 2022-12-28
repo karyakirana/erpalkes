@@ -9,6 +9,11 @@ class PenjualanPreorderRepository
         return PenjualanPreorder::find($id);
     }
 
+    public static function datatables()
+    {
+        return PenjualanPreorder::query();
+    }
+
     public static function getByPenjualanQuotation()
     {
         //

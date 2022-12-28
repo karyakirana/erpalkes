@@ -9,6 +9,15 @@ class PembelianRepository
         return Pembelian::find($id);
     }
 
+    public static function datatables($active_cash = true)
+    {
+        $query = Pembelian::query();
+        if ($active_cash){
+            $query = $query->where('active_cash', session('ClosedCash'));
+        }
+        return Pembelian::query();
+    }
+
     public static function getAllCurrentActiveCash($deleted = false)
     {
         if ($deleted){
