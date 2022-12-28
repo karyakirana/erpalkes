@@ -16,6 +16,7 @@ class PersediaanAwalForm extends Component
         'setProduk'
     ];
     public $persediaan_awal_id;
+    public $tanggal_persediaan_awal;
     public $kondisi;
     public $gudang_id;
     public $user_id;
@@ -44,7 +45,6 @@ class PersediaanAwalForm extends Component
         $this->user_id = \Auth::id();
         if ($persediaan_awal_id){
             $this->mode = 'update';
-
             $data = (new PersediaanAwalService())->handleEdit($persediaan_awal_id);
             $this->persediaan_awal_id = $data->id;
             $this->kondisi = $data->kondisi;
