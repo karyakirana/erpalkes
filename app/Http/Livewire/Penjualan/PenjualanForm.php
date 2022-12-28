@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Penjualan;
 
 use App\Mine\SubPenjualan\PenjualanRepository;
+use App\Models\Master\Produk;
 use Livewire\Component;
 
 class PenjualanForm extends Component
@@ -26,9 +27,19 @@ class PenjualanForm extends Component
     public $keterangan;
     public $print;
 
+    public $mode = 'create';
+
+    public $dataDetail = [];
+    public $produk_id, $produk_nama, $harga;
+    public $kemasan, $satuan_jual;
+    public $jumlah, $diskon, $sub_total;
+    public $dataKemasan = [];
+
     public $update = false;
 
-    protected $listeners = [];
+    protected $listeners = [
+        'setProduk'
+    ];
 
     protected $rules = [
         'customer_id'=>'required',
@@ -40,7 +51,7 @@ class PenjualanForm extends Component
     {
         if ($penjualan_id){
             $this->update = true;
-            $penjualan = PenjualanRepository::find($penjualan_id);
+            $penjualan = PenjualanRepository::getById($penjualan_id);
             $this->kode = $penjualan->kode;
             $this->customer_id = $penjualan->customer_id;
             $this->penjualan_quotation_id = $penjualan->penjualan_quotation_id;
@@ -58,16 +69,14 @@ class PenjualanForm extends Component
         }
     }
 
-    protected function kode()
+    public function setProduk(Produk $produk)
     {
-        $penjualan = PenjualanRepository::latest('kode')->first();
-        if (!$penjualan){
-            $num = 1;
-        } else {
-            $lastNum = (int) $penjualan->last_num_master;
-            $num = $lastNum + 1;
-        }
-        return "E".sprintf("%05s", $num);
+        $this->produk_id = $produk->id;
+        $this->produk_nama = $produk->nama_produk."\n"
+            .$produk->produkSubKategori->nama_sub_kategori."\n";
+        $this->satuan_jual = $produk->satuan_jual;
+        $this->harga = $produk->harga;
+        $this->dataKemasan = $produk->produkKemasan;
     }
 
     public function store()

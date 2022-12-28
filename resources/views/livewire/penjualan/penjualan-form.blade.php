@@ -45,10 +45,19 @@
 
     <div class="col-lg-4">
         <x-card.card-3 title="Tambah Produk" class="mt-5" data-kt-sticky="true" data-kt-sticky-name="quotation" data-kt-sticky-offset="{default: false, lg: '100px'}" data-kt-sticky-width="{lg: '300px', lg: '410px'}" data-kt-sticky-left="auto" data-kt-sticky-top="150px"  data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
+            <x-input.group-vertical label="Produk" name="produk_nama">
+                <x-input.textarea wire:model.defer="produk_nama" data-bs-toggle="modal" data-bs-target="#modalProdukSet"/>
+            </x-input.group-vertical>
+            <x-input.group-vertical label="Kemasan" name="kemasan">
+                <x-input.select wire:model.defer="kemasan">
+                    <option>Dipilih</option>
+                    @forelse($dataKemasan as $row)
+                        <option value="{{$row->kemasan}}">{{$row->kemasan}}</option>
+                    @empty
+                    @endforelse
+                </x-input.select>
+            </x-input.group-vertical>
             <div class="row">
-                <x-input.group-vertical label="Produk" name="produk_id">
-                    <x-input.text wire:model.defer="produk_id" />
-                </x-input.group-vertical>
                 <div class="col-5">
                     <x-input.group-vertical label="Jumlah" name="jumlah">
                         <x-input.text wire:model.defer="jumlah" />
@@ -98,6 +107,6 @@
             {{--            </x-slot:footer>--}}
         </x-card.card-3>
     </div>
-
+    <x-datatables.produk-set />
 </div>
 
