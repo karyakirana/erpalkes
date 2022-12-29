@@ -98,7 +98,7 @@ class PersediaanAwalForm extends Component
             'produk_id' => $this->produk_id,
             'produk_nama' => $this->produk_nama,
             'batch' => $this->batch,
-            'tgl-expired' => $this->tgl_expired,
+            'tgl_expired' => $this->tgl_expired,
             'harga' => $this->harga,
             'jumlah' => $this->jumlah,
             'sub_total' => $this->sub_total
@@ -113,7 +113,7 @@ class PersediaanAwalForm extends Component
         $this->produk_id = $this->dataDetail['produk_id'];
         $this->produk_nama = $this->dataDetail['produk_nama'];
         $this->batch = $this->dataDetail['batch'];
-        $this->tgl_expired = $this->dataDetail['tgl-expired'];
+        $this->tgl_expired = $this->dataDetail['tgl_expired'];
         $this->jumlah = $this->dataDetail['jumlah'];
         $this->sub_total = $this->dataDetail['sub_total'];
     }
@@ -124,7 +124,7 @@ class PersediaanAwalForm extends Component
         $this->dataDetail['produk_id'] = $this->produk_id;
         $this->dataDetail['produk_nama'] = $this->produk_nama;
         $this->dataDetail['batch'] = $this->batch;
-        $this->dataDetail['tgl-expired'] = $this->tgl_expired;
+        $this->dataDetail['tgl_expired'] = $this->tgl_expired;
         $this->dataDetail['jumlah'] = $this->jumlah;
         $this->dataDetail['sub_total'] = $this->sub_total;
         $this->resetForm();

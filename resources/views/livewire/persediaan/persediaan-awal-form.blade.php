@@ -20,7 +20,7 @@
                 <div class="row mb-4">
                     <div class="col-6">
                         <x-input.group-vertical class="mb-4" label="Exp" name="tgl_expired">
-                            <x-input.single-daterange id="tgl_expired" />
+                            <x-input.single-daterange wire:model="tgl_expired" />
                         </x-input.group-vertical>
                     </div>
                     <div class="col-6">
@@ -95,7 +95,7 @@
                                         @if($row['tgl_expired'])
                                             <br> {{$row['tgl_expired']}}
                                         @endif
-                                        <br> {{$row->harga}}
+                                        <br> {{$row['harga']}}
                                     </td>
                                     <td>
                                         {{$row['jumlah']}}

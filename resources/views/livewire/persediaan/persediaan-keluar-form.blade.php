@@ -95,7 +95,7 @@
                                     @if($row['tgl_expired'])
                                         <br> {{$row['tgl_expired']}}
                                     @endif
-                                    <br> {{$row->harga}}
+                                    <br> {{$row['harga']}}
                                 </td>
                                 <td>
                                     {{$row['jumlah']}}
