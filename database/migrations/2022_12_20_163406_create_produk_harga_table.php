@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('produk_id');
             $table->bigInteger('harga_diskon');
-            $table->float('persen_diskon', 3);
+            $table->integer('persen_diskon');
             $table->timestamps();
         });
     }

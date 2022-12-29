@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('produk_sub_kategori_id');
             $table->string('kode', 10);
             $table->string('status', 20);
-            $table->string('nama_produk', 50);
+            $table->string('nama_produk', 100);
             $table->text('tipe');
             $table->string('merk', 50);
             $table->string('satuan_beli', 20);
