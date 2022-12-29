@@ -58,39 +58,39 @@
                 </x-input.select>
             </x-input.group-vertical>
             <div class="row">
-                <div class="col-5">
+                <div class="col-4">
                     <x-input.group-vertical label="Jumlah" name="jumlah">
                         <x-input.text wire:model.defer="jumlah" />
                     </x-input.group-vertical>
                 </div>
-                <div class="col-7">
-                    <x-input.group-vertical label="Harga" name="harga">
+                <div class="col-8">
+                    <x-input.group-vertical label="Rp." name="harga">
                         <div class="input-group">
                             <span class="input-group-text">Rp.</span>
                             <x-input.text wire:model.defer="harga" />
                         </div>
                     </x-input.group-vertical>
                 </div>
-                <div class="col-5">
+                <div class="col-4">
                     <x-input.group-vertical label="Diskon" name="diskon">
                         <div class="input-group">
-                            <x-input.text wire:model.defer="diskon" />
+                            <x-input.text wire:model="diskon" />
                             <span class="input-group-text">%</span>
                         </div>
                     </x-input.group-vertical>
                 </div>
-                <div class="col-7">
-                    <x-input.group-vertical label="Harga Diskon" name="harga">
+                <div class="col-8">
+                    <x-input.group-vertical label="Diskon Rp." name="harga">
                         <div class="input-group">
                             <span class="input-group-text">Rp.</span>
-                            <x-input.text wire:model.defer="harga" />
+                            <x-input.text wire:model="harga_setelah_diskon" />
                         </div>
                     </x-input.group-vertical>
                 </div>
                 <x-input.group-vertical label="Sub Total" name="sub_total">
                     <div class="input-group">
                         <span class="input-group-text">Rp.</span>
-                        <x-input.text wire:model.defer="sub_total" />
+                        <x-input.text wire:model="sub_total" />
                     </div>
                 </x-input.group-vertical>
                 <div class="text-center pb-4 pt-5">

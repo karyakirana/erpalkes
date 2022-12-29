@@ -30,9 +30,9 @@ class PenjualanForm extends Component
     public $mode = 'create';
 
     public $dataDetail = [];
-    public $produk_id, $produk_nama, $harga;
+    public $produk_id, $produk_nama, $harga, $harga_setelah_diskon;
     public $kemasan, $satuan_jual;
-    public $jumlah, $diskon, $sub_total;
+    public $jumlah, $diskon, $sub_total, $sub_total_rupiah;
     public $dataKemasan = [];
 
     public $update = false;
@@ -118,6 +118,16 @@ class PenjualanForm extends Component
         session()->flash('message', 'Data '.$this->customer_id.' sudah diupdate.');
         return redirect()->to(route('penjualan'));
     }
+
+    public function updatedDiskon()
+    {
+        $this->harga_setelah_diskon = (int) $this->harga-($this->harga * (int) $this->diskon/100);
+    }
+
+//    public function setSubTotal()
+//    {
+//        $this->sub_total = (int) $this->jumlah * (int) $this->harga_setelah_diskon;
+//     }
 
     public function render()
     {
