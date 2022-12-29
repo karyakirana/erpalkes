@@ -52,3 +52,10 @@ if (!function_exists('tanggalan_database_format')){
         return Carbon::createFromFormat($format, $tanggal)->format('Y-m-d') ?? null;
     }
 }
+
+if (!function_exists('rupiah_format')){
+    function rupiah_format($number): ?string
+    {
+        return number_format($number, 0, ",", ".") ?? null;
+    }
+}

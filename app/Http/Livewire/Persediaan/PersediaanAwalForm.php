@@ -37,6 +37,7 @@ class PersediaanAwalForm extends Component
     public $sub_total;
     public function __construct($id = null)
     {
+        $this->tanggal_persediaan_awal = tanggalan_format(now('ASIA/JAKARTA'));
         parent::__construct($id);
     }
 
@@ -67,7 +68,7 @@ class PersediaanAwalForm extends Component
         }
     }
 
-    public function hitungSubTotal()
+    protected function hitungSubTotal()
     {
         $this->sub_total = (int) $this->harga * (int) $this->jumlah;
     }

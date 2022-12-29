@@ -66,7 +66,7 @@
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <x-input.group-vertical label="Tanggal" name="tgl_persediaan">
-                            <x-input.single-daterange id="tgl_persediaan_awal" />
+                            <x-input.single-daterange id="tgl_persediaan_awal" wire:model.defer="tanggal_persediaan_awal" />
                         </x-input.group-vertical>
                     </div>
                     <div class="col-md-6">
@@ -136,7 +136,7 @@
     @push('scripts')
         <script>
             $('#tgl_persediaan_awal').on('change', function (e) {
-                @this.tgl_persediaan_awal = e.target.value;
+                @this.tanggal_persediaan_awal = e.target.value;
             })
             $('#tgl_expired').on('change', function (e) {
                 @this.tgl_expired = e.target.value;

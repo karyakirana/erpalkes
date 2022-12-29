@@ -11,5 +11,6 @@ trait ProdukSetTrait
         $this->produk_id = $produk->id;
         $this->produk_nama = $produk->nama_produk."\n"
             .$produk->produkSubKategori->nama_sub_kategori."\n";
+        $this->emit('modalProdukSetHide');
     }
 }
