@@ -63,6 +63,7 @@ class PersediaanRepository
     {
         return Persediaan::create([
             'active_cash' => $this->active_cash,
+            'kondisi' => $this->kondisi,
             'gudang_id' => $this->gudang_id,
             'produk_id' => $this->produk_id,
             'batch' => $this->batch,

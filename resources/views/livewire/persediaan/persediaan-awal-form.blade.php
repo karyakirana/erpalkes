@@ -1,10 +1,30 @@
 <div>
+    @if($errors->all())
+        <x-alert.danger>
+            <ul>
+                @foreach($errors->all() as $messages)
+                    <li>{{$messages}}</li>
+                @endforeach
+            </ul>
+        </x-alert.danger>
+    @endif
+    @if(session()->has('message'))
+        <x-alert.danger>
+            {{session('message')}}
+        </x-alert.danger>
+    @endif
     <x-card.standart class="mt-5" title="Form Persediaan Awal">
         <div class="row">
             <div class="col-md-4">
                 <x-input.group-vertical class="mb-4" label="Produk" name="produk_nama">
                     <x-input.textarea wire:model.defer="produk_nama" data-bs-toggle="modal" data-bs-target="#modalProdukSet" readonly/>
                 </x-input.group-vertical>
+                <div class="form-check form-switch form-check-custom form-check-solid mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="flexSwitchDefault" wire:model="is_expired"/>
+                    <label class="form-check-label" for="flexSwitchDefault">
+                        Produk Expired
+                    </label>
+                </div>
                 <div class="row">
                     <div class="col-6">
                         <x-input.group-vertical class="mb-4" label="Harga" name="harga">
@@ -20,7 +40,7 @@
                 <div class="row mb-4">
                     <div class="col-6">
                         <x-input.group-vertical class="mb-4" label="Exp" name="tgl_expired">
-                            <x-input.single-daterange wire:model="tgl_expired" />
+                            <x-input.single-daterange wire:model="tgl_expired" id="tgl_expired" />
                         </x-input.group-vertical>
                     </div>
                     <div class="col-6">
@@ -138,6 +158,7 @@
             $('#tgl_persediaan_awal').on('change', function (e) {
                 @this.tanggal_persediaan_awal = e.target.value;
             })
+
             $('#tgl_expired').on('change', function (e) {
                 @this.tgl_expired = e.target.value;
             })

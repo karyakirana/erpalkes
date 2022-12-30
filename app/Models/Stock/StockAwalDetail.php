@@ -11,6 +11,7 @@ class StockAwalDetail extends Model
     use HasFactory;
 
     protected $table = 'stock_awal_detail';
+    public $timestamps = false;
     protected $fillable = [
         'stock_awal_id',
         'stock_id',

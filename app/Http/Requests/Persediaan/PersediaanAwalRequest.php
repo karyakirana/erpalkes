@@ -25,12 +25,14 @@ class PersediaanAwalRequest extends FormRequest
     {
         return [
             'persediaan_awal_id' => 'nullable',
+            'tgl_persediaan_awal' => 'required|date:d-M-Y',
             'kondisi' => 'required',
             'gudang_id' => 'required',
             'user_id' => 'required',
             'total_barang' => 'required',
             'total_nominal' => 'required',
-            'keterangan' => 'nullable'
+            'keterangan' => 'nullable',
+            'dataDetail' => 'required'
         ];
     }
 }

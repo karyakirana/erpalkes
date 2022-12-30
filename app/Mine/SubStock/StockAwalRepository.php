@@ -44,15 +44,18 @@ class StockAwalRepository
     {
         $data['kode'] = self::kode();
         $stockAwal = $persediaanAwal->stockAwal()->create([
+            'active_cash' => $persediaanAwal->active_cash,
             'kode' => self::kode(),
+            'kondisi' => $persediaanAwal->kondisi,
+            'gudang_id' => $persediaanAwal->gudang_id,
             'user_id' => $persediaanAwal->user_id,
             'total_barang' => $persediaanAwal->total_barang,
             'keterangan' => $persediaanAwal->keterangan
         ]);
         foreach ($persediaanAwal->persediaanAwalDetail as $item) {
-            StockRepository::build($stockAwal->active_cash, $stockAwal->gudang_id, 'stock_awal', $item)->addStockIn();
+            StockRepository::build($stockAwal->active_cash, $persediaanAwal->kondisi, $stockAwal->gudang_id, 'stock_awal', $item)->addStockIn();
             $stockAwal->stockAwalDetail()->create([
-                'stock_id' => $item->produk_id,
+                'stock_id' => $item->persediaan->produk_id,
                 'jumlah' => $item->jumlah,
             ]);
         }
@@ -63,15 +66,17 @@ class StockAwalRepository
     {
         $stockAwal = $persediaanAwal->stockAwal();
         $stockAwal->update([
+            'kondisi' => $persediaanAwal->kondisi,
+            'gudang_id' => $persediaanAwal->gudang_id,
             'user_id' => $persediaanAwal->user_id,
             'total_barang' => $persediaanAwal->total_barang,
             'keterangan' => $persediaanAwal->keterangan
         ]);
         $stockAwal = $persediaanAwal->stockAwal;
         foreach ($persediaanAwal->persediaanAwalDetail as $item) {
-            StockRepository::build($persediaanAwal->active_cash, $persediaanAwal->gudang_id, 'stock_awal', $item)->addStockIn();
+            StockRepository::build($persediaanAwal->active_cash, $persediaanAwal->kondisi, $persediaanAwal->gudang_id, 'stock_awal', $item)->addStockIn();
             $stockAwal->stockAwalDetail()->create([
-                'stock_id' => $item->produk_id,
+                'stock_id' => $item->persediaan->produk_id,
                 'tgl_produksi' => $item->tgl_produksi,
                 'tgl_expired' => $item->tgl_expired,
                 'jumlah' => $item->jumlah,

@@ -28,7 +28,7 @@ class StockRepository
         }
 
         if (is_object($dataDetail)){
-            $this->produk_id = $dataDetail->produk_id;
+            $this->produk_id = $dataDetail->produk_id ?? $dataDetail->persediaan->produk_id;
             $this->batch = $dataDetail->batch;
             $this->tgl_expired = $dataDetail->tgl_expired;
             $this->jumlah = $dataDetail->jumlah;
@@ -68,6 +68,7 @@ class StockRepository
         return Stock::create([
             'active_cash' => $this->active_cash,
             'gudang_id' => $this->gudang_id,
+            'kondisi' => $this->kondisi,
             'produk_id' => $this->produk_id,
             'batch' => $this->batch,
             'tgl_expired' => $this->tgl_expired,

@@ -1,5 +1,5 @@
 <x-livewire-tables::bs5.table.cell width="30%">
-    {{$row->produk->nama}} <br>
+    {{$row->produk->nama_produk}} <br>
     {{$row->tgl_expired}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell width="15%">

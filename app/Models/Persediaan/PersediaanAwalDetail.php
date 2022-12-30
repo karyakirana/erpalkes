@@ -12,16 +12,22 @@ class PersediaanAwalDetail extends Model
     use ProdukModelTrait;
 
     protected $table = 'persediaan_awal_detail';
+    public $timestamps = false;
     protected $fillable = [
         'persediaan_awal_id',
         'persediaan_id',
         'jumlah',
-        'harga_dasar',
+        'harga',
         'sub_total',
     ];
 
     public function persediaanAwal()
     {
         return $this->belongsTo(PersediaanAwal::class, 'persediaan_awal_id');
+    }
+
+    public function persediaan()
+    {
+        return $this->belongsTo(Persediaan::class, 'persediaan_id');
     }
 }

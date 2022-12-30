@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Persediaan;
 
 use App\Http\Livewire\Master\ProdukSetTrait;
 use App\Http\Requests\Persediaan\PersediaanAwalRequest;
+use App\Http\Requests\PersediaanAwalDetailRequest;
 use App\Mine\SubMaster\GudangRepository;
 use App\Mine\SubPersediaan\PersediaanAwalService;
 use Livewire\Component;
@@ -16,7 +17,7 @@ class PersediaanAwalForm extends Component
         'setProduk'
     ];
     public $persediaan_awal_id;
-    public $tanggal_persediaan_awal;
+    public $tgl_persediaan_awal;
     public $kondisi;
     public $gudang_id;
     public $user_id;
@@ -30,6 +31,7 @@ class PersediaanAwalForm extends Component
     public $dataDetail = [];
     public $index;
     public $produk_id, $produk_nama;
+    public $is_expired = false;
     public $batch;
     public $tgl_expired;
     public $harga;
@@ -37,7 +39,8 @@ class PersediaanAwalForm extends Component
     public $sub_total;
     public function __construct($id = null)
     {
-        $this->tanggal_persediaan_awal = tanggalan_format(now('ASIA/JAKARTA'));
+        $this->tgl_persediaan_awal = tanggalan_format(now('ASIA/JAKARTA'));
+        $this->tgl_expired = tanggalan_format(now('ASIA/JAKARTA'));
         parent::__construct($id);
     }
 
@@ -94,11 +97,19 @@ class PersediaanAwalForm extends Component
 
     public function addLine()
     {
+        $this->validate([
+            'produk_nama' => 'required',
+            'batch' => 'nullable',
+            'tgl_expired' => ($this->is_expired) ? 'required' : 'nullable',
+            'harga' => 'required|numeric',
+            'jumlah' => 'required|numeric',
+            'sub_total' => 'required|numeric'
+        ]);
         $this->dataDetail[] = [
             'produk_id' => $this->produk_id,
             'produk_nama' => $this->produk_nama,
-            'batch' => $this->batch,
-            'tgl_expired' => $this->tgl_expired,
+            'batch' => ($this->is_expired) ? $this->batch : null,
+            'tgl_expired' => ($this->is_expired) ? $this->tgl_expired : null,
             'harga' => $this->harga,
             'jumlah' => $this->jumlah,
             'sub_total' => $this->sub_total
@@ -112,6 +123,7 @@ class PersediaanAwalForm extends Component
         $this->index = $index;
         $this->produk_id = $this->dataDetail['produk_id'];
         $this->produk_nama = $this->dataDetail['produk_nama'];
+        $this->is_expired = (is_null($this->dataDetail['tgl_expired']));
         $this->batch = $this->dataDetail['batch'];
         $this->tgl_expired = $this->dataDetail['tgl_expired'];
         $this->jumlah = $this->dataDetail['jumlah'];
@@ -120,11 +132,19 @@ class PersediaanAwalForm extends Component
 
     public function updateLine()
     {
+        $this->validate([
+            'produk_nama' => 'required',
+            'batch' => 'nullable',
+            'tgl_expired' => ($this->is_expired) ? 'required' : 'nullable',
+            'harga' => 'required|numeric',
+            'jumlah' => 'required|numeric',
+            'sub_total' => 'required|numeric'
+        ]);
         $index = $this->index;
         $this->dataDetail['produk_id'] = $this->produk_id;
         $this->dataDetail['produk_nama'] = $this->produk_nama;
-        $this->dataDetail['batch'] = $this->batch;
-        $this->dataDetail['tgl_expired'] = $this->tgl_expired;
+        $this->dataDetail['batch'] = ($this->is_expired) ? $this->batch : null;
+        $this->dataDetail['tgl_expired'] = ($this->is_expired) ? $this->tgl_expired : null;
         $this->dataDetail['jumlah'] = $this->jumlah;
         $this->dataDetail['sub_total'] = $this->sub_total;
         $this->resetForm();
@@ -141,14 +161,35 @@ class PersediaanAwalForm extends Component
         return (new PersediaanAwalRequest())->rules();
     }
 
+    public function messages()
+    {
+        return [
+            'produk_nama.required' => 'Produk harus diisi.',
+            'dataDetail.required' => 'Data Produk harus diisi.'
+        ];
+    }
+
+    protected function total()
+    {
+        $this->total_barang = array_sum(array_column($this->dataDetail, 'jumlah'));
+        $this->total_nominal = array_sum(array_column($this->dataDetail, 'sub_total'));
+    }
+
     public function store()
     {
+        $this->total();
         $data = $this->validate();
-        (new PersediaanAwalService())->handleStore($data);
+        $store = (new PersediaanAwalService())->handleStore($data);
+        if ($store->status){
+            return redirect()->route('persediaan.awal');
+        }
+        session()->flash('message', $store->message);
+        return null;
     }
 
     public function update()
     {
+        $this->total();
         $data = $this->validate();
         (new PersediaanAwalService())->handleUpdate($data);
     }

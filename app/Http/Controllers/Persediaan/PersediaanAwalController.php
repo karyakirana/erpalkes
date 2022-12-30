@@ -9,6 +9,6 @@ class PersediaanAwalController extends Controller
 {
     public function index()
     {
-        return view();
+        return view('pages.persediaan.persediaan-awal-index');
     }
 }
