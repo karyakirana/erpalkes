@@ -1,5 +1,5 @@
 @props(['head'=>null, 'footer'=>null])
-<table {{$attributes->class('table align-middle table-striped table-row-bordered fs-6 gy-5 gs-7')}}>
+<table {{$attributes->class('table align-middle table-row-bordered fs-6 gy-5 gs-7')}}>
     <thead class="text-center fw-bold ">
         {{$head}}
     </thead>
@@ -7,8 +7,8 @@
         {{$slot}}
     </tbody >
     @if($footer)
-        <tfooter >
+        <tfoot class="border">
         {{$footer}}
-        </tfooter>
+        </tfoot>
     @endif
 </table>
