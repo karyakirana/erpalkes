@@ -202,18 +202,18 @@
                             <!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-                                <span class="menu-title">Users</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
+{{--                        <!--begin:Menu item-->--}}
+{{--                        <div class="menu-item">--}}
+{{--                            <!--begin:Menu link-->--}}
+{{--                            <a class="menu-link" href="#">--}}
+{{--													<span class="menu-bullet">--}}
+{{--														<span class="bullet bullet-dot"></span>--}}
+{{--													</span>--}}
+{{--                                <span class="menu-title">Users</span>--}}
+{{--                            </a>--}}
+{{--                            <!--end:Menu link-->--}}
+{{--                        </div>--}}
+{{--                        <!--end:Menu item-->--}}
                     </div>
                     <!--end:Menu sub-->
                 </div>
@@ -248,6 +248,19 @@
                     <!--end:Menu link-->
                     <!--begin:Menu sub-->
                     <div class="menu-sub menu-sub-accordion">
+
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{url('penjualan')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+                                <span class="menu-title">Penjualan</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
@@ -256,6 +269,18 @@
 														<span class="bullet bullet-dot"></span>
 													</span>
                                 <span class="menu-title">Customer</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{url('penjualan/po')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+                                <span class="menu-title">Pre Order</span>
                             </a>
                             <!--end:Menu link-->
                         </div>
@@ -312,30 +337,30 @@
                             <!--end:Menu sub-->
                         </div>
                         <!--end:Menu item-->
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-                                <span class="menu-title">Payment</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-                                <span class="menu-title">Retur</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
+{{--                        <!--begin:Menu item-->--}}
+{{--                        <div class="menu-item">--}}
+{{--                            <!--begin:Menu link-->--}}
+{{--                            <a class="menu-link" href="#">--}}
+{{--													<span class="menu-bullet">--}}
+{{--														<span class="bullet bullet-dot"></span>--}}
+{{--													</span>--}}
+{{--                                <span class="menu-title">Payment</span>--}}
+{{--                            </a>--}}
+{{--                            <!--end:Menu link-->--}}
+{{--                        </div>--}}
+{{--                        <!--end:Menu item-->--}}
+{{--                        <!--begin:Menu item-->--}}
+{{--                        <div class="menu-item">--}}
+{{--                            <!--begin:Menu link-->--}}
+{{--                            <a class="menu-link" href="#">--}}
+{{--													<span class="menu-bullet">--}}
+{{--														<span class="bullet bullet-dot"></span>--}}
+{{--													</span>--}}
+{{--                                <span class="menu-title">Retur</span>--}}
+{{--                            </a>--}}
+{{--                            <!--end:Menu link-->--}}
+{{--                        </div>--}}
+{{--                        <!--end:Menu item-->--}}
                     </div>
                     <!--end:Menu sub-->
                 </div>
@@ -372,7 +397,19 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('pembelian')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+                                <span class="menu-title">Pembelian</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{url('master/supplier')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -384,11 +421,23 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('pembelian/po')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
                                 <span class="menu-title">Pre Order</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{url('pembelian/quotation')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+                                <span class="menu-title">Quotation</span>
                             </a>
                             <!--end:Menu link-->
                         </div>
@@ -409,7 +458,7 @@
                                 <!--begin:Menu item-->
                                 <div class="menu-item">
                                     <!--begin:Menu link-->
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link" href="{{url('pembelian')}}">
 															<span class="menu-bullet">
 																<span class="bullet bullet-dot"></span>
 															</span>
@@ -440,6 +489,83 @@
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
+                        <span class="menu-heading fw-bold text-uppercase fs-7">Persediaan</span>
+                    </div>
+                    <!--end:Menu content-->
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+											<span class="menu-icon">
+												<!--begin::Svg Icon | path: icons/duotune/finance/fin001.svg-->
+												<span class="svg-icon svg-icon-2">
+													<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path opacity="0.3" d="M8.9 21L7.19999 22.6999C6.79999 23.0999 6.2 23.0999 5.8 22.6999L4.1 21H8.9ZM4 16.0999L2.3 17.8C1.9 18.2 1.9 18.7999 2.3 19.1999L4 20.9V16.0999ZM19.3 9.1999L15.8 5.6999C15.4 5.2999 14.8 5.2999 14.4 5.6999L9 11.0999V21L19.3 10.6999C19.7 10.2999 19.7 9.5999 19.3 9.1999Z" fill="currentColor" />
+														<path d="M21 15V20C21 20.6 20.6 21 20 21H11.8L18.8 14H20C20.6 14 21 14.4 21 15ZM10 21V4C10 3.4 9.6 3 9 3H4C3.4 3 3 3.4 3 4V21C3 21.6 3.4 22 4 22H9C9.6 22 10 21.6 10 21ZM7.5 18.5C7.5 19.1 7.1 19.5 6.5 19.5C5.9 19.5 5.5 19.1 5.5 18.5C5.5 17.9 5.9 17.5 6.5 17.5C7.1 17.5 7.5 17.9 7.5 18.5Z" fill="currentColor" />
+													</svg>
+												</span>
+                                                <!--end::Svg Icon-->
+											</span>
+											<span class="menu-title">Persediaan</span>
+											<span class="menu-arrow"></span>
+										</span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{url('persediaan')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+                                <span class="menu-title">Persediaan</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{url('persediaan/awal')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+                                <span class="menu-title">Persediaan Awal</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{url('persediaan/masuk')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+                                <span class="menu-title">Persediaan Masuk</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{url('persediaan/keluar')}}">
+													<span class="menu-bullet">
+														<span class="bullet bullet-dot"></span>
+													</span>
+                                <span class="menu-title">Persediaan Keluar</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                    </div>
+                    <!--end:Menu sub-->
+                </div>
+                <div class="menu-item pt-5">
+                    <!--begin:Menu content-->
+                    <div class="menu-content">
                         <span class="menu-heading fw-bold text-uppercase fs-7">Stock</span>
                     </div>
                     <!--end:Menu content-->
@@ -467,11 +593,11 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('stock')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
-                                <span class="menu-title">Barang</span>
+                                <span class="menu-title">Stock</span>
                             </a>
                             <!--end:Menu link-->
                         </div>
@@ -479,7 +605,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('stock/stockawal')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -491,7 +617,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('stock/stockmasuk')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -503,7 +629,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('stock/stockkeluar')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -515,11 +641,11 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('stock/stocksaldo')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
-                                <span class="menu-title">Mutasi Stock</span>
+                                <span class="menu-title">Stock Saldo</span>
                             </a>
                             <!--end:Menu link-->
                         </div>
@@ -527,11 +653,11 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="#">
+                            <a class="menu-link" href="{{url('master/gudang')}}">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
-                                <span class="menu-title">Stock Rusak</span>
+                                <span class="menu-title">Gudang</span>
                             </a>
                             <!--end:Menu link-->
                         </div>
