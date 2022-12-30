@@ -51,6 +51,7 @@ class PersediaanAwalForm extends Component
             $this->mode = 'update';
             $data = (new PersediaanAwalService())->handleEdit($persediaan_awal_id);
             $this->persediaan_awal_id = $data->id;
+            $this->tgl_persediaan_awal = $data->tgl_persediaan_awal;
             $this->kondisi = $data->kondisi;
             $this->gudang_id = $data->gudang_id;
             $this->total_barang = $data->total_barang;
@@ -59,8 +60,8 @@ class PersediaanAwalForm extends Component
 
             foreach ($data->persediaanAwalDetail as $row){
                 $this->dataDetail[] = [
-                    'produk_id' => $row->produk_id,
-                    'produk_nama' => $row->produk->nama_produk,
+                    'produk_id' => $row->persediaan->produk_id,
+                    'produk_nama' => $row->persediaan->produk->nama_produk,
                     'batch' => $row->batch,
                     'tgl_expired' => $row->tgl_expired,
                     'jumlah' => $row->jumlah,
@@ -119,15 +120,17 @@ class PersediaanAwalForm extends Component
 
     public function editLine($index)
     {
+        //dd(is_null($this->dataDetail[$index]['tgl_expired']));
         $this->update = true;
         $this->index = $index;
-        $this->produk_id = $this->dataDetail['produk_id'];
-        $this->produk_nama = $this->dataDetail['produk_nama'];
-        $this->is_expired = (is_null($this->dataDetail['tgl_expired']));
-        $this->batch = $this->dataDetail['batch'];
-        $this->tgl_expired = $this->dataDetail['tgl_expired'];
-        $this->jumlah = $this->dataDetail['jumlah'];
-        $this->sub_total = $this->dataDetail['sub_total'];
+        $this->produk_id = $this->dataDetail[$index]['produk_id'];
+        $this->produk_nama = $this->dataDetail[$index]['produk_nama'];
+        $this->is_expired = (!is_null($this->dataDetail[$index]['tgl_expired']));
+        $this->batch = $this->dataDetail[$index]['batch'];
+        $this->tgl_expired = $this->dataDetail[$index]['tgl_expired'];
+        $this->harga = $this->dataDetail[$index]['harga'];
+        $this->jumlah = $this->dataDetail[$index]['jumlah'];
+        $this->sub_total = $this->dataDetail[$index]['sub_total'];
     }
 
     public function updateLine()
@@ -141,12 +144,12 @@ class PersediaanAwalForm extends Component
             'sub_total' => 'required|numeric'
         ]);
         $index = $this->index;
-        $this->dataDetail['produk_id'] = $this->produk_id;
-        $this->dataDetail['produk_nama'] = $this->produk_nama;
-        $this->dataDetail['batch'] = ($this->is_expired) ? $this->batch : null;
-        $this->dataDetail['tgl_expired'] = ($this->is_expired) ? $this->tgl_expired : null;
-        $this->dataDetail['jumlah'] = $this->jumlah;
-        $this->dataDetail['sub_total'] = $this->sub_total;
+        $this->dataDetail[$index]['produk_id'] = $this->produk_id;
+        $this->dataDetail[$index]['produk_nama'] = $this->produk_nama;
+        $this->dataDetail[$index]['batch'] = ($this->is_expired) ? $this->batch : null;
+        $this->dataDetail[$index]['tgl_expired'] = ($this->is_expired) ? $this->tgl_expired : null;
+        $this->dataDetail[$index]['jumlah'] = $this->jumlah;
+        $this->dataDetail[$index]['sub_total'] = $this->sub_total;
         $this->resetForm();
     }
 
@@ -191,7 +194,12 @@ class PersediaanAwalForm extends Component
     {
         $this->total();
         $data = $this->validate();
-        (new PersediaanAwalService())->handleUpdate($data);
+        $store = (new PersediaanAwalService())->handleUpdate($data);
+        if ($store->status){
+            return redirect()->route('persediaan.awal');
+        }
+        session()->flash('message', $store->message);
+        return null;
     }
 
     public function render()

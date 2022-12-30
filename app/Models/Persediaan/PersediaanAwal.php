@@ -3,6 +3,7 @@
 namespace App\Models\Persediaan;
 
 use App\Models\KodeTrait;
+use App\Models\Master\Gudang;
 use App\Models\Stock\StockAwal;
 use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -34,6 +35,11 @@ class PersediaanAwal extends Model
             get: fn($value) => tanggalan_format($value),
             set: fn($value) => tanggalan_database_format($value, 'd-M-Y')
         );
+    }
+
+    public function gudang()
+    {
+        return $this->belongsTo(Gudang::class, 'gudang_id');
     }
 
     public function persediaanAwalDetail()

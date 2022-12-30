@@ -56,7 +56,7 @@ class PersediaanAwalRepository
         $query = self::getById($persediaan_awal_id);
         foreach ($query->persediaanAwalDetail as $row) {
             // rollback persediaan
-            PersediaanRepository::rollbackStaticPersediaanIn($row->persediaan_id, $row->jumlah, 'stock_masuk');
+            PersediaanRepository::rollbackStaticPersediaanIn($row->persediaan_id, $row->jumlah, 'stock_awal');
         }
         return $query->persediaanAwalDetail()->delete();
     }
@@ -66,7 +66,7 @@ class PersediaanAwalRepository
         $query = self::getById($persediaan_awal_id);
         foreach ($query->persediaanAwalDetail as $row) {
             // rollback persediaan
-            PersediaanRepository::rollbackStaticPersediaanIn($row->persediaan_id, $row->jumlah, 'stock_masuk');
+            PersediaanRepository::rollbackStaticPersediaanIn($row->persediaan_id, $row->jumlah, 'stock_awal');
         }
         $query->persediaanAwalDetail()->delete();
         return $query->delete();

@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <x-input.group-vertical label="Sub Total" name="sub_total">
-                    <x-input.text wire:model.defer="sub_total" readonly/>
+                    <x-input.text value="{{rupiah_format($sub_total)}}" readonly/>
                 </x-input.group-vertical>
                 @if($update)
                     <x-button.btn-base wire:click="updateLine">Update Produk</x-button.btn-base>
@@ -86,7 +86,7 @@
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <x-input.group-vertical label="Tanggal" name="tgl_persediaan">
-                            <x-input.single-daterange id="tgl_persediaan_awal" wire:model.defer="tanggal_persediaan_awal" />
+                            <x-input.single-daterange id="tgl_persediaan_awal" wire:model.defer="tgl_persediaan_awal" />
                         </x-input.group-vertical>
                     </div>
                     <div class="col-md-6">
@@ -102,9 +102,9 @@
                         <thead>
                             <tr class="fw-bold fs-6 text-gray-800">
                                 <th width="50%">Deskripsi</th>
-                                <th width="20%">Jumlah</th>
-                                <th width="20%">Sub Total</th>
-                                <th width="10%"></th>
+                                <th width="15%" class="text-center">Jumlah</th>
+                                <th width="20%" class="text-end">Sub Total</th>
+                                <th width="15%"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,15 +113,15 @@
                                     <td>
                                         {{$row['produk_nama']}}
                                         @if($row['tgl_expired'])
-                                            <br> {{$row['tgl_expired']}}
+                                            <br>expired : {{$row['tgl_expired']}}
                                         @endif
-                                        <br> {{$row['harga']}}
+                                        <br>Harga : {{rupiah_format($row['harga'])}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {{$row['jumlah']}}
                                     </td>
-                                    <td>
-                                        {{$row['sub_total']}}
+                                    <td class="text-end">
+                                        {{rupiah_format($row['sub_total'])}}
                                     </td>
                                     <td>
                                         <x-button.btn-icon-edit wire:click="editLine({{$index}})" />
@@ -156,7 +156,7 @@
     @push('scripts')
         <script>
             $('#tgl_persediaan_awal').on('change', function (e) {
-                @this.tanggal_persediaan_awal = e.target.value;
+                @this.tgl_persediaan_awal = e.target.value;
             })
 
             $('#tgl_expired').on('change', function (e) {

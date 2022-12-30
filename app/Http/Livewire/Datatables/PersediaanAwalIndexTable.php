@@ -9,11 +9,23 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class PersediaanAwalIndexTable extends DataTableComponent
 {
-
+    use LivewireDatatableTrait;
     public function columns(): array
     {
         return [
-            Column::make('Column Name'),
+            Column::make('ID', 'kode')
+                ->addClass('text-center'),
+            Column::make('Kondisi', 'kondisi')
+                ->addClass('text-center'),
+            Column::make('Gudang', 'gudang.nama')
+                ->addClass('text-center'),
+            Column::make('Pembuat', 'users.name')
+                ->addClass('text-center'),
+            Column::make('Barang', 'total_barang')
+                ->addClass('text-center'),
+            Column::make('Nominal', 'total_nominal')
+                ->addClass('text-center'),
+            Column::make(''),
         ];
     }
 

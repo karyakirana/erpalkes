@@ -7,6 +7,7 @@ class StockRepository
     public $active_cash;
     public $kondisi;
     public $gudang_id;
+    public $stock_id;
     public $produk_id;
     public $batch;
     public $tgl_expired;
@@ -28,7 +29,8 @@ class StockRepository
         }
 
         if (is_object($dataDetail)){
-            $this->produk_id = $dataDetail->produk_id ?? $dataDetail->persediaan->produk_id;
+            $this->stock_id = $dataDetail->stock_id ?? null;
+            $this->produk_id = $dataDetail->produk_id ?? $dataDetail->persediaan->produk_id ?? null;
             $this->batch = $dataDetail->batch;
             $this->tgl_expired = $dataDetail->tgl_expired;
             $this->jumlah = $dataDetail->jumlah;
@@ -98,7 +100,7 @@ class StockRepository
      */
     public function rollbackStockIn()
     {
-        $stock = $this->baseQuery()->first();
+        $stock = Stock::find($this->stock_id);
         $stock->update([
             $this->field => \DB::raw($this->field." - ".$this->jumlah),
             'stock_saldo' => \DB::raw("stock_saldo - ".$this->jumlah),
@@ -127,7 +129,7 @@ class StockRepository
      */
     public function rollbackStockOut()
     {
-        $stock = $this->baseQuery()->first();
+        $stock = Stock::find($this->stock_id);
         $stock->update([
             $this->field => \DB::raw($this->field." - ".$this->jumlah),
             'stock_saldo' => \DB::raw("stock_saldo + ".$this->jumlah),

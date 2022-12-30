@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class PersediaanAwalDetail extends Model
 {
     use HasFactory;
-    use ProdukModelTrait;
 
     protected $table = 'persediaan_awal_detail';
     public $timestamps = false;

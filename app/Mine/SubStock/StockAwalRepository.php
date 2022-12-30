@@ -53,9 +53,9 @@ class StockAwalRepository
             'keterangan' => $persediaanAwal->keterangan
         ]);
         foreach ($persediaanAwal->persediaanAwalDetail as $item) {
-            StockRepository::build($stockAwal->active_cash, $persediaanAwal->kondisi, $stockAwal->gudang_id, 'stock_awal', $item)->addStockIn();
+            $stock = StockRepository::build($stockAwal->active_cash, $persediaanAwal->kondisi, $stockAwal->gudang_id, 'stock_awal', $item)->addStockIn();
             $stockAwal->stockAwalDetail()->create([
-                'stock_id' => $item->persediaan->produk_id,
+                'stock_id' => $stock->id,
                 'jumlah' => $item->jumlah,
             ]);
         }
@@ -74,11 +74,9 @@ class StockAwalRepository
         ]);
         $stockAwal = $persediaanAwal->stockAwal;
         foreach ($persediaanAwal->persediaanAwalDetail as $item) {
-            StockRepository::build($persediaanAwal->active_cash, $persediaanAwal->kondisi, $persediaanAwal->gudang_id, 'stock_awal', $item)->addStockIn();
+            $stock = StockRepository::build($persediaanAwal->active_cash, $persediaanAwal->kondisi, $persediaanAwal->gudang_id, 'stock_awal', $item)->addStockIn();
             $stockAwal->stockAwalDetail()->create([
-                'stock_id' => $item->persediaan->produk_id,
-                'tgl_produksi' => $item->tgl_produksi,
-                'tgl_expired' => $item->tgl_expired,
+                'stock_id' => $stock->id,
                 'jumlah' => $item->jumlah,
             ]);
         }
@@ -87,9 +85,9 @@ class StockAwalRepository
 
     public static function destroyDetail(PersediaanAwal $persediaanAwal)
     {
-        $stockAwal = $persediaanAwal->stockAwal;
+        $stockAwal = StockAwal::where('persediaan_awal_id', $persediaanAwal->id)->first();
         foreach ($stockAwal->stockAwalDetail as $row){
-            StockRepository::build($persediaanAwal->active_cash, $persediaanAwal->gudang_id, 'stock_awal', $row)->rollbackStockIn();
+            StockRepository::build($stockAwal->active_cash, $stockAwal->kondisi, $stockAwal->gudang_id, 'stock_awal', $row)->rollbackStockIn();
         }
         return $stockAwal->stockAwalDetail()->delete();
     }
