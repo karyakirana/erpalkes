@@ -29,9 +29,17 @@ class PenjualanService implements TransactionInterface
             // todo jurnal
             \DB::commit();
             // return status true
+            return (object)[
+                'status' => true,
+                'messages' => 'Data Berhasil Disimpan'
+            ];
         } catch (ModelNotFoundException $e){
             \DB::rollBack();
             // return status false and exception message
+            return (object)[
+                'status' => false,
+                'messages' => $e
+            ];
         }
     }
 
@@ -47,9 +55,17 @@ class PenjualanService implements TransactionInterface
             // todo jurnal
             \DB::commit();
             // return status true
+            return (object)[
+                'status' => true,
+                'messages' => 'Data Berhasil Disimpan'
+            ];
         } catch (ModelNotFoundException $e){
             \DB::rollBack();
             // return status false and exception message
+            return (object)[
+                'status' => false,
+                'messages' => $e
+            ];
         }
     }
 

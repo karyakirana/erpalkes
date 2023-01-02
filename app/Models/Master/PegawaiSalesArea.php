@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class PegawaiSalesArea extends Model
 {
     use HasFactory, KodeTrait;
+
     protected $table = 'pegawai_sales_area';
     public $timestamps = false;
     protected $fillable = [

@@ -1,5 +1,5 @@
 @props(['head'=>null, 'footer'=>null])
-<table {{$attributes->class('table align-middle table-row-bordered fs-6 gy-5 gs-7')}}>
+<table {{$attributes->class('table align-middle table-row-bordered fs-6 gy-5 gs-7')->merge()}}>
     <thead class="text-center fw-bold ">
         {{$head}}
     </thead>
@@ -7,7 +7,7 @@
         {{$slot}}
     </tbody >
     @if($footer)
-        <tfoot class="border">
+        <tfoot>
         {{$footer}}
         </tfoot>
     @endif

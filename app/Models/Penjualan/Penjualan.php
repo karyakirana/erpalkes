@@ -7,10 +7,12 @@ use App\Models\Akuntansi\PenjualanDimuka;
 use App\Models\Akuntansi\PiutangPenjualan;
 use App\Models\KodeTrait;
 use App\Models\Master\CustomerModelTrait;
+use App\Models\Master\Pegawai;
 use App\Models\Persediaan\PersediaanKeluar;
 use App\Models\Stock\StockKeluar;
 use App\Models\Stock\StockKeluarModelTrait;
 use App\Models\UsersModelTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,14 +44,25 @@ class Penjualan extends Model
         'print'
     ];
 
+    public function tglPenjualan():Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => tanggalan_format($value),
+            set: fn($value) => tanggalan_database_format($value, 'd-M-Y')
+        );
+    }
+
+    public function tglTempo():Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => tanggalan_format($value),
+            set: fn($value) => tanggalan_database_format($value, 'd-M-Y')
+        );
+    }
+
     public function penjualanDetail()
     {
         return $this->hasMany(PenjualanDetail::class, 'penjualan_id');
-    }
-
-    public function penjualanQuotation()
-    {
-        return $this->belongsTo(PenjualanQuotation::class, 'penjualan_quotation_id');
     }
 
     public function persediaanKeluar()
@@ -70,5 +83,10 @@ class Penjualan extends Model
     public function penjualanDimuka()
     {
         return $this->hasOne(PenjualanDimuka::class, 'penjualan_id');
+    }
+
+    public function sales()
+    {
+        return $this->belongsTo(Pegawai::class, 'sales_id');
     }
 }
