@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function (){
 
 //Pembelian
     Route::get('pembelian', [\App\Http\Controllers\Pembelian\PembelianController::class, 'index'])->name('pembelian');
+    Route::get('pembelian/form', \App\Http\Livewire\Pembelian\PembelianForm::class)->name('pembelian.form');
 
     Route::get('pembelian/quotation',[\App\Http\Controllers\Pembelian\PembelianQuotationController::class,'index'])->name('pembelian.quotation');
     Route::get('pembelian/quotation/form', \App\Http\Livewire\Pembelian\PembelianQuotaionForm::class)->name('pembelian.quotation.form');
