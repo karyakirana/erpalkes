@@ -55,7 +55,7 @@ class PenjualanForm extends Component
         $this->user_id = \Auth::id();
         if ($penjualan_id){
             $this->update = true;
-            $penjualan = PenjualanRepository::getById($penjualan_id);
+            $penjualan = (new PenjualanService())->handleById($penjualan_id);
             $this->penjualan_id = $penjualan->id;
             $this->tgl_penjualan = $penjualan->tgl_penjualan;
             $this->tgl_tempo = $penjualan->tgl_tempo;
@@ -194,9 +194,13 @@ class PenjualanForm extends Component
     {
         $data = $this->validate();
         $store = (new PenjualanService())->handleStore($data);
-        // redirect
-        session()->flash('message', 'Data sudah disimpan.');
-        return redirect()->to(route('penjualan'));
+        if($store->status){
+            // redirect
+            session()->flash('message', 'Data sudah disimpan.');
+            return redirect()->to(route('penjualan'));
+        }
+        session()->flash('message', $store->keterangan);
+        return null;
     }
 
     public function update()
