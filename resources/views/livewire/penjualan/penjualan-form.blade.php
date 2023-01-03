@@ -172,13 +172,13 @@
                         <tr>
                             <td colspan="3" class="text-end">PPN :</td>
                             <td colspan="2">
-                                <input type="number" class="form-control text-end" wire:model.defer="total_ppn">
+                                <input type="text" class="form-control text-end" wire:model.defer="total_ppn">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3" class="text-end">Biaya Lain :</td>
                             <td colspan="2">
-                                <input type="number" class="form-control text-end" wire:model.defer="total_biaya_lain">
+                                <input type="text" class="form-control text-end" wire:model.defer="total_biaya_lain">
                             </td>
                         </tr>
                         <tr>
