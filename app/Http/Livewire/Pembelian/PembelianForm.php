@@ -43,12 +43,17 @@ class PembelianForm extends Component
         'setProduk'
     ];
 
+    public function __construct($id = null)
+    {
+        parent::__construct($id);
+    }
+
     public function mount($pembelian_id = null)
     {
         $this->user_id = \Auth::id();
         if ($pembelian_id){
             $this->update = true;
-            $pembelian = PembelianRepository::getById($pembelian_id);
+            $pembelian = (new PembelianService())->handleById($pembelian_id);
             $this->pembelian_id = $pembelian->id;
             $this->tgl_nota = $pembelian->tgl_nota;
             $this->tgl_tempo = $pembelian->tgl_tempo;

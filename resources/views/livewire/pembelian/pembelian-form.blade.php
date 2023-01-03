@@ -23,15 +23,15 @@
                 <x-input.group-vertical label="Produk" name="produk_nama">
                     <x-input.textarea wire:model.defer="produk_nama" data-bs-toggle="modal" data-bs-target="#modalProdukSet" readonly />
                 </x-input.group-vertical>
-                <x-input.group-vertical label="Kemasan" name="kemasan">
-                    <x-input.select wire:model.defer="kemasan">
-                        <option>Dipilih</option>
-                        @forelse($dataKemasan as $row)
-                            <option value="{{$row->kemasan}}">{{$row->kemasan}}</option>
-                        @empty
-                        @endforelse
-                    </x-input.select>
-                </x-input.group-vertical>
+{{--                <x-input.group-vertical label="Kemasan" name="kemasan">--}}
+{{--                    <x-input.select wire:model.defer="kemasan">--}}
+{{--                        <option>Dipilih</option>--}}
+{{--                        @forelse($dataKemasan as $row)--}}
+{{--                            <option value="{{$row->kemasan}}">{{$row->kemasan}}</option>--}}
+{{--                        @empty--}}
+{{--                        @endforelse--}}
+{{--                    </x-input.select>--}}
+{{--                </x-input.group-vertical>--}}
                 <div class="row">
                     <div class="col-4">
                         <x-input.group-vertical label="Jumlah" name="jumlah">
@@ -82,12 +82,12 @@
             <div class="col-8">
                 <div class="row">
                     <div class="col-6">
-                        <x-input.group-horizontal label="Tanggal Invoice" name="tgl_nota">
+                        <x-input.group-horizontal label="Tgl. Pembelian" name="tgl_nota">
                             <x-input.single-daterange wire:model.defer="tgl_nota" id="tgl_nota" />
                         </x-input.group-horizontal>
                     </div>
                     <div class="col-6">
-                        <x-input.group-horizontal label="Tanggal Tempo" name="tgl_tempo">
+                        <x-input.group-horizontal label="Tgl. Tempo" name="tgl_tempo">
                             <x-input.single-daterange wire:model.defer="tgl_tempo" id="tgl_tempo" />
                         </x-input.group-horizontal>
                     </div>
@@ -99,20 +99,16 @@
                         </x-input.group-horizontal>
                     </div>
                     <div class="col-6">
-                        <x-input.group-horizontal label="User" name="user_nama">
-                            <x-input.text wire:model.defer="user_nama" data-bs-toggle="modal" data-bs-target="#modalUserList" readonly/>
-                        </x-input.group-horizontal>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <x-input.group-horizontal label="Keterangan" name="customer_nama">
-                            <x-input.text wire:model.defer="keterangan" />
-                        </x-input.group-horizontal>
-                    </div>
-                    <div class="col-6">
                         <x-input.group-horizontal label="ID Preorder" name="pembelian_po_id">
                             <x-input.text wire:model.defer="pembelian_po_id" data-bs-toggle="modal" data-bs-target="#modalPembelianPreorderSet" readonly/>
+                        </x-input.group-horizontal>
+                    </div>
+
+                </div>
+                <div class="row" >
+                    <div class="col-6" >
+                        <x-input.group-horizontal label="Keterangan" name="customer_nama">
+                            <x-input.text wire:model.defer="keterangan" />
                         </x-input.group-horizontal>
                     </div>
                 </div>
@@ -131,9 +127,6 @@
                         <tr>
                             <x-table.td align="start">
                                 {{$row['produk_nama']}}
-                                @if($row['kemasan'])
-                                    <br> Kemasan : {{$row['kemasan']}}
-                                @endif
                                 <br> Harga : {{rupiah_format($row['harga'])}}
                             </x-table.td>
                             <x-table.td align="end">
@@ -200,8 +193,7 @@
         </x-slot:footer>
     </x-card.standart>
     <x-datatables.produk-set />
-    <x-datatables.customer-set />
-    <x-datatables.sales-list-set />
-    <x-datatables.penjualan-preorder-set />
+    <x-datatables.supplier-set />
+    <x-datatables.pembelian-preorder-set />
 </div>
 

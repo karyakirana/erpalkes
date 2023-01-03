@@ -9,6 +9,11 @@ class PembelianPreorderRepository
         return PembelianPO::find($id);
     }
 
+    public static function datatables()
+    {
+        return PembelianPO::query();
+    }
+
     public static function getAllCurrentActiveCash($deleted = false)
     {
         if ($deleted){
