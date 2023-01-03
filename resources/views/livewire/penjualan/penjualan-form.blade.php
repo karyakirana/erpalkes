@@ -18,6 +18,45 @@
             {{$kode}}
         </x-slot:toolbar>
         <div class="row">
+            <div class="col-6">
+                <x-input.group-horizontal label="Tanggal Invoice" name="tgl_penjualan">
+                    <x-input.single-daterange wire:model.defer="tgl_penjualan" id="tgl_penjualan" />
+                </x-input.group-horizontal>
+            </div>
+            <div class="col-6">
+                <x-input.group-horizontal label="Tanggal Tempo" name="tgl_tempo">
+                    <x-input.single-daterange wire:model.defer="tgl_tempo" id="tgl_tempo" />
+                </x-input.group-horizontal>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <x-input.group-horizontal label="Customer" name="customer_nama">
+                    <x-input.text wire:model.defer="customer_nama" data-bs-toggle="modal" data-bs-target="#modalCustomerSet" readonly />
+                </x-input.group-horizontal>
+            </div>
+            <div class="col-6">
+                <x-input.group-horizontal label="Sales" name="sales_nama">
+                    <x-input.text wire:model.defer="sales_nama" data-bs-toggle="modal" data-bs-target="#modalSalesList" readonly/>
+                </x-input.group-horizontal>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <x-input.group-horizontal label="Keterangan" name="customer_nama">
+                    <x-input.text wire:model.defer="keterangan" />
+                </x-input.group-horizontal>
+            </div>
+            <div class="col-6">
+                <x-input.group-horizontal label="ID Preorder" name="penjualan_preorder_id">
+                    <x-input.text wire:model.defer="penjualan_preorder_id" data-bs-toggle="modal" data-bs-target="#modalPenjualanPreorderSet" readonly/>
+                </x-input.group-horizontal>
+            </div>
+        </div>
+    </x-card.standart>
+    <x-card.standart class="mt-5" title="">
+
+        <div class="row">
             <!-- begin:: form-produk -->
             <div class="col-4">
                 <x-input.group-vertical label="Produk" name="produk_nama">
@@ -80,42 +119,7 @@
             <!-- begin:: form-produk -->
             <!-- end:: form-penjualan -->
             <div class="col-8">
-                <div class="row">
-                    <div class="col-6">
-                        <x-input.group-horizontal label="Tanggal Invoice" name="tgl_penjualan">
-                            <x-input.single-daterange wire:model.defer="tgl_penjualan" id="tgl_penjualan" />
-                        </x-input.group-horizontal>
-                    </div>
-                    <div class="col-6">
-                        <x-input.group-horizontal label="Tanggal Tempo" name="tgl_tempo">
-                            <x-input.single-daterange wire:model.defer="tgl_tempo" id="tgl_tempo" />
-                        </x-input.group-horizontal>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <x-input.group-horizontal label="Customer" name="customer_nama">
-                            <x-input.text wire:model.defer="customer_nama" data-bs-toggle="modal" data-bs-target="#modalCustomerSet" readonly />
-                        </x-input.group-horizontal>
-                    </div>
-                    <div class="col-6">
-                        <x-input.group-horizontal label="Sales" name="sales_nama">
-                            <x-input.text wire:model.defer="sales_nama" data-bs-toggle="modal" data-bs-target="#modalSalesList" readonly/>
-                        </x-input.group-horizontal>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <x-input.group-horizontal label="Keterangan" name="customer_nama">
-                            <x-input.text wire:model.defer="keterangan" />
-                        </x-input.group-horizontal>
-                    </div>
-                    <div class="col-6">
-                        <x-input.group-horizontal label="ID Preorder" name="penjualan_preorder_id">
-                            <x-input.text wire:model.defer="penjualan_preorder_id" data-bs-toggle="modal" data-bs-target="#modalPenjualanPreorderSet" readonly/>
-                        </x-input.group-horizontal>
-                    </div>
-                </div>
+
                 <!-- begin::tableproduk -->
                 <x-atoms.table class="border">
                     <x-slot:head>
