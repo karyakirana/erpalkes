@@ -159,7 +159,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="text-center" colspan="5">-</td>
+                            <td class="text-center" colspan="5">Silahkan Input Data</td>
                         </tr>
                     @endforelse
                     <x-slot:footer>
