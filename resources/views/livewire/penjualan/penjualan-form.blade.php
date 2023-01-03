@@ -159,7 +159,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="text-center" colspan="5">Tidak Ada Data</td>
+                            <td class="text-center" colspan="5">-</td>
                         </tr>
                     @endforelse
                     <x-slot:footer>
