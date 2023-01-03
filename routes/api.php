@@ -54,6 +54,12 @@ Route::delete('master/produk', [\App\Http\Controllers\Master\ProdukController::c
 Route::post('penjualan/datatables', [\App\Http\Controllers\Penjualan\PenjualanController::class, 'datatables'])->name('penjualan.datatables');
 Route::delete('penjualan/invoice', [\App\Http\Controllers\Penjualan\PenjualanController::class, 'destroy'])->name('penjualan.destroy');
 
+Route::post('penjualan/po/datatables', [\App\Http\Controllers\Penjualan\PenjualanPreOrderController::class, 'datatables'])->name('penjualan.po.datatables');
+Route::delete('penjualan/po/invoice', [\App\Http\Controllers\Penjualan\PenjualanPreOrderController::class, 'destroy'])->name('penjualan.po.destroy');
+
+Route::post('pembelian/po/datatables', [\App\Http\Controllers\Pembelian\PembelianPreOrderController::class,'datatables'])->name('pembelian.po.datatables');
+Route::delete('pembelian/po/invoice', [\App\Http\Controllers\Pembelian\PembelianPreOrderController::class, 'destroy'])->name('pembelian.po.destroy');
+
 Route::post('pembelian/datatables', [\App\Http\Controllers\Pembelian\PembelianController::class,'datatables'])->name('pembelian.datatables');
 Route::delete('pembelian/invoice', [\App\Http\Controllers\Pembelian\PembelianController::class,'destroy'])->name('pembelian.destroy');
 
