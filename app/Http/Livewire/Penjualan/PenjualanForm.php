@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Penjualan;
 
 use App\Http\Livewire\ProdukTransaksiLineTrait;
 use App\Http\Requests\Penjualan\PenjualanRequest;
-use App\Mine\SubPenjualan\PenjualanRepository;
 use App\Mine\SubPenjualan\PenjualanService;
 use App\Models\Master\Produk;
 use Livewire\Component;
@@ -207,9 +206,14 @@ class PenjualanForm extends Component
     {
         $data = $this->validate();
         $update = (new PenjualanService())->handleUpdate($data);
+        if($update->status){
+            // redirect
+            session()->flash('message', 'Data sudah disimpan.');
+            return redirect()->to(route('penjualan'));
+        }
         // redirect
-        session()->flash('message', 'Data sudah disimpan.');
-        return redirect()->to(route('penjualan'));
+        session()->flash('message', $update->keterangan);
+        return null;
     }
 
     public function render()
