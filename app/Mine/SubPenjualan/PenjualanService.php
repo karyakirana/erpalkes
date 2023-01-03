@@ -19,6 +19,11 @@ class PenjualanService implements TransactionInterface
         return PenjualanRepository::getById($id);
     }
 
+    public function handleLoadFromPreorder($penjualan_preorder_id)
+    {
+        return PenjualanPreorderRepository::getById($penjualan_preorder_id);
+    }
+
     public function handleStore(array $data)
     {
         \DB::beginTransaction();

@@ -20,6 +20,11 @@ class PembelianService implements TransactionInterface
         return PembelianRepository::getById($id);
     }
 
+    public function handleLoadPembelianPreorder($pembelian_preorder_id)
+    {
+        return PembelianPreorderRepository::getById($pembelian_preorder_id);
+    }
+
     public function handleStore(array $data)
     {
         \DB::beginTransaction();

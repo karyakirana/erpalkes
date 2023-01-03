@@ -8,6 +8,7 @@ use App\Models\Akuntansi\PiutangPenjualan;
 use App\Models\KodeTrait;
 use App\Models\Master\CustomerModelTrait;
 use App\Models\Master\Pegawai;
+use App\Models\Master\PegawaiSalesArea;
 use App\Models\Persediaan\PersediaanKeluar;
 use App\Models\Stock\StockKeluar;
 use App\Models\Stock\StockKeluarModelTrait;
@@ -87,6 +88,6 @@ class Penjualan extends Model
 
     public function sales()
     {
-        return $this->belongsTo(Pegawai::class, 'sales_id');
+        return $this->belongsTo(PegawaiSalesArea::class, 'sales_id');
     }
 }

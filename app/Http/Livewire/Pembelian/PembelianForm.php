@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Pembelian;
 
+use App\Http\Livewire\Penjualan\LoadPenjualanPreorderTrait;
 use App\Http\Livewire\ProdukTransaksiLineTrait;
 use App\Http\Requests\Pembelian\PembelianRequest;
-use App\Mine\SubPembelian\PembelianRepository;
 use App\Mine\SubPembelian\PembelianService;
 use App\Models\Master\Produk;
 use Livewire\Component;
@@ -12,6 +12,7 @@ use Livewire\Component;
 class PembelianForm extends Component
 {
     use ProdukTransaksiLineTrait;
+    use LoadPenjualanPreorderTrait;
 
     public $pembelian_id;
     public $pembelian_po_id;
