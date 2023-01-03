@@ -41,7 +41,8 @@ class PembelianForm extends Component
     public $dataKemasan = [];
 
     protected $listeners = [
-        'setProduk'
+        'setProduk',
+        'setPreorder'
     ];
 
     public function __construct($id = null)
