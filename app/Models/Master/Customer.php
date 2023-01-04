@@ -25,6 +25,7 @@ class Customer extends Model
         'email',
         'npwp',
         'alamat',
+        'sales_id',
         'regencies_id',
         'diskon',
         'keterangan',
@@ -33,5 +34,10 @@ class Customer extends Model
     public function regency()
     {
         return $this->belongsTo(Regency::class, 'regencies_id');
+    }
+
+    public function sales()
+    {
+        return $this->belongsTo(PegawaiSalesArea::class, 'sales_id');
     }
 }

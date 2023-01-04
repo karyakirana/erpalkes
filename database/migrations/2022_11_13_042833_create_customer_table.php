@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email', 50)->nullable();
             $table->string('npwp', 20)->nullable();
             $table->text('alamat');
+            $table->unsignedBigInteger('sales_id');
             $table->char('regencies_id', 4);
             $table->double('diskon', 2)->nullable()->default(0);
             $table->text('keterangan')->nullable();
