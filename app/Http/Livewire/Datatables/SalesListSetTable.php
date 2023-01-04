@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Datatables;
 
+use App\Mine\SubMaster\PegawaiSalesAreaRepository;
 use App\Models\Master\PegawaiSalesArea;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
@@ -14,10 +15,16 @@ class SalesListSetTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make(''),
-            Column::make('Pegawai', 'pegawai.nama'),
-            Column::make('Telepon', 'pegawai.telepon'),
-            Column::make('')
+//            Column::make(''),
+//            Column::make('Pegawai', 'pegawai.nama'),
+//            Column::make('Telepon', 'pegawai.telepon'),
+//            Column::make('')
+            Column::make('ID', 'kode')
+                ->sortable(),
+            Column::make('Nama', 'nama')
+                ->sortable()
+                ->searchable(),
+            Column::make('Telepon', 'telepon'),
         ];
     }
 
