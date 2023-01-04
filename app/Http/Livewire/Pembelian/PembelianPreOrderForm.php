@@ -9,7 +9,6 @@ use Livewire\Component;
 
 class PembelianPreOrderForm extends Component
 {
-    use ProdukTransaksiLineTrait, ProdukTransaksiLineTrait;
 
     protected $listeners = [
         'setProduk'

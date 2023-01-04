@@ -19,6 +19,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('penjualan_quotation_id');
             $table->date('tgl_preorder');
+            $table->integer('tempo');
+            $table->date('tgl_tempo')->nullable();
             $this->fieldPenjualan($table);
         });
     }

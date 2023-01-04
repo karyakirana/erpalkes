@@ -19,6 +19,8 @@ class PembelianPO extends Model
     protected $fillable = [
         'pembelian_quotation_id',
         'tgl_pembelian_po',
+        'tempo',
+        'tgl_tempo',
         'active_cash',
         'kode',
         'supplier_id',

@@ -18,31 +18,89 @@
             {{$kode}}
         </x-slot:toolbar>
         <div class="row">
+            <div class="col-6">
+                <x-input.group-horizontal label="Tgl. Pembelian" name="tgl_nota">
+                    <x-input.single-daterange wire:model.defer="tgl_nota" id="tgl_nota" />
+                </x-input.group-horizontal>
+            </div>
+            <div class="col-6">
+                <x-input.group-horizontal label="Tgl. Tempo" name="tgl_tempo">
+                    <x-input.single-daterange wire:model.defer="tgl_tempo" id="tgl_tempo" />
+                </x-input.group-horizontal>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <x-input.group-horizontal label="Supplier" name="supplier_nama">
+                    <x-input.text wire:model.defer="supplier_nama" data-bs-toggle="modal" data-bs-target="#modalSupplierSet" readonly />
+                </x-input.group-horizontal>
+            </div>
+            <div class="col-6">
+                <x-input.group-horizontal label="ID Preorder" name="pembelian_po_id">
+                    <x-input.text wire:model.defer="pembelian_po_id" data-bs-toggle="modal" data-bs-target="#modalPembelianPreorderSet" readonly/>
+                </x-input.group-horizontal>
+            </div>
+
+        </div>
+        <div class="row" >
+            <div class="col-6" >
+                <x-input.group-horizontal label="Keterangan" name="customer_nama">
+                    <x-input.text wire:model.defer="keterangan" />
+                </x-input.group-horizontal>
+            </div>
+        </div>
+    </x-card.standart>
+    <x-card.standart class="mt-5" title="Form">
+        <div class="row">
             <!-- begin:: form-produk -->
             <div class="col-4">
                 <x-input.group-vertical label="Produk" name="produk_nama">
                     <x-input.textarea wire:model.defer="produk_nama" data-bs-toggle="modal" data-bs-target="#modalProdukSet" readonly />
                 </x-input.group-vertical>
-{{--                <x-input.group-vertical label="Kemasan" name="kemasan">--}}
-{{--                    <x-input.select wire:model.defer="kemasan">--}}
-{{--                        <option>Dipilih</option>--}}
-{{--                        @forelse($dataKemasan as $row)--}}
-{{--                            <option value="{{$row->kemasan}}">{{$row->kemasan}}</option>--}}
-{{--                        @empty--}}
-{{--                        @endforelse--}}
-{{--                    </x-input.select>--}}
-{{--                </x-input.group-vertical>--}}
+                <div class="row">
+                    <div class="col-8">
+                        <x-input.group-vertical label="Kemasan" name="kemasan_id">
+                            <x-input.select wire:model="kemasan_id">
+                                <option>Dipilih</option>
+                                @forelse($dataKemasan as $index => $row)
+                                    <option value="{{$index}}">{{$row->kemasan}}</option>
+                                @empty
+                                @endforelse
+                            </x-input.select>
+                        </x-input.group-vertical>
+                    </div>
+                    <div class="col-4">
+                        <x-input.group-vertical label="Isi" name="kemasan_isi">
+                            <x-input.text value="{{$kemasan_isi}}"/>
+                        </x-input.group-vertical>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <x-input.group-vertical label="Jumlah Kemasan" name="jumlah">
+                            <x-input.text wire:model="kemasan_jumlah" />
+                        </x-input.group-vertical>
+                    </div>
+                    <div class="col-8">
+                        <x-input.group-vertical label="Harga Kemasan" name="harga">
+                            <div class="input-group">
+                                <span class="input-group-text">Rp.</span>
+                                <x-input.text wire:model="kemasan_harga" />
+                            </div>
+                        </x-input.group-vertical>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-4">
                         <x-input.group-vertical label="Jumlah" name="jumlah">
-                            <x-input.text wire:model="jumlah" />
+                            <x-input.text value="{{$jumlah}}" readonly/>
                         </x-input.group-vertical>
                     </div>
                     <div class="col-8">
                         <x-input.group-vertical label="Rp." name="harga">
                             <div class="input-group">
                                 <span class="input-group-text">Rp.</span>
-                                <x-input.text wire:model="harga" />
+                                <x-input.text value="{{rupiah_format($harga)}}" readonly/>
                             </div>
                         </x-input.group-vertical>
                     </div>
@@ -60,7 +118,7 @@
                         <x-input.group-vertical label="Diskon Rp." name="harga">
                             <div class="input-group">
                                 <span class="input-group-text">Rp.</span>
-                                <x-input.text wire:model="harga_setelah_diskon" />
+                                <x-input.text value="{{rupiah_format($harga_setelah_diskon)}}" readonly />
                             </div>
                         </x-input.group-vertical>
                     </div>
@@ -80,38 +138,6 @@
             <!-- begin:: form-produk -->
             <!-- end:: form-pembelian -->
             <div class="col-8">
-                <div class="row">
-                    <div class="col-6">
-                        <x-input.group-horizontal label="Tgl. Pembelian" name="tgl_nota">
-                            <x-input.single-daterange wire:model.defer="tgl_nota" id="tgl_nota" />
-                        </x-input.group-horizontal>
-                    </div>
-                    <div class="col-6">
-                        <x-input.group-horizontal label="Tgl. Tempo" name="tgl_tempo">
-                            <x-input.single-daterange wire:model.defer="tgl_tempo" id="tgl_tempo" />
-                        </x-input.group-horizontal>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <x-input.group-horizontal label="Supplier" name="supplier_nama">
-                            <x-input.text wire:model.defer="supplier_nama" data-bs-toggle="modal" data-bs-target="#modalSupplierSet" readonly />
-                        </x-input.group-horizontal>
-                    </div>
-                    <div class="col-6">
-                        <x-input.group-horizontal label="ID Preorder" name="pembelian_po_id">
-                            <x-input.text wire:model.defer="pembelian_po_id" data-bs-toggle="modal" data-bs-target="#modalPembelianPreorderSet" readonly/>
-                        </x-input.group-horizontal>
-                    </div>
-
-                </div>
-                <div class="row" >
-                    <div class="col-6" >
-                        <x-input.group-horizontal label="Keterangan" name="customer_nama">
-                            <x-input.text wire:model.defer="keterangan" />
-                        </x-input.group-horizontal>
-                    </div>
-                </div>
                 <!-- begin::tableproduk -->
                 <x-atoms.table class="border">
                     <x-slot:head>

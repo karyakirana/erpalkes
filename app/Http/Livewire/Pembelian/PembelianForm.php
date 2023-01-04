@@ -11,7 +11,6 @@ use Livewire\Component;
 
 class PembelianForm extends Component
 {
-    use ProdukTransaksiLineTrait;
     use LoadPenjualanPreorderTrait;
 
     public $pembelian_id;
@@ -35,7 +34,8 @@ class PembelianForm extends Component
     public $update = false;
     public $dataDetail = [];
     public $produk_id, $produk_nama, $harga, $harga_setelah_diskon;
-    public $kemasan, $satuan_jual;
+    public $kemasan_id, $kemasan_nama, $kemasan_isi, $satuan_beli, $satuan_jual;
+    public $kemasan_jumlah, $kemasan_harga;
     public $jumlah, $diskon, $sub_total;
 
     public $dataKemasan = [];
@@ -100,6 +100,23 @@ class PembelianForm extends Component
         ]);
     }
 
+    protected function hitungKemasan()
+    {
+        // konversi kemasan jumlah
+        // konversi kemasan harga
+        // isi kemasan
+        if ((int)$this->kemasan_isi == 0){
+            $this->jumlah = $this->kemasan_jumlah;
+            $this->harga = $this->kemasan_harga;
+        }
+
+        if ((int)$this->kemasan_isi >= 0){
+            $this->jumlah = $this->kemasan_jumlah * $this->kemasan_isi;
+            $this->harga = (int) $this->kemasan_harga / $this->kemasan_isi;
+        }
+
+    }
+
     protected function hitungTotal()
     {
         $this->harga_setelah_diskon = (int) $this->harga - ((int) $this->harga * (int) $this->diskon / 100);
@@ -110,6 +127,16 @@ class PembelianForm extends Component
     {
         $this->total_sub_total = array_sum(array_column($this->dataDetail, 'sub_total'));
         $this->total_bayar = (int) $this->ppn + (int) $this->biaya_lain + (int) $this->total_sub_total;
+    }
+
+    protected function updatedKemasanJumlah()
+    {
+        $this->hitungKemasan();
+    }
+
+    protected function updatedKemasanHarga()
+    {
+        $this->hitungKemasan();
     }
 
     public function updatedDiskon()
@@ -125,6 +152,12 @@ class PembelianForm extends Component
     public function updatedHarga()
     {
         $this->hitungTotal();
+    }
+
+    public function updatedKemasanId($value)
+    {
+        $this->kemasan_isi = $this->dataKemasan[$value]->isi;
+        $this->satuan_beli = $this->dataKemasan[$value]->kemasan;
     }
 
     public function setProduk(Produk $produk)

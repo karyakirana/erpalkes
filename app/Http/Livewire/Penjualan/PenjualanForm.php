@@ -2,23 +2,25 @@
 
 namespace App\Http\Livewire\Penjualan;
 
-use App\Http\Livewire\ProdukTransaksiLineTrait;
 use App\Http\Requests\Penjualan\PenjualanRequest;
 use App\Mine\SubPenjualan\PenjualanService;
 use App\Models\Master\Produk;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class PenjualanForm extends Component
 {
-    use ProdukTransaksiLineTrait;
+    use PenjualanDetailTrait;
 
     public $penjualan_id;
     public $penjualan_preorder_id;
+    public $tanggal;
     public $tgl_penjualan;
     public $tgl_tempo;
     public $active_cash;
     public $kode;
     public $tipe; // tunai, tempo, dan kso
+    public $nomor_kso;
     public $customer_id, $customer_nama;
     public $sales_id, $sales_nama;
     public $user_id;
@@ -35,7 +37,7 @@ class PenjualanForm extends Component
     public $update = false;
     public $dataDetail = [];
     public $produk_id, $produk_nama, $harga, $harga_setelah_diskon;
-    public $kemasan, $satuan_jual;
+    public $satuan_jual;
     public $jumlah, $diskon, $sub_total;
 
     public $dataKemasan = [];
@@ -46,6 +48,8 @@ class PenjualanForm extends Component
 
     public function __construct($id = null)
     {
+        $this->tgl_penjualan = tanggalan_format(now('ASIA/JAKARTA'));
+        $this->tgl_tempo = tanggalan_format(now('ASIA/JAKARTA'));
         parent::__construct($id);
     }
 
@@ -96,7 +100,7 @@ class PenjualanForm extends Component
         $this->reset([
             'index',
             'produk_id', 'produk_nama',
-            'kemasan', 'satuan_jual', 'diskon',
+            'satuan_jual', 'diskon',
             'harga', 'harga_setelah_diskon',
             'jumlah', 'sub_total'
         ]);
@@ -131,61 +135,33 @@ class PenjualanForm extends Component
 
     public function setProduk(Produk $produk)
     {
-        $this->produk_id = $produk->id;
-        $this->produk_nama = $produk->nama_produk;
-        $this->satuan_jual = $produk->satuan_jual;
-        $this->harga = $produk->harga;
-        $this->dataKemasan = $produk->produkKemasan;
+        $this->getProduk($produk);
         $this->emit('modalProdukSetHide');
     }
 
     public function addLine()
     {
-        $this->dataDetail[] = [
-            'produk_id' => $this->produk_id,
-            'produk_nama' => $this->produk_nama,
-            'kemasan' => $this->kemasan,
-            'satuan_jual' => $this->satuan_jual,
-            'harga' => $this->harga,
-            'diskon' => $this->diskon,
-            'jumlah' => $this->jumlah,
-            'sub_total' => $this->sub_total
-        ];
+        $this->setLine();
         $this->hitungTotalSubTotal();
         $this->resetForm();
     }
 
     public function editLine($index)
     {
-        $this->index = $index;
-        $this->produk_id = $this->dataDetail[$index]['produk_id'];
-        $this->produk_nama = $this->dataDetail[$index]['produk_nama'];
-        $this->kemasan = $this->dataDetail[$index]['kemasan'];
-        $this->satuan_jual = $this->dataDetail[$index]['satuan_jual'];
-        $this->harga = $this->dataDetail[$index]['harga'];
-        $this->jumlah = $this->dataDetail[$index]['jumlah'];
-        $this->sub_total = $this->dataDetail[$index]['sub_total'];
+        $this->getLine($index);
         $this->hitungTotal();
     }
 
     public function updateLine()
     {
-        $index = $this->index;
-        $this->dataDetail[$index]['produk_id'] = $this->produk_id;
-        $this->dataDetail[$index]['produk_nama'] = $this->produk_nama;
-        $this->dataDetail[$index]['kemasan'] = $this->kemasan;
-        $this->dataDetail[$index]['satuan_jual'] = $this->satuan_jual;
-        $this->dataDetail[$index]['harga'] = $this->harga;
-        $this->dataDetail[$index]['jumlah'] = $this->jumlah;
-        $this->dataDetail[$index]['sub_total'] = $this->sub_total;
+        $this->setLine();
         $this->resetForm();
         $this->hitungTotalSubTotal();
     }
 
     public function destroyLine($index)
     {
-        unset($this->dataDetail[$index]);
-        $this->dataDetail = array_values($this->dataDetail);
+        $this->removeLine($index);
         $this->hitungTotalSubTotal();
     }
 

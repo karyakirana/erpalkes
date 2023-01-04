@@ -19,6 +19,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pembelian_po_id')->nullable();
             $table->date('tgl_nota');
+            $table->integer('tempo')->nullable();
             $table->date('tgl_tempo')->nullable();
             $this->fieldPembelian($table);
         });

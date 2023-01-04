@@ -16,6 +16,8 @@ class PenjualanPreorder extends Model
     protected $fillable = [
         'penjualan_quotation_id',
         'tgl_preorder',
+        'tempo',
+        'tgl_tempo',
         'active_cash',
         'kode',
         'tipe',

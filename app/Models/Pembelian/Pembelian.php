@@ -17,24 +17,24 @@ class Pembelian extends Model
     use StockMasukModelTrait;
     use KodeTrait;
 
-    protected $table = 'pembelian';
     protected $fillable = [
+        'pembelian_po_id',
+        'tgl_nota',
+        'tempo',
+        'tgl_tempo',
         'active_cash',
         'kode',
-        'pembelian_po_id',
         'supplier_id',
         'user_id',
-        'jenis_pembelian',
-        'status_pembelian',
-        'tgl_nota',
-        'tgl_tempo',
+        'status',
         'total_barang',
-        'total_ppn',
-        'total_biaya_lain',
+        'ppn',
+        'biaya_lain',
         'total_bayar',
         'keterangan',
-        'print'
     ];
+
+    protected $table = 'pembelian';
 
     public function pembelianDetail()
     {

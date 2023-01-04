@@ -29,10 +29,12 @@ class Penjualan extends Model
     protected $fillable = [
         'penjualan_preorder_id',
         'tgl_penjualan',
+        'tempo',
         'tgl_tempo',
         'active_cash',
         'kode',
-        'tipe', // KSO
+        'tipe', // non-kso, kso, kso-alat
+        'nomor_kso',
         'customer_id',
         'sales_id',
         'user_id',
