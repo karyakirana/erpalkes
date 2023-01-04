@@ -29,7 +29,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-8">
+            <div class="col-3">
+                <x-input.group-vertical label="Sales" name="sales_name">
+                    <x-input.text wire:model.defer="sales_name" data-bs-toggle="modal" data-bs-target="#modalSalesList" readonly/>
+                </x-input.group-vertical>
+            </div>
+            <div class="col-5">
                 <x-input.group-vertical label="Alamat" name="alamat">
                     <x-input.text wire:model.defer="alamat"/>
                 </x-input.group-vertical>
@@ -70,6 +75,7 @@
             @endif
         </x-slot:footer>
     </x-card.standart>
+    <x-datatables.sales-list-set />
     <x-datatables.city-set />
     @push('scripts')
         <script>
