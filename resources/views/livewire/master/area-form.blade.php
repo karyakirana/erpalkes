@@ -68,7 +68,20 @@
         </x-slot:footer>
     </x-card.standart>
     <x-datatables.city-set />
-    <x-datatables.pegawai-set />
+    <x-modal.standart id="modalPegawaiSet" size="xl" title="Data Pegawai">
+        <livewire:datatables.pegawai-set-sales-table />
+    </x-modal.standart>
     @push('scripts')
+            <script>
+                let modalPegawaiSet = new bootstrap.Modal(document.getElementById('modalPegawaiSet'));
+
+                window.livewire.on('modalPegawaiSetHide', function (){
+                    modalPegawaiSet.hide()
+                })
+
+                window.livewire.on('modalPegawaiSetShow', function (){
+                    modalPegawaiSet.show()
+                })
+            </script>
     @endpush
 </div>

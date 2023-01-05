@@ -46,4 +46,9 @@ class Pegawai extends Model
     {
         return $this->hasOne(User::class, 'pegawai_id');
     }
+
+    public function pegawaiSalesArea()
+    {
+        return $this->hasOne(PegawaiSalesArea::class, 'pegawai_id');
+    }
 }
