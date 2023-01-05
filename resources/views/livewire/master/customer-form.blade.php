@@ -30,7 +30,7 @@
         </div>
         <div class="row">
             <div class="col-3">
-                <x-input.group-vertical label="Sales" name="sales_name">
+                <x-input.group-vertical label="Sales" name="sales_nama">
                     <x-input.text wire:model.defer="sales_nama" data-bs-toggle="modal" data-bs-target="#modalSalesList" readonly/>
                 </x-input.group-vertical>
             </div>

@@ -32,7 +32,7 @@ class CustomerForm extends Component
     {
         $this->sales_id = $pegawai->id;
         $this->sales_nama = $pegawai->nama;
-        $this->emit('modalSalesHide');
+        $this->emit('modalSalesListHide');
     }
 
     public function store()
