@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function (){
     Route::get('master/supplier', [\App\Http\Controllers\Master\SupplierController::class, 'index'])->name('supplier');
     Route::get('master/supplier/{supplier_id}/show', [\App\Http\Controllers\Master\SupplierController::class, 'show'])->name('supplier.show');
     Route::get('master/supplier/form', \App\Http\Livewire\Master\SupplierForm::class)->name('supplier.form');
-    Route::get('master/supplier/form/{supplier_id}', \App\Http\Livewire\Master\SupplierForm::class);
+    Route::get('master/supplier/form/{supplier_id}', \App\Http\Livewire\Master\SupplierForm::class)->name('supplier.form.edit');
 
     Route::get('master/jabatan', [\App\Http\Controllers\Master\JabatanController::class, 'index'])->name('jabatan');
 

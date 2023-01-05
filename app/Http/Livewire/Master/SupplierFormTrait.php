@@ -31,7 +31,7 @@ trait SupplierFormTrait
         $supplier = SupplierRepository::getById($supplier_id);
         $this->supplier_id = $supplier->id;
         $this->kode = $supplier->kode;
-        $this->nama_supplier = $supplier->nama_supplier;
+        $this->nama = $supplier->nama;
         $this->telepon = $supplier->telepon;
         $this->email = $supplier->email;
         $this->npwp = $supplier->npwp;
