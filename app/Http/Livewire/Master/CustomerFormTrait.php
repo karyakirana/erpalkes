@@ -13,6 +13,7 @@ trait CustomerFormTrait
     public $telepon;
     public $email;
     public $npwp;
+    public $sales_id, $sales_nama;
     public $alamat;
     public $regencies_id, $regencies_name;
     public $diskon;
@@ -39,6 +40,8 @@ trait CustomerFormTrait
         $this->npwp = $customer->npwp;
         $this->regencies_id = $customer->regencies_id;
         $this->regencies_name = $customer->regency->name;
+        $this->sales_id = $customer->id;
+        $this->sales_nama = $customer->sales->nama;
         $this->alamat = $customer->alamat;
         $this->diskon = $customer->diskon;
         $this->keterangan = $customer->keterangan;

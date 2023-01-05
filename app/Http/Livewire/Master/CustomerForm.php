@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Master;
 
 use App\Mine\SubMaster\CustomerRepository;
+use App\Models\Master\Pegawai;
 use Livewire\Component;
 
 class CustomerForm extends Component
@@ -15,7 +16,8 @@ class CustomerForm extends Component
     protected $listeners = [
         'setArea',
         'resetForm',
-        'setCity'
+        'setCity',
+        'setSales'
     ];
 
     public function mount($customer_id = null)
@@ -24,6 +26,13 @@ class CustomerForm extends Component
             $this->update = true;
             $this->loadCustomer($customer_id);
         }
+    }
+
+    public function setSales(Pegawai $pegawai)
+    {
+        $this->sales_id = $pegawai->id;
+        $this->sales_nama = $pegawai->nama;
+        $this->emit('modalSalesHide');
     }
 
     public function store()
