@@ -71,7 +71,7 @@
                         </x-input.group-vertical>
                     </div>
                     <div class="col-md-6">
-                        <x-input.group-vertical label="Gudang" name="gudang_id">
+                        <x-input.group-vertical label="Lokasi" name="gudang_id">
                             <x-input.select wire:model.defer="gudang_id">
                                 <option>Dipilih</option>
                                 @foreach($dataGudang as $row)
