@@ -43,7 +43,11 @@ Route::middleware('auth')->group(function (){
     Route::get('master/pegawai', [\App\Http\Controllers\Master\PegawaiController::class, 'index'])->name('pegawai');
     Route::get('master/pegawai/{pegawai_id}/show', [\App\Http\Controllers\Master\PegawaiController::class, 'show'])->name('pegawai.show');
     Route::get('master/pegawai/form', \App\Http\Livewire\Master\PegawaiForm::class)->name('pegawai.form');
-    Route::get('master/pegawai/form/{pegawai_id}', \App\Http\Livewire\Master\PegawaiForm::class);
+    Route::get('master/pegawai/form/{pegawai_id}', \App\Http\Livewire\Master\PegawaiForm::class)->name('pegawai.form.edit');
+
+    Route::get('master/users', [\App\Http\Controllers\Master\UserController::class, 'index'])->name('users');
+    Route::get('master/users/form', \App\Http\Livewire\Master\UsersForm::class)->name('users.form');
+    Route::get('master/users/form/{user_id}', \App\Http\Livewire\Master\UsersForm::class)->name('users.form.edit');
 
     Route::get('master/sales', [\App\Http\Controllers\Master\SalesSupervisorController::class, 'index'])->name('sales');
     Route::get('master/sales/{sales_supervisor_id}/show', [\App\Http\Controllers\Master\SalesSupervisorController::class, 'show']);

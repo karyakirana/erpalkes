@@ -28,6 +28,11 @@
         <!--end::Menu item-->
         <!--begin::Menu item-->
         <div class="menu-item px-3">
+            <a href="{{route('pegawai.form.edit', $row->id)}}" class="menu-link px-3">Edit</a>
+        </div>
+        <!--end::Menu item-->
+        <!--begin::Menu item-->
+        <div class="menu-item px-3">
             <a href="#" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Delete</a>
         </div>
         <!--end::Menu item-->

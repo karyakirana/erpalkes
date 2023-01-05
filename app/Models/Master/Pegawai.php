@@ -14,7 +14,6 @@ class Pegawai extends Model
 {
     use HasFactory;
     use AreaModelTrait;
-    use UsersModelTrait;
     use KodeTrait;
     use SoftDeletes;
 
@@ -41,5 +40,10 @@ class Pegawai extends Model
     public function regency()
     {
         return $this->belongsTo(Regency::class, 'regencies_id');
+    }
+
+    public function users()
+    {
+        return $this->hasOne(User::class, 'pegawai_id');
     }
 }
