@@ -32,6 +32,7 @@ class CustomerRequest extends FormRequest
             'telepon' => 'nullable',
             'email' => 'nullable|email',
             'npwp' => 'nullable',
+            'sales_id' => 'nullable',
             'alamat' => 'nullable',
             'regencies_id' => 'nullable',
             'regencies_name' => 'required',
