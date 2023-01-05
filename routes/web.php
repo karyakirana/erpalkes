@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function (){
     Route::get('master/produk/form', \App\Http\Livewire\Master\ProdukForm::class)->name('produk.form');
     Route::get('master/produk/form/{produk_id}', \App\Http\Livewire\Master\ProdukForm::class);
 
-    Route::get('master/gudang', [\App\Http\Controllers\Master\GudangController::class, 'index'])->name('gudang');
+    Route::get('master/lokasi', [\App\Http\Controllers\Master\LokasiController::class, 'index'])->name('lokasi');
 });
 
 
