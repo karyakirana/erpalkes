@@ -12,6 +12,7 @@ class StockMasukPembelian
             'stockable_masuk_id' => $pembelian->id,
             'stockable_masuk_type' => $pembelian::class,
             'customer_id' => null,
+            'tgl_masuk' => $pembelian->tgl_nota,
             'supplier_id' => $pembelian->supplier_id,
             'active_cash' => $pembelian->active_cash,
             'kode' => StockMasukRepository::kode(),
@@ -23,15 +24,18 @@ class StockMasukPembelian
             'keterangan' => $pembelian->keterangan
         ]);
         foreach ($data['dataDetail'] as $row) {
-            StockRepository::build(
+            $stock = StockRepository::build(
                 $stockMasuk->active_cash,
                 $stockMasuk->kondisi,
                 $stockMasuk->gudang_id,
                 'stock_masuk',
                 $row
             )->addStockIn();
+            $stockMasuk->stockMasukDetail()->create([
+                'stock_id' => $stock->id,
+                'jumlah' => $row->jumlah ?? $row['jumlah'],
+            ]);
         }
-        $stockMasuk->stockMasukDetail()->createMany($data['dataDetail']);
         return $stockMasuk;
     }
 
@@ -50,15 +54,18 @@ class StockMasukPembelian
             'keterangan' => $pembelian->keterangan
         ]);
         foreach ($data['dataDetail'] as $row) {
-            StockRepository::build(
+            $stock = StockRepository::build(
                 $stockMasuk->active_cash,
                 $stockMasuk->kondisi,
                 $stockMasuk->gudang_id,
                 'stock_masuk',
                 $row
             )->addStockIn();
+            $stockMasuk->stockMasukDetail()->create([
+                'stock_id' => $stock->id,
+                'jumlah' => $row->jumlah ?? $row['jumlah'],
+            ]);
         }
-        $stockMasuk->stockMasukDetail()->createMany($data['dataDetail']);
         return $stockMasuk;
     }
 

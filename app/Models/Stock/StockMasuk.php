@@ -6,6 +6,7 @@ use App\Models\KodeTrait;
 use App\Models\Master\CustomerModelTrait;
 use App\Models\Master\SupplierModelTrait;
 use App\Models\UsersModelTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,7 @@ class StockMasuk extends Model
         'tgl_masuk',
         'active_cash',
         'kode',
+        'kondisi',
         'status',
         'gudang_id',
         'customer_id',
@@ -27,6 +29,14 @@ class StockMasuk extends Model
         'total_barang',
         'keterangan'
     ];
+
+    public function tglMasuk():Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => tanggalan_format($value),
+            set: fn($value) => tanggalan_database_format($value, 'd-M-Y')
+        );
+    }
 
     public function stockMasukDetail()
     {

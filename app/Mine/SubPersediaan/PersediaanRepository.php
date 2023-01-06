@@ -23,8 +23,8 @@ class PersediaanRepository
 
         if (is_array($dataDetail)){
             $this->produk_id = $dataDetail['produk_id'];
-            $this->batch = $dataDetail['batch'];
-            $this->tgl_expired = $dataDetail['tgl_expired'];
+            $this->batch = $dataDetail['batch'] ?? null;
+            $this->tgl_expired = $dataDetail['tgl_expired'] ?? null;
             $this->harga = $dataDetail['harga'];
             $this->jumlah = $dataDetail['jumlah'];
         }

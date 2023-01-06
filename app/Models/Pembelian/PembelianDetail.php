@@ -13,6 +13,7 @@ class PembelianDetail extends Model
     use ProdukModelTrait;
 
     protected $table = 'pembelian_detail';
+    public $timestamps = false;
     protected $fillable = [
         'pembelian_id',
         'produk_id',

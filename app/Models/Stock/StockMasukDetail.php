@@ -12,11 +12,10 @@ class StockMasukDetail extends Model
     use ProdukModelTrait;
 
     protected $table = 'stock_masuk_detail';
+    public $timestamps = false;
     protected $fillable = [
         'stock_masuk_id',
-        'produk_id',
-        'batch',
-        'tgl_expired',
+        'stock_id',
         'jumlah'
     ];
 

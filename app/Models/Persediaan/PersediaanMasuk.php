@@ -2,6 +2,7 @@
 
 namespace App\Models\Persediaan;
 
+use App\Models\KodeTrait;
 use App\Models\Master\Gudang;
 use App\Models\UsersModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,6 +12,7 @@ class PersediaanMasuk extends Model
 {
     use HasFactory;
     use UsersModelTrait;
+    use KodeTrait;
 
     protected $table = 'persediaan_masuk';
     protected $fillable = [

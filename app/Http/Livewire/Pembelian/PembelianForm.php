@@ -8,6 +8,7 @@ use App\Http\Requests\Pembelian\PembelianRequest;
 use App\Mine\SubPembelian\PembelianService;
 use App\Models\Master\Lokasi;
 use App\Models\Master\Produk;
+use App\Models\Master\Supplier;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -21,11 +22,13 @@ class PembelianForm extends Component
     public $tgl_tempo;
     public $active_cash;
     public $kode;
+    public $kondisi = 'baik';
     public $gudang_id, $gudang_nama;
     public $supplier_id, $supplier_nama;
     public $user_id;
     public $status = 'belum';
     public $total_sub_total;
+    public $total_nominal;
     public $total_barang;
     public $ppn;
     public $biaya_lain;
@@ -46,7 +49,8 @@ class PembelianForm extends Component
     protected $listeners = [
         'setProduk',
         'setPreorder',
-        'setLokasi'
+        'setLokasi',
+        'setSupplier'
     ];
 
     public function __construct($id = null)
@@ -93,7 +97,15 @@ class PembelianForm extends Component
     public function setLokasi(Lokasi $lokasi)
     {
         $this->gudang_id = $lokasi->id;
-        $this->gudang_nama = $lokasi->gudang->lokasi;
+        $this->gudang_nama = $lokasi->lokasi;
+        $this->emit('modalLokasiHide');
+    }
+
+    public function setSupplier(Supplier $supplier)
+    {
+        $this->supplier_id = $supplier->id;
+        $this->supplier_nama = $supplier->nama;
+        $this->emit('modalSupplierSetHide');
     }
 
     public function rules()
@@ -239,6 +251,8 @@ class PembelianForm extends Component
 
     public function store()
     {
+        $this->total_barang = array_sum(array_column($this->dataDetail, 'jumlah'));
+        $this->total_nominal = array_sum(array_column($this->dataDetail, 'sub_total'));
         $data = $this->validate();
         $store = (new PembelianService())->handleStore($data);
         // redirect
@@ -248,6 +262,8 @@ class PembelianForm extends Component
 
     public function update()
     {
+        $this->total_barang = array_sum(array_column('jumlah'));
+        $this->total_nominal = array_sum(array_column($this->dataDetail, 'sub_total'));
         $data = $this->validate();
         $update = (new PembelianService())->handleUpdate($data);
         // redirect

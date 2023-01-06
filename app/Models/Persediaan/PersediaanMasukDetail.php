@@ -12,6 +12,7 @@ class PersediaanMasukDetail extends Model
     use ProdukModelTrait;
 
     protected $table = 'persediaan_masuk_detail';
+    public $timestamps = false;
     protected $fillable = [
         'persediaan_masuk_id',
         'persediaan_id',

@@ -45,7 +45,7 @@
         <div class="row" >
             <div class="col-6">
                 <x-input.group-horizontal label="Lokasi" name="gudang_id">
-                    <x-input.text wire:model.defer="gudang_id" data-bs-toggle="modal" data-bs-target="#modalLokasi" />
+                    <x-input.text wire:model.defer="gudang_nama" data-bs-toggle="modal" data-bs-target="#modalLokasi" />
                 </x-input.group-horizontal>
             </div>
             <div class="col-6" >
@@ -216,9 +216,9 @@
         <x-slot:footer>
             <div class="text-end">
                 @if($mode == 'create')
-                    <x-button.btn-base>Simpan</x-button.btn-base>
+                    <x-button.btn-base wire:click="store">Simpan</x-button.btn-base>
                 @else
-                    <x-button.btn-base>Update</x-button.btn-base>
+                    <x-button.btn-base wire:click="update">Update</x-button.btn-base>
                 @endif
             </div>
         </x-slot:footer>

@@ -7,6 +7,7 @@ use App\Models\Master\Gudang;
 use App\Models\Master\SupplierModelTrait;
 use App\Models\Stock\StockMasukModelTrait;
 use App\Models\UsersModelTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,6 +38,22 @@ class Pembelian extends Model
     ];
 
     protected $table = 'pembelian';
+
+    public function tglnota():Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => tanggalan_format($value),
+            set: fn($value) => tanggalan_database_format($value, 'd-M-Y')
+        );
+    }
+
+    public function tglTempo():Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => tanggalan_format($value),
+            set: fn($value) => tanggalan_database_format($value, 'd-M-Y')
+        );
+    }
 
     public function pembelianDetail()
     {

@@ -17,7 +17,20 @@ class PersediaanMasukRepository
 
     public static function kode($kondisi = 'baik')
     {
-        return null;
+        $query = PersediaanMasuk::query()
+            ->where('active_cash', session('ClosedCash'))
+            ->where('kondisi', $kondisi)
+            ->latest('kode');
+
+        $kodeKondisi = ($kondisi == 'baik') ? 'PM' : 'PMR';
+
+        // check last num
+        if ($query->doesntExist()){
+            return "0001/{$kodeKondisi}/".date('Y');
+        }
+
+        $num = (int) $query->first()->last_num_trans + 1;
+        return sprintf("%04s", $num)."/{$kodeKondisi}/".date('Y');
     }
 
     public static function store($classId, $classType, array $data)
@@ -25,7 +38,8 @@ class PersediaanMasukRepository
         $persediaanMasuk = PersediaanMasuk::create([
             'persedianable_masuk_id' => $classId,
             'persediaanable_masuk_type' => $classType,
-            'active_cash' => session($data['kondisi'] ?? null),
+            'active_cash' => $data['kondisi'] ?? session('ClosedCash'),
+            'kode' => self::kode($data['kondisi']),
             'kondisi' => $data['kondisi'],
             'gudang_id' => $data['gudang_id'],
             'user_id' => \Auth::id(),

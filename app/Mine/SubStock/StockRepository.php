@@ -23,16 +23,16 @@ class StockRepository
 
         if (is_array($dataDetail)){
             $this->produk_id = $dataDetail['produk_id'];
-            $this->batch = $dataDetail['batch'];
-            $this->tgl_expired = $dataDetail['tgl_expired'];
+            $this->batch = $dataDetail['batch'] ?? null;
+            $this->tgl_expired = $dataDetail['tgl_expired'] ?? null;
             $this->jumlah = $dataDetail['jumlah'];
         }
 
         if (is_object($dataDetail)){
             $this->stock_id = $dataDetail->stock_id ?? null;
             $this->produk_id = $dataDetail->produk_id ?? $dataDetail->persediaan->produk_id ?? null;
-            $this->batch = $dataDetail->batch;
-            $this->tgl_expired = $dataDetail->tgl_expired;
+            $this->batch = $dataDetail->batch ?? null;
+            $this->tgl_expired = $dataDetail->tgl_expired ?? null;
             $this->jumlah = $dataDetail->jumlah;
         }
     }
