@@ -173,7 +173,7 @@
 														<span class="bullet bullet-dot"></span>
 													</span>
                                     <span class="menu-title">Customer</span>
-                                </a>
+                                </a>F
                                 <!--end:Menu link-->
                             </div>
                             <!--end:Menu item-->
@@ -247,7 +247,7 @@
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
-                        <span class="menu-heading fw-bold text-uppercase fs-7">Sales</span>
+                        <span class="menu-heading fw-bold text-uppercase fs-7">Penjualan</span>
                     </div>
                     <!--end:Menu content-->
                 </div>
@@ -266,7 +266,7 @@
 												</span>
                                                 <!--end::Svg Icon-->
 											</span>
-											<span class="menu-title">Sales</span>
+											<span class="menu-title">Penjualan</span>
 											<span class="menu-arrow"></span>
 										</span>
                     <!--end:Menu link-->
@@ -382,7 +382,7 @@
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->
                     <div class="menu-content">
-                        <span class="menu-heading fw-bold text-uppercase fs-7">Purchase</span>
+                        <span class="menu-heading fw-bold text-uppercase fs-7">Pembelian</span>
                     </div>
                     <!--end:Menu content-->
                 </div>
@@ -400,7 +400,7 @@
 												</span>
                                                 <!--end::Svg Icon-->
 											</span>
-											<span class="menu-title">Purchase</span>
+											<span class="menu-title">Pembelian</span>
 											<span class="menu-arrow"></span>
 										</span>
                     <!--end:Menu link-->
