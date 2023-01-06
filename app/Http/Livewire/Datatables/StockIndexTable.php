@@ -14,10 +14,11 @@ class StockIndexTable extends DataTableComponent
     {
         return [
             Column::make('ID', 'produk.kode'),
-            Column::make('Produk', 'produk.nama'),
+            Column::make('Produk', 'produk.name'),
             Column::make('Stock Awal', 'stock_awal'),
             Column::make('Stock Masuk', 'stock_masuk'),
             Column::make('Stock Akhir', 'stock_akhir'),
+            Column::make('Stock saldo', 'stock_saldo'),
         ];
     }
 
