@@ -231,56 +231,56 @@
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="{{url('penjualan/quotation')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-                                <span class="menu-title">Quotation</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
+{{--                        <div class="menu-item">--}}
+{{--                            <!--begin:Menu link-->--}}
+{{--                            <a class="menu-link" href="{{url('penjualan/quotation')}}">--}}
+{{--													<span class="menu-bullet">--}}
+{{--														<span class="bullet bullet-dot"></span>--}}
+{{--													</span>--}}
+{{--                                <span class="menu-title">Quotation</span>--}}
+{{--                            </a>--}}
+{{--                            <!--end:Menu link-->--}}
+{{--                        </div>--}}
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                            <!--begin:Menu link-->
-                            <span class="menu-link">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">Invoice</span>
-													<span class="menu-arrow"></span>
-												</span>
-                            <!--end:Menu link-->
-                            <!--begin:Menu sub-->
-                            <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                <!--begin:Menu item-->
-                                <div class="menu-item">
-                                    <!--begin:Menu link-->
-                                    <a class="menu-link" href="{{url('penjualan')}}">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-                                        <span class="menu-title">Normal Invoice</span>
-                                    </a>
-                                    <!--end:Menu link-->
-                                </div>
-                                <!--end:Menu item-->
-                                <!--begin:Menu item-->
-                                <div class="menu-item">
-                                    <!--begin:Menu link-->
-                                    <a class="menu-link" href="#">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-                                        <span class="menu-title">Special Invoice</span>
-                                    </a>
-                                    <!--end:Menu link-->
-                                </div>
-                            </div>
-                            <!--end:Menu sub-->
-                        </div>
+{{--                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">--}}
+{{--                            <!--begin:Menu link-->--}}
+{{--                            <span class="menu-link">--}}
+{{--													<span class="menu-bullet">--}}
+{{--														<span class="bullet bullet-dot"></span>--}}
+{{--													</span>--}}
+{{--													<span class="menu-title">Invoice</span>--}}
+{{--													<span class="menu-arrow"></span>--}}
+{{--												</span>--}}
+{{--                            <!--end:Menu link-->--}}
+{{--                            <!--begin:Menu sub-->--}}
+{{--                            <div class="menu-sub menu-sub-accordion menu-active-bg">--}}
+{{--                                <!--begin:Menu item-->--}}
+{{--                                <div class="menu-item">--}}
+{{--                                    <!--begin:Menu link-->--}}
+{{--                                    <a class="menu-link" href="{{url('penjualan')}}">--}}
+{{--															<span class="menu-bullet">--}}
+{{--																<span class="bullet bullet-dot"></span>--}}
+{{--															</span>--}}
+{{--                                        <span class="menu-title">Normal Invoice</span>--}}
+{{--                                    </a>--}}
+{{--                                    <!--end:Menu link-->--}}
+{{--                                </div>--}}
+{{--                                <!--end:Menu item-->--}}
+{{--                                <!--begin:Menu item-->--}}
+{{--                                <div class="menu-item">--}}
+{{--                                    <!--begin:Menu link-->--}}
+{{--                                    <a class="menu-link" href="#">--}}
+{{--															<span class="menu-bullet">--}}
+{{--																<span class="bullet bullet-dot"></span>--}}
+{{--															</span>--}}
+{{--                                        <span class="menu-title">Special Invoice</span>--}}
+{{--                                    </a>--}}
+{{--                                    <!--end:Menu link-->--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <!--end:Menu sub-->--}}
+{{--                        </div>--}}
                         <!--end:Menu item-->
 {{--                        <!--begin:Menu item-->--}}
 {{--                        <div class="menu-item">--}}
@@ -364,56 +364,56 @@
                         </div>
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link" href="{{url('pembelian/quotation')}}">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-                                <span class="menu-title">Quotation</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
+{{--                        <div class="menu-item">--}}
+{{--                            <!--begin:Menu link-->--}}
+{{--                            <a class="menu-link" href="{{url('pembelian/quotation')}}">--}}
+{{--													<span class="menu-bullet">--}}
+{{--														<span class="bullet bullet-dot"></span>--}}
+{{--													</span>--}}
+{{--                                <span class="menu-title">Quotation</span>--}}
+{{--                            </a>--}}
+{{--                            <!--end:Menu link-->--}}
+{{--                        </div>--}}
                         <!--end:Menu item-->
                         <!--begin:Menu item-->
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                            <!--begin:Menu link-->
-                            <span class="menu-link">
-													<span class="menu-bullet">
-														<span class="bullet bullet-dot"></span>
-													</span>
-													<span class="menu-title">Invoice Masuk</span>
-													<span class="menu-arrow"></span>
-												</span>
-                            <!--end:Menu link-->
-                            <!--begin:Menu sub-->
-                            <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                <!--begin:Menu item-->
-                                <div class="menu-item">
-                                    <!--begin:Menu link-->
-                                    <a class="menu-link" href="{{url('pembelian')}}">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-                                        <span class="menu-title">Normal Invoice</span>
-                                    </a>
-                                    <!--end:Menu link-->
-                                </div>
-                                <!--end:Menu item-->
-                                <!--begin:Menu item-->
-                                <div class="menu-item">
-                                    <!--begin:Menu link-->
-                                    <a class="menu-link" href="#">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-                                        <span class="menu-title">Special Invoice</span>
-                                    </a>
-                                    <!--end:Menu link-->
-                                </div>
-                            </div>
-                            <!--end:Menu sub-->
-                        </div>
+{{--                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">--}}
+{{--                            <!--begin:Menu link-->--}}
+{{--                            <span class="menu-link">--}}
+{{--													<span class="menu-bullet">--}}
+{{--														<span class="bullet bullet-dot"></span>--}}
+{{--													</span>--}}
+{{--													<span class="menu-title">Invoice Masuk</span>--}}
+{{--													<span class="menu-arrow"></span>--}}
+{{--												</span>--}}
+{{--                            <!--end:Menu link-->--}}
+{{--                            <!--begin:Menu sub-->--}}
+{{--                            <div class="menu-sub menu-sub-accordion menu-active-bg">--}}
+{{--                                <!--begin:Menu item-->--}}
+{{--                                <div class="menu-item">--}}
+{{--                                    <!--begin:Menu link-->--}}
+{{--                                    <a class="menu-link" href="{{url('pembelian')}}">--}}
+{{--															<span class="menu-bullet">--}}
+{{--																<span class="bullet bullet-dot"></span>--}}
+{{--															</span>--}}
+{{--                                        <span class="menu-title">Normal Invoice</span>--}}
+{{--                                    </a>--}}
+{{--                                    <!--end:Menu link-->--}}
+{{--                                </div>--}}
+{{--                                <!--end:Menu item-->--}}
+{{--                                <!--begin:Menu item-->--}}
+{{--                                <div class="menu-item">--}}
+{{--                                    <!--begin:Menu link-->--}}
+{{--                                    <a class="menu-link" href="#">--}}
+{{--															<span class="menu-bullet">--}}
+{{--																<span class="bullet bullet-dot"></span>--}}
+{{--															</span>--}}
+{{--                                        <span class="menu-title">Special Invoice</span>--}}
+{{--                                    </a>--}}
+{{--                                    <!--end:Menu link-->--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <!--end:Menu sub-->--}}
+{{--                        </div>--}}
                         <!--end:Menu item-->
                     </div>
                     <!--end:Menu sub-->
