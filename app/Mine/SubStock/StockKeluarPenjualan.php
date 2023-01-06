@@ -15,6 +15,7 @@ class StockKeluarPenjualan
             'stockable_keluar_id' => $penjualan->id,
             'stockable_keluar_type' => $penjualan::class,
             'customer_id' => $penjualan->customer_id,
+            'tgl_keluar' => $penjualan->tgl_penjualan,
             'supplier_id' => null,
             'active_cash' => $penjualan->active_cash,
             'kode' => StockKeluarRepository::kode(),
@@ -26,15 +27,18 @@ class StockKeluarPenjualan
             'keterangan' => $penjualan->keterangan
         ]);
         foreach ($data['dataDetail'] as $row) {
-            StockRepository::build(
+            $stock = StockRepository::build(
                 $stockKeluar->active_cash,
                 $stockKeluar->kondisi,
                 $stockKeluar->gudang_id,
                 'stock_keluar',
                 $row
             )->addStockOut();
+            $stockKeluar->stockKeluarDetail()->create([
+                'stock_id' => $stock,
+                'jumlah' => $row->jumlah ?? $row['jumlah'],
+            ]);
         }
-        $stockKeluar->stockKeluarDetail()->createMany($data['dataDetail']);
         return $stockKeluar;
     }
 
@@ -52,13 +56,17 @@ class StockKeluarPenjualan
         ]);
         $stockKeluar = $stockKeluar->refresh();
         foreach ($data['dataDetail'] as $row) {
-            StockRepository::build(
+            $stock = StockRepository::build(
                 $stockKeluar->active_cash,
                 $stockKeluar->kondisi,
                 $stockKeluar->gudang_id,
                 'stock_keluar',
                 $row
             )->addStockOut();
+            $stockKeluar->stockKeluarDetail()->create([
+                'stock_id' => $stock,
+                'jumlah' => $row->jumlah ?? $row['jumlah'],
+            ]);
         }
         $stockKeluar->stockKeluarDetail()->createMany($data['dataDetail']);
         return $stockKeluar;

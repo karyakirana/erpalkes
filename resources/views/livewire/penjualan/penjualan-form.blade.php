@@ -43,12 +43,12 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <x-input.group-horizontal label="Lokasi" name="lokasi">
-                    <x-input.text wire:model.defer=" " />
+                <x-input.group-horizontal label="Lokasi" name="gudang_nama">
+                    <x-input.text wire:model.defer="gudang_nama" data-bs-toggle="modal" data-bs-target="#modalLokasi" readonly/>
                 </x-input.group-horizontal>
             </div>
             <div class="col-6">
-                <x-input.group-horizontal label="Tipe" name="customer_nama">
+                <x-input.group-horizontal label="Tipe" name="tipe">
                     <x-input.select wire:model.defer="tipe">
                         <option value="non-kso">Non KSO</option>
                         <option value="kso">KSO</option>
@@ -71,7 +71,7 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <x-input.group-horizontal label="Keterangan" name="customer_nama">
+                <x-input.group-horizontal label="Keterangan" name="keterangan">
                     <x-input.text wire:model.defer="keterangan" />
                 </x-input.group-horizontal>
             </div>
@@ -110,7 +110,7 @@
                         </x-input.group-vertical>
                     </div>
                     <div class="col-8">
-                        <x-input.group-vertical label="Diskon Rp." name="harga">
+                        <x-input.group-vertical label="Diskon Rp." name="harga_setelah_diskon">
                             <div class="input-group">
                                 <span class="input-group-text">Rp.</span>
                                 <x-input.text wire:model="harga_setelah_diskon" />
@@ -218,5 +218,17 @@
     <x-datatables.customer-set />
     <x-datatables.sales-list-set />
     <x-datatables.penjualan-preorder-set />
+        <x-modal.standart title="Data Lokasi" id="modalLokasi">
+            <livewire:datatables.lokasi-set-transaksi />
+        </x-modal.standart>
+        @push('scripts')
+            <script>
+                let modalLokasi = new bootstrap.Modal(document.getElementById('modalLokasi'));
+
+                window.livewire.on('modalLokasiHide', function () {
+                    modalLokasi.hide()
+                })
+            </script>
+        @endpush
 </div>
 

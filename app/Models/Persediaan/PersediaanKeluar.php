@@ -17,6 +17,8 @@ class PersediaanKeluar extends Model
     protected $fillable = [
         'active_cash',
         'kode',
+        'kondisi',
+        'gudang_id',
         'user_id',
         'persedianable_keluar_id',
         'persediaanable_keluar_type',
@@ -27,7 +29,7 @@ class PersediaanKeluar extends Model
 
     public function persediaanKeluarDetail()
     {
-        return $this->hasMany(PersediaanKeluarDetail::class, 'perseidaan_keluar_id');
+        return $this->hasMany(PersediaanKeluarDetail::class, 'persediaan_keluar_id');
     }
 
     public function persediaanableKeluar()

@@ -4,6 +4,9 @@ namespace App\Http\Livewire\Penjualan;
 
 use App\Http\Requests\Penjualan\PenjualanRequest;
 use App\Mine\SubPenjualan\PenjualanService;
+use App\Models\Master\Customer;
+use App\Models\Master\Gudang;
+use App\Models\Master\Pegawai;
 use App\Models\Master\Produk;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -22,6 +25,7 @@ class PenjualanForm extends Component
     public $tipe; // tunai, tempo, dan kso
     public $nomor_kso;
     public $customer_id, $customer_nama;
+    public $gudang_id, $gudang_nama;
     public $sales_id, $sales_nama;
     public $user_id;
     public $status = 'belum';
@@ -43,7 +47,10 @@ class PenjualanForm extends Component
     public $dataKemasan = [];
 
     protected $listeners = [
-        'setProduk'
+        'setProduk',
+        'setCustomer',
+        'setLokasi',
+        'setSales'
     ];
 
     public function __construct($id = null)
@@ -88,6 +95,27 @@ class PenjualanForm extends Component
             }
             $this->hitungTotalSubTotal();
         }
+    }
+
+    public function setCustomer(Customer $customer)
+    {
+        $this->customer_id = $customer->id;
+        $this->customer_nama = $customer->nama_customer;
+        $this->emit('modalCustomerSetHide');
+    }
+
+    public function setSales(Pegawai $pegawai)
+    {
+        $this->sales_id = $pegawai->id;
+        $this->sales_nama = $pegawai->nama;
+        $this->emit('modalSalesListHide');
+    }
+
+    public function setLokasi(Gudang $gudang)
+    {
+        $this->gudang_id = $gudang->id;
+        $this->gudang_nama = $gudang->lokasi;
+        $this->emit('modalLokasiHide');
     }
 
     public function rules()
@@ -141,6 +169,13 @@ class PenjualanForm extends Component
 
     public function addLine()
     {
+        $this->validate([
+            'produk_nama' => 'required',
+            'jumlah' => 'required',
+            'harga' => 'required',
+            'diskon' => 'required',
+            'sub_total' => 'required'
+        ]);
         $this->setLine();
         $this->hitungTotalSubTotal();
         $this->resetForm();
@@ -167,6 +202,9 @@ class PenjualanForm extends Component
 
     public function store()
     {
+        $this->total_barang = array_sum(array_column($this->dataDetail, 'jumlah'));
+        $this->total_sub_total = array_sum(array_column($this->dataDetail, 'sub_total'));
+        $this->total_bayar = $this->total_sub_total + (int) $this->total_biaya_lain + (int) $this->total_ppn;
         $data = $this->validate();
         $store = (new PenjualanService())->handleStore($data);
         if($store->status){
@@ -174,12 +212,15 @@ class PenjualanForm extends Component
             session()->flash('message', 'Data sudah disimpan.');
             return redirect()->to(route('penjualan'));
         }
-        session()->flash('message', $store->keterangan);
+        session()->flash('message', $store->messages);
         return null;
     }
 
     public function update()
     {
+        $this->total_barang = array_sum(array_column($this->dataDetail, 'jumlah'));
+        $this->total_sub_total = array_sum(array_column($this->dataDetail, 'sub_total'));
+        $this->total_bayar = $this->total_sub_total + (int) $this->total_biaya_lain + (int) $this->total_ppn;
         $data = $this->validate();
         $update = (new PenjualanService())->handleUpdate($data);
         if($update->status){
@@ -188,7 +229,7 @@ class PenjualanForm extends Component
             return redirect()->to(route('penjualan'));
         }
         // redirect
-        session()->flash('message', $update->keterangan);
+        session()->flash('message', $update->messages);
         return null;
     }
 

@@ -109,7 +109,7 @@ class StockRepository
     }
 
     /**
-     * @return Stock
+     * @return mixed|string
      */
     public function addStockOut()
     {

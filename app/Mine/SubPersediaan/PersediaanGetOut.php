@@ -24,9 +24,13 @@ class PersediaanGetOut
                 ->oldest('tgl_expired');
         }
 
+        // dd($query->sum('stock_saldo'));
+
         if ($query->sum('stock_saldo') < $jumlah){
             throw new ModelNotFoundException('Stock Kurang dari Permintaan');
         }
+
+
 
         $data = $query->get();
         $countData = $query->count();

@@ -38,7 +38,7 @@ class PersediaanMasukRepository
         $persediaanMasuk = PersediaanMasuk::create([
             'persedianable_masuk_id' => $classId,
             'persediaanable_masuk_type' => $classType,
-            'active_cash' => $data['kondisi'] ?? session('ClosedCash'),
+            'active_cash' => session('ClosedCash'),
             'kode' => self::kode($data['kondisi']),
             'kondisi' => $data['kondisi'],
             'gudang_id' => $data['gudang_id'],

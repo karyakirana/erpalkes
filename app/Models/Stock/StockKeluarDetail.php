@@ -9,6 +9,7 @@ class StockKeluarDetail extends Model
 {
     use HasFactory;
     protected $table = 'stock_keluar_detail';
+    public $timestamps = false;
     protected $fillable = [
         'stock_keluar_id',
         'stock_id',

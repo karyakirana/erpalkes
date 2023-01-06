@@ -45,7 +45,7 @@ trait MigrationTransaksiTrait
     public function fieldPenjualanDetail(Blueprint $table)
     {
         $table->unsignedBigInteger('produk_id');
-        $table->string('kemasan');
+        $table->string('kemasan')->nullable();
         $table->bigInteger('harga');
         $table->bigInteger('jumlah');
         $table->float('diskon', 3);

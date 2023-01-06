@@ -12,6 +12,7 @@ class PenjualanDetail extends Model
     use PenjualanModelTrait;
 
     protected $table = 'penjualan_detail';
+    public $timestamps = false;
     protected $fillable = [
         'penjualan_id',
         'produk_id',

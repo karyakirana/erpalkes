@@ -43,7 +43,7 @@ class PenjualanService implements TransactionInterface
             // return status false and exception message
             return (object)[
                 'status' => false,
-                'messages' => $e
+                'messages' => $e->getMessage()
             ];
         }
     }

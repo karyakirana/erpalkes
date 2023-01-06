@@ -10,11 +10,14 @@ class PersediaanKeluarDetail extends Model
     use HasFactory;
 
     protected $table = 'persediaan_keluar_detail';
+    public $timestamps = false;
     protected $fillable = [
         'persediaan_keluar_id',
-        'produk_id',
+        'persediaan_id',
+        'batch',
+        'tgl_expired',
         'jumlah',
-        'harga_dasar',
+        'harga',
         'sub_total'
     ];
 

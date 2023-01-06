@@ -70,15 +70,16 @@ class PersediaanKeluarRepository
                 $item['produk_id'],
                 $item['jumlah'],
                 'baik',
-                $item['tgl_expired']
+                $item['tgl_expired'] ?? null
             );
             // update persediaan
             foreach ($getPersediaan as $row) {
-                PersediaanGetOut::updateFromOut(
+                $persediaan = PersediaanGetOut::updateFromOut(
                     $row['persediaan_id'],
                     $row['jumlah']
                 );
-                $persediaanKeluar->persediaanKeluarDetail()->create($row);
+                $dataRow = array_merge(['persediaan_id' => $persediaan->id], $row);
+                $persediaanKeluar->persediaanKeluarDetail()->create($dataRow);
                 $subTotal += $row['sub_total'];
             }
         }
