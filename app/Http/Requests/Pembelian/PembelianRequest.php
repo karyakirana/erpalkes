@@ -27,6 +27,7 @@ class PembelianRequest extends FormRequest
             'pembelian_po_id' => 'nullable',
             'tgl_nota' => 'required|date:d-M-Y',
             'tgl_tempo' => 'nullable|date:d-M-Y',
+            'gudang_id' => 'required',
             'supplier_id' => 'required',
             'user_id' => 'required',
             'status' => 'required',
@@ -34,7 +35,9 @@ class PembelianRequest extends FormRequest
             'ppn' => 'nullable|numeric',
             'biaya_lain' => 'nullable|numeric',
             'total_bayar' => 'required|numeric',
-            'keterangan' => 'nullable'
+            'keterangan' => 'nullable',
+
+            'dataDetail' => 'required'
         ];
     }
 }
