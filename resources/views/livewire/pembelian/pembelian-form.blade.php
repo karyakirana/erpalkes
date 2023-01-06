@@ -71,13 +71,13 @@
                     </div>
                     <div class="col-4">
                         <x-input.group-vertical label="Isi" name="kemasan_isi">
-                            <x-input.text value="{{$kemasan_isi}}"/>
+                            <x-input.text value="{{$kemasan_isi}}" readonly/>
                         </x-input.group-vertical>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <x-input.group-vertical label="Jumlah Kemasan" name="jumlah">
+                        <x-input.group-vertical label="Kemasan" name="jumlah">
                             <x-input.text wire:model="kemasan_jumlah" />
                         </x-input.group-vertical>
                     </div>

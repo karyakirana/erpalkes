@@ -110,9 +110,9 @@ class PembelianForm extends Component
             $this->harga = $this->kemasan_harga;
         }
 
-        if ((int)$this->kemasan_isi >= 0){
-            $this->jumlah = $this->kemasan_jumlah * $this->kemasan_isi;
-            $this->harga = (int) $this->kemasan_harga / $this->kemasan_isi;
+        if ((int)$this->kemasan_isi > 0){
+            $this->jumlah = (int) $this->kemasan_jumlah * (int) $this->kemasan_isi;
+            $this->harga = (int) $this->kemasan_harga / (int) $this->kemasan_isi;
         }
 
     }
