@@ -75,7 +75,7 @@
                             <x-input.select wire:model.defer="gudang_id">
                                 <option>Dipilih</option>
                                 @foreach($dataGudang as $row)
-                                    <option value="{{$row->id}}">{{$row->nama}}</option>
+                                    <option value="{{$row->id}}">{{$row->lokasi}}</option>
                                 @endforeach
                             </x-input.select>
                         </x-input.group-vertical>
