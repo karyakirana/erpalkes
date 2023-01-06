@@ -6,7 +6,9 @@ use App\Http\Livewire\Penjualan\LoadPenjualanPreorderTrait;
 use App\Http\Livewire\ProdukTransaksiLineTrait;
 use App\Http\Requests\Pembelian\PembelianRequest;
 use App\Mine\SubPembelian\PembelianService;
+use App\Models\Master\Lokasi;
 use App\Models\Master\Produk;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class PembelianForm extends Component
@@ -19,6 +21,7 @@ class PembelianForm extends Component
     public $tgl_tempo;
     public $active_cash;
     public $kode;
+    public $gudang_id, $gudang_nama;
     public $supplier_id, $supplier_nama;
     public $user_id;
     public $status = 'belum';
@@ -42,11 +45,14 @@ class PembelianForm extends Component
 
     protected $listeners = [
         'setProduk',
-        'setPreorder'
+        'setPreorder',
+        'setLokasi'
     ];
 
     public function __construct($id = null)
     {
+        $this->tgl_nota = tanggalan_format(Carbon::now());
+        $this->tgl_tempo = tanggalan_format(Carbon::now());
         parent::__construct($id);
     }
 
@@ -82,6 +88,12 @@ class PembelianForm extends Component
             }
             $this->hitungTotalSubTotal();
         }
+    }
+
+    public function setLokasi(Lokasi $lokasi)
+    {
+        $this->gudang_id = $lokasi->id;
+        $this->gudang_nama = $lokasi->gudang->lokasi;
     }
 
     public function rules()
@@ -172,6 +184,11 @@ class PembelianForm extends Component
 
     public function addLine()
     {
+        $this->validate([
+            'produk_nama' => 'required',
+            'jumlah' => 'required|numeric',
+            'sub_total' => 'required|numeric'
+        ]);
         $this->dataDetail[] = [
             'produk_id' => $this->produk_id,
             'produk_nama' => $this->produk_nama,

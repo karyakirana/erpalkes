@@ -43,8 +43,13 @@
 
         </div>
         <div class="row" >
+            <div class="col-6">
+                <x-input.group-horizontal label="Lokasi" name="gudang_id">
+                    <x-input.text wire:model.defer="gudang_id" data-bs-toggle="modal" data-bs-target="#modalLokasi" />
+                </x-input.group-horizontal>
+            </div>
             <div class="col-6" >
-                <x-input.group-horizontal label="Keterangan" name="customer_nama">
+                <x-input.group-horizontal label="Keterangan" name="keterangan">
                     <x-input.text wire:model.defer="keterangan" />
                 </x-input.group-horizontal>
             </div>
@@ -77,7 +82,7 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <x-input.group-vertical label="Kemasan" name="jumlah">
+                        <x-input.group-vertical label="Kemasan" name="kemasan_jumlah">
                             <x-input.text wire:model="kemasan_jumlah" />
                         </x-input.group-vertical>
                     </div>
@@ -126,7 +131,7 @@
                 <x-input.group-vertical label="Sub Total" name="sub_total">
                     <div class="input-group">
                         <span class="input-group-text">Rp.</span>
-                        <x-input.text value="{{rupiah_format($sub_total)}}" />
+                        <x-input.text value="{{rupiah_format($sub_total)}}" readonly/>
                     </div>
                 </x-input.group-vertical>
                 @if($update)
@@ -221,5 +226,17 @@
     <x-datatables.produk-set />
     <x-datatables.supplier-set />
     <x-datatables.pembelian-preorder-set />
+    <x-modal.standart title="Data Lokasi" id="modalLokasi">
+        <livewire:datatables.lokasi-set-transaksi />
+    </x-modal.standart>
+    @push('scripts')
+            <script>
+                let modalLokasi = new bootstrap.Modal(document.getElementById('modalLokasi'));
+
+                window.livewire.on('modalLokasiHide', function () {
+                    modalLokasi.hide()
+                })
+            </script>
+    @endpush
 </div>
 

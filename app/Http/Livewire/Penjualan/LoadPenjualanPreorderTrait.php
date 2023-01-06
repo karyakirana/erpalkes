@@ -15,6 +15,7 @@ trait LoadPenjualanPreorderTrait
     public $keterangan;
 
     public $dataDetail = [];
+    public $index;
     public $produk_id, $produk_nama, $harga, $harga_setelah_diskon;
     public $kemasan, $satuan_jual;
     public $jumlah, $diskon, $sub_total;

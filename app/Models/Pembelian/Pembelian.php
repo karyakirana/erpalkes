@@ -3,6 +3,7 @@
 namespace App\Models\Pembelian;
 
 use App\Models\KodeTrait;
+use App\Models\Master\Gudang;
 use App\Models\Master\SupplierModelTrait;
 use App\Models\Stock\StockMasukModelTrait;
 use App\Models\UsersModelTrait;
@@ -24,6 +25,7 @@ class Pembelian extends Model
         'tgl_tempo',
         'active_cash',
         'kode',
+        'gudang_id',
         'supplier_id',
         'user_id',
         'status',
@@ -44,6 +46,11 @@ class Pembelian extends Model
     public function pembelianPreorder()
     {
         return $this->belongsTo(PembelianPO::class, 'pembelian_po_id');
+    }
+
+    public function gudang()
+    {
+        return $this->belongsTo(Gudang::class, 'gudang_id');
     }
 
 }

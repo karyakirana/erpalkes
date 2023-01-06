@@ -67,6 +67,7 @@ trait MigrationTransaksiTrait
         $table->string('active_cash', 100);
         $table->string('kode', 20);
         $table->unsignedBigInteger('supplier_id');
+        $table->unsignedBigInteger('gudang_id');
         $table->unsignedBigInteger('user_id');
         $table->string('status', 20);
         $table->bigInteger('total_barang');

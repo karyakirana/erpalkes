@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gudang extends Model
 {
     use HasFactory, KodeTrait;
-    protected $table = 'gudang';
+    protected $table = 'lokasi';
     protected $fillable = [
         'kode',
         'nama',
