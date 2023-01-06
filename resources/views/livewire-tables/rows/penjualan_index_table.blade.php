@@ -2,10 +2,10 @@
     {{$row->kode}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell class="text-center" width="15%">
-    {{$row->customer->nama}}
+    {{$row->customer->nama_customer}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell class="text-center" width="15%">
-    {{($row->tgl_nota)}}
+    {{$row->tgl_penjualan}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell class="text-center" width="15%">
     {{$row->total_barang}}
