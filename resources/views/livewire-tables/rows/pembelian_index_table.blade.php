@@ -2,7 +2,7 @@
     {{$row->kode}}
 </x-livewire-tables::table.cell>
 <x-livewire-tables::table.cell width="15%">
-    {{$row->supplier_id}}
+    {{$row->supplier->nama}}
 </x-livewire-tables::table.cell>
 <x-livewire-tables::table.cell width="20%" >
     {{($row->tgl_nota)}}
