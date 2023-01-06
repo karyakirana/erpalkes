@@ -15,7 +15,7 @@ class PembelianIndexTable extends DataTableComponent
         return [
             Column::make('ID', 'kode'),
             Column::make('Supplier', 'supplier.nama'),
-            Column::make('Tangal', 'tgl_nota'),
+            Column::make('Tanggal', 'tgl_nota'),
             Column::make('Jumlah', 'total_barang'),
             Column::make('Total Bayar', 'total_bayar'),
             Column::make('Status', 'status'),
