@@ -5,7 +5,7 @@
     {{(ucwords($row->kondisi))}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell class="text-center" width="15%">
-    {{ucwords($row->gudang->nama)}}
+    {{ucwords($row->gudang->lokasi)}}
 </x-livewire-tables::bs5.table.cell>
 <x-livewire-tables::bs5.table.cell class="text-center" width="15%">
     {{ucwords($row->users->name)}}
