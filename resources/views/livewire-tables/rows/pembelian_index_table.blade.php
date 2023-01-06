@@ -4,14 +4,17 @@
 <x-livewire-tables::table.cell width="15%">
     {{$row->supplier->nama}}
 </x-livewire-tables::table.cell>
-<x-livewire-tables::table.cell width="20%" >
+<x-livewire-tables::table.cell width="15%" >
     {{($row->tgl_nota)}}
 </x-livewire-tables::table.cell>
-<x-livewire-tables::table.cell width="25%">
+<x-livewire-tables::table.cell width="15%">
     {{$row->total_barang}}
 </x-livewire-tables::table.cell>
 <x-livewire-tables::table.cell width="15%">
     {{$row->total_bayar}}
+</x-livewire-tables::table.cell>
+<x-livewire-tables::table.cell width="10%">
+    {{$row->status}}
 </x-livewire-tables::table.cell>
 <x-livewire-tables::table.cell width="15%" class="text-center">
     <a href="javascript:void(0)" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
