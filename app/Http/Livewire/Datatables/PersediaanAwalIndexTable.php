@@ -17,7 +17,7 @@ class PersediaanAwalIndexTable extends DataTableComponent
                 ->addClass('text-center'),
             Column::make('Kondisi', 'kondisi')
                 ->addClass('text-center'),
-            Column::make('Gudang', 'gudang.nama')
+            Column::make('Lokasi', 'gudang.nama')
                 ->addClass('text-center'),
             Column::make('Pembuat', 'users.name')
                 ->addClass('text-center'),
