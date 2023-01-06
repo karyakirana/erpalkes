@@ -43,7 +43,12 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <x-input.group-horizontal label="Keterangan" name="customer_nama">
+                <x-input.group-horizontal label="Lokasi" name="lokasi">
+                    <x-input.text wire:model.defer=" " />
+                </x-input.group-horizontal>
+            </div>
+            <div class="col-6">
+                <x-input.group-horizontal label="Tipe" name="customer_nama">
                     <x-input.select wire:model.defer="tipe">
                         <option value="non-kso">Non KSO</option>
                         <option value="kso">KSO</option>
@@ -51,9 +56,16 @@
                     </x-input.select>
                 </x-input.group-horizontal>
             </div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <x-input.group-horizontal label="Nomor KSO" name="penjualan_preorder_id">
                     <x-input.text wire:model.defer="nomor_kso" />
+                </x-input.group-horizontal>
+            </div>
+            <div class="col-6">
+                <x-input.group-horizontal label="ID Preorder" name="penjualan_preorder_id">
+                    <x-input.text wire:model.defer="penjualan_preorder_id" data-bs-toggle="modal" data-bs-target="#modalPenjualanPreorderSet" readonly/>
                 </x-input.group-horizontal>
             </div>
         </div>
@@ -61,11 +73,6 @@
             <div class="col-6">
                 <x-input.group-horizontal label="Keterangan" name="customer_nama">
                     <x-input.text wire:model.defer="keterangan" />
-                </x-input.group-horizontal>
-            </div>
-            <div class="col-6">
-                <x-input.group-horizontal label="ID Preorder" name="penjualan_preorder_id">
-                    <x-input.text wire:model.defer="penjualan_preorder_id" data-bs-toggle="modal" data-bs-target="#modalPenjualanPreorderSet" readonly/>
                 </x-input.group-horizontal>
             </div>
         </div>
