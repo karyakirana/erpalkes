@@ -13,13 +13,20 @@ class PembelianIndexTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'kode'),
-            Column::make('Supplier', 'supplier.nama'),
-            Column::make('Tanggal', 'tgl_nota'),
-            Column::make('Jumlah', 'total_barang'),
-            Column::make('Total Bayar', 'total_bayar'),
-            Column::make('Status', 'status'),
+            Column::make('ID', 'kode')
+                ->addClass('text-center'),
+            Column::make('Supplier', 'supplier.nama')
+                ->addClass('text-center'),
+            Column::make('Tanggal', 'tgl_nota')
+                ->addClass('text-center'),
+            Column::make('Jumlah', 'total_barang')
+                ->addClass('text-center'),
+            Column::make('Total Bayar', 'total_bayar')
+                ->addClass('text-center'),
+            Column::make('Status', 'status')
+                ->addClass('text-center'),
             Column::make('')
+                ->addClass('text-center'),
         ];
     }
 

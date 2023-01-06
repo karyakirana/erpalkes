@@ -1,22 +1,22 @@
-<x-livewire-tables::table.cell width="10%">
+<x-livewire-tables::bs5.table.cell class="text-center" width="15%">
     {{$row->kode}}
-</x-livewire-tables::table.cell>
-<x-livewire-tables::table.cell width="15%">
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell class="text-center" width="15%">
     {{$row->supplier->nama}}
-</x-livewire-tables::table.cell>
-<x-livewire-tables::table.cell width="15%" >
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell class="text-center" width="15%">
     {{($row->tgl_nota)}}
-</x-livewire-tables::table.cell>
-<x-livewire-tables::table.cell width="15%">
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell class="text-center" width="15%">
     {{$row->total_barang}}
-</x-livewire-tables::table.cell>
-<x-livewire-tables::table.cell width="15%">
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell class="text-center" width="15%">
     {{$row->total_bayar}}
-</x-livewire-tables::table.cell>
-<x-livewire-tables::table.cell width="10%">
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell class="text-center" width="15%">
     {{$row->status}}
-</x-livewire-tables::table.cell>
-<x-livewire-tables::table.cell width="15%" class="text-center">
+</x-livewire-tables::bs5.table.cell>
+<x-livewire-tables::bs5.table.cell class="text-center" width="15%">
     <a href="javascript:void(0)" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
         <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
         <span class="svg-icon svg-icon-5 m-0">
@@ -38,4 +38,4 @@
         </div>
         <!--end::Menu item-->
     </div>
-</x-livewire-tables::table.cell>
+</x-livewire-tables::bs5.table.cell>
